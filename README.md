@@ -7,4 +7,4 @@ NoSQL Project
 **Database:** Neo4j  
      **Version:** 4.3.3.   
 **Rear-end:** Spring  
-**Fore-end:** Vue  
+**Fore-end:** Vue   
