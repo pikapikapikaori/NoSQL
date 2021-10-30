@@ -5,6 +5,6 @@ NoSQL Project
       
 ## Project Framework     
 **Database:** Neo4j  
-&emsp;**Version:** 4.3.3.   
+&emsp;&emsp;**Version:** 4.3.3    
 **Rear-end:** Spring  
 **Fore-end:** Vue   
