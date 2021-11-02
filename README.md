@@ -1,4 +1,6 @@
 # NoSQL
+
+## Introduction
 NoSQL Project      
      
 **Remember to reset the *application.yml* file under directory *resource* in order to connect to your local Neo4j database.**     
