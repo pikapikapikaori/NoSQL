@@ -1,17 +1,21 @@
 <template>
   <div>
-    <el-container style="height: 500px; border: 1px solid #eee">
+    <el-container style="height: 700px; border: 1px solid #eee">
       <el-aside width="300px">
         <Navigation></Navigation>
       </el-aside>
       <el-container>
         <el-header style="text-align: center; font-size: 36px">
-          {{msg}}
+          {{headmsg}}
         </el-header>
 
-        <el-main>
-          <HelloWorld></HelloWorld>
+        <el-main style="text-align: left; font-size: 18px">
+
         </el-main>
+
+        <el-footer>
+          <Copyright></Copyright>
+        </el-footer>
       </el-container>
     </el-container>
   </div>
@@ -19,18 +23,18 @@
 
 <script>
 import Navigation from '../../components/navi/Navigation'
-import HelloWorld from '../../components/HelloWorld.vue'
+import Copyright from '../../components/copyright/Copyright'
 
 export default {
-  name: "testpage",
+  name: "Wayss",
   data(){
     return{
-      msg:'Test Page'
+      headmsg:'直达路线查询'
     }
   },
   components:{
     Navigation,
-    HelloWorld
+    Copyright
   }
 }
 </script>

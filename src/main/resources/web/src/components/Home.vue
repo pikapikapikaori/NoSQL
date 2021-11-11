@@ -6,7 +6,7 @@
       </el-aside>
       <el-container>
         <el-header style="text-align: center; font-size: 36px">
-          {{msg}}
+          {{headmsg}}
         </el-header>
 
         <el-main style="text-align: left; font-size: 18px">
@@ -75,7 +75,7 @@ export default {
           funcp: '线路删除更新'
         }
       ],
-      msg: '金河市公交线路系统',
+      headmsg: '金河市公交线路系统',
       intromsg: '\xa0\xa0\xa0\xa0\xa0\xa0\xa0金河市(虚拟城市)是一座⻛景优美的城市，包括信息技术产业专区高新区、历史悠久的老城区、人口流动较多的 天河区和有高速公路联通的合江县。有两座火⻋站(火⻋⻄站和金河南站)和一座快铁站(普光快铁)，有两座客 运站(金河客运站和北客站)。其公交网络也比较发达，一共有93条公交线路，包括常规线路、快速公交、高峰公 交、夜班公交等多种类型。'
     }
   },

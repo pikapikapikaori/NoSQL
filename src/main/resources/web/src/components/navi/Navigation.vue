@@ -10,25 +10,25 @@
         <span slot="title">主页</span>
       </el-menu-item>
 
-      <el-submenu index="1">
+      <el-submenu index="/routes">
         <template slot="title">
           <i class="el-icon-info"></i>
           <span slot="title">线路</span>
         </template>
 
-        <el-menu-item index="/testpage">线路信息</el-menu-item>
+        <el-menu-item index="/3">线路信息</el-menu-item>
         <el-menu-item index="1-2">沿线站点</el-menu-item>
         <el-menu-item index="1-2">线路班次</el-menu-item>
         <el-menu-item index="1-2">线路更新</el-menu-item>
 
       </el-submenu>
 
-      <el-menu-item index="2">
+      <el-menu-item index="/stations">
         <i class="el-icon-location"></i>
         <span slot="title">站点</span>
       </el-menu-item>
 
-      <el-submenu index="2">
+      <el-submenu index="/stastics">
         <template slot="title">
           <i class="el-icon-document"></i>
           <span slot="title">统计</span>
@@ -48,7 +48,7 @@
         </el-menu-item-group>
       </el-submenu>
 
-      <el-menu-item index="2">
+      <el-menu-item index="/ways">
         <i class="el-icon-rank"></i>
         <span slot="title">路线</span>
       </el-menu-item>
