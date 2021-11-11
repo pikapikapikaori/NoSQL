@@ -81,10 +81,10 @@ export default {
   },
   methods: {
     indexMethod1(index) {
-      return index * 2;
+      return index * 2 + 1;
     },
     indexMethod2(index) {
-      return index * 2 + 1;
+      return index * 2 + 2;
     }
   },
   components:{
