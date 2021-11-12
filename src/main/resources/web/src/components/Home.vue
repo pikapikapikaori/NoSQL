@@ -14,14 +14,14 @@
           {{intromsg}}
           <el-divider content-position="left">具体功能</el-divider>
           <div class="HomeTableData" style="text-align: center">
-            <el-table :data="tableData" stripe="true ">
-              <el-table-column type="index" :index="indexMethod1" width="200">
+            <el-table :data="tableData" stripe="true" :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}">
+              <el-table-column type="index" prop="序号" :index="indexMethod1" width="150">
               </el-table-column>
-              <el-table-column prop="func" label="功能" width="300">
+              <el-table-column prop="func" label="功能" width="340">
               </el-table-column>
-              <el-table-column type="index" :index="indexMethod2" width="200">
+              <el-table-column type="index" :index="indexMethod2" width="150">
               </el-table-column>
-              <el-table-column prop="funcp" label="功能" width="300">
+              <el-table-column prop="funcp" label="功能" width="340">
               </el-table-column>
             </el-table>
           </div>
