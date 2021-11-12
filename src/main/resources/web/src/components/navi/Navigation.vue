@@ -16,10 +16,10 @@
           <span slot="title">线路</span>
         </template>
 
-        <el-menu-item index="/3">线路信息</el-menu-item>
-        <el-menu-item index="1-2">沿线站点</el-menu-item>
-        <el-menu-item index="1-2">线路班次</el-menu-item>
-        <el-menu-item index="1-2">线路更新</el-menu-item>
+        <el-menu-item index="/routes/information">线路信息</el-menu-item>
+        <el-menu-item index="/routes/stations">沿线站点</el-menu-item>
+        <el-menu-item index="/routes/timetable">线路班次</el-menu-item>
+        <el-menu-item index="/routes/update">线路更新</el-menu-item>
 
       </el-submenu>
 
@@ -36,15 +36,15 @@
 
         <el-menu-item-group>
           <span slot="title">排序</span>
-          <el-menu-item index="1-1">路线最多站点</el-menu-item>
-          <el-menu-item index="1-2">线路最多站台</el-menu-item>
-          <el-menu-item index="1-2">最多站点线路</el-menu-item>
-          <el-menu-item index="1-2">运行时间线路</el-menu-item>
+          <el-menu-item index="/stastics/mostroutesbystations">路线最多站点</el-menu-item>
+          <el-menu-item index="/stastics/mostroutesbetweenstations">线路最多站台</el-menu-item>
+          <el-menu-item index="/stastics/moststationsinroutes">最多站点线路</el-menu-item>
+          <el-menu-item index="/stastics/longesttimeroutes">运行时间线路</el-menu-item>
         </el-menu-item-group>
 
         <el-menu-item-group>
           <span slot="title">数量</span>
-          <el-menu-item index="1-1">路线类型统计</el-menu-item>
+          <el-menu-item index="/stastics/routestype">路线类型统计</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
 

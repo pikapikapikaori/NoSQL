@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-container style="height: 700px; border: 1px solid #eee">
-      <el-aside width="300px">
+      <el-aside width="200px">
         <Navigation></Navigation>
       </el-aside>
       <el-container>
@@ -13,16 +13,18 @@
           <el-divider content-position="left">金河市介绍</el-divider>
           {{intromsg}}
           <el-divider content-position="left">具体功能</el-divider>
-          <el-table :data="tableData" stripe="true ">
-            <el-table-column type="index" :index="indexMethod1" width="150">
-            </el-table-column>
-            <el-table-column prop="func" label="功能" width="250">
-            </el-table-column>
-            <el-table-column type="index" :index="indexMethod2" width="150">
-            </el-table-column>
-            <el-table-column prop="funcp" label="功能" width="250">
-            </el-table-column>
-          </el-table>
+          <div class="HomeTableData" style="text-align: center">
+            <el-table :data="tableData" stripe="true ">
+              <el-table-column type="index" :index="indexMethod1" width="200">
+              </el-table-column>
+              <el-table-column prop="func" label="功能" width="300">
+              </el-table-column>
+              <el-table-column type="index" :index="indexMethod2" width="200">
+              </el-table-column>
+              <el-table-column prop="funcp" label="功能" width="300">
+              </el-table-column>
+            </el-table>
+          </div>
         </el-main>
 
         <el-footer>
