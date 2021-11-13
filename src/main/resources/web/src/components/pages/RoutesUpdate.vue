@@ -56,7 +56,7 @@
               </el-form>
 
               <el-form :inline="true" @submit.native.prevent :model="formInlineCreate" class="demo-form-inline"
-                       v-for="(interval, index) in formInlineCreate.intervals">
+                       v-for="(interval, index) in formInlineCreate.intervals" :key="formInlineCreate.intervals.key">
                 <el-form-item
                   :label="'站点' + (index + 1) + ' 名称'"
                   :prop="'intervals.' + index + '.name'"
@@ -84,7 +84,7 @@
               </el-form>
 
               <el-form :inline="true" @submit.native.prevent :model="formInlineCreate" class="demo-form-inline"
-                       v-for="(timeTable, index) in formInlineCreate.timeTables">
+                       v-for="(timeTable, index) in formInlineCreate.timeTables" :key="formInlineCreate.timeTables.key">
                 <el-form-item
                   :label="'时刻' + (index + 1) + ''"
                   :prop="'timeTables.' + index + '.time'"
@@ -191,10 +191,12 @@ export default {
         intervals: [{
           name: '',
           english: '',
-          id: ''
+          id: '',
+          key: Date.now()
         }],
         timeTables: [{
-          time: ''
+          time: '',
+          key: Date.now()
         }]
       },
       deleteWhole: {
@@ -216,7 +218,8 @@ export default {
         this.formInlineCreate.intervals.push({
           name: '',
           english: '',
-          id: ''
+          id: '',
+          key: Date.now()
         });
     },
     removeStation(interval) {
@@ -227,7 +230,8 @@ export default {
     },
     addTime(){
       this.formInlineCreate.timeTables.push({
-        time: ''
+        time: '',
+        key: Date.now()
       });
     },
     removeTime(time) {
