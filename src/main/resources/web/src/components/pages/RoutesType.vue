@@ -9,7 +9,16 @@
       </el-header>
 
       <el-main style="text-align: left; font-size: 18px">
-
+        <div class="HomeTableData" style="text-align: center">
+          <el-table :data="tableData" stripe="true" :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}">
+            <el-table-column type="index" prop="序号" width="200">
+            </el-table-column>
+            <el-table-column prop="type" label="线路类型" width="580">
+            </el-table-column>
+            <el-table-column prop="num" label="线路数量" width="200">
+            </el-table-column>
+          </el-table>
+        </div>
       </el-main>
 
       <el-footer>
@@ -27,12 +36,16 @@ export default {
   name: "RoutesType",
   data(){
     return{
-      headmsg:'路线类型统计'
+      headmsg:'路线类型统计',
+      tableData: []
     }
   },
   components:{
     Navigation,
     Copyright
+  },
+  created: function(){
+    //这里写与后端对接的将tableData初始化的代码
   }
 }
 </script>

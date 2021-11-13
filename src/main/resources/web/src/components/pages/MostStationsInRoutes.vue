@@ -9,7 +9,14 @@
       </el-header>
 
       <el-main style="text-align: left; font-size: 18px">
-
+        <div class="HomeTableData" style="text-align: center">
+          <el-table :data="tableData" stripe="true" :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}">
+            <el-table-column type="index" prop="序号" width="300">
+            </el-table-column>
+            <el-table-column prop="route" label="线路" width="680">
+            </el-table-column>
+          </el-table>
+        </div>
       </el-main>
 
       <el-footer>
@@ -27,12 +34,16 @@ export default {
   name: "MostStationsInRoutes",
   data(){
     return{
-      headmsg:'最多站点线路'
+      headmsg:'最多站点线路',
+      tableData: []
     }
   },
   components: {
     Navigation,
     Copyright
+  },
+  created: function(){
+    //这里写与后端对接的将tableData初始化的代码
   }
 }
 </script>
