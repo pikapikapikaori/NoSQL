@@ -25,13 +25,13 @@
               </el-form-item>
 
               <el-form-item>
-                <el-button type="primary" @click="searchRoutes" native-type="submit" :loading="loading">查询</el-button>
-                <el-button type="primary" @click="clear" native-type="submit" :loading="loading">清空</el-button>
+                <el-button type="primary" @click="searchRoutes" native-type="submit">查询</el-button>
+                <el-button type="primary" @click="clearAll" native-type="submit">清空</el-button>
               </el-form-item>
             </el-form>
 
             <div>
-              <div v-if="isclear">
+              <div v-if="isClear">
                 <el-table :data="searchWayResult" stripe="true" :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}" empty-text="暂无直达路线">
                   <el-table-column prop="route" label="路线" width="980">
                   </el-table-column>
@@ -54,11 +54,11 @@ import Navigation from '../../components/navi/Navigation'
 import Copyright from '../../components/copyright/Copyright'
 
 export default {
-  name: "Wayss",
+  name: "Ways",
   data(){
     return{
-      headmsg:'直达路线查询',
-      isclear: false,
+      headmsg: '直达路线查询',
+      isClear: false,
       formInline: {
         station1: '',
         station2: ''
@@ -72,7 +72,7 @@ export default {
   },
   methods: {
     searchRoutes() {
-      this.isclear = true;
+      this.isClear = true;
       if (this.formInline.station1 === '荷花池' && this.formInline.station2 == '环球中心'){
         this.searchWayResult = [{route: '30路上行'}];
       }
@@ -80,8 +80,8 @@ export default {
         this.searchWayResult = [];
       }
     },
-    clear(){
-      this.isclear = false;
+    clearAll(){
+      this.isClear = false;
     }
   }
 }
