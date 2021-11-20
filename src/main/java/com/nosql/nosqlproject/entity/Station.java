@@ -9,7 +9,7 @@ import org.springframework.data.neo4j.core.schema.Property;
 @Getter
 @Setter
 @Node
-public class Stations {
+public class Station {
     @Id
     private int id;
     @Property
