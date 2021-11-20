@@ -34,9 +34,5 @@ public class Line {
     @Property
     private int[] route_up;
     @Property
-    private int[][] time_up;
-    @Property
     private int[] route_down;
-    @Property
-    private int[] time_down;
 }
