@@ -41,10 +41,18 @@
               <div v-if="isClearStation">
                 <div v-if="haveResultStation">
                   <el-descriptions title="查询结果">
-                    <el-descriptions-item label="运行方向">{{routeToSearchStationResult.direction}}</el-descriptions-item>
-                    <el-descriptions-item label="沿途站点">{{routeToSearchStationResult.interval}}</el-descriptions-item>
+                    <el-descriptions-item label="运行方向">{{routeToSearchStationResult.lineName}}</el-descriptions-item>
                     <el-descriptions-item label="运行时长">{{routeToSearchStationResult.time}}</el-descriptions-item>
                   </el-descriptions>
+
+                  <el-table :data="routeToSearchStationResult.interval" stripe="true" :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}" empty-text="暂无线路">
+                    <el-table-column prop="id" label="站点id" width="320">
+                    </el-table-column>
+                    <el-table-column prop="name" label="站点名称" width="330">
+                    </el-table-column>
+                    <el-table-column prop="english" label="站点英语" width="330">
+                    </el-table-column>
+                  </el-table>
                 </div>
                 <div v-else>
                   <el-descriptions title="暂无线路信息">
@@ -97,7 +105,11 @@
 
               <div v-show="isClearRepeat">
                 <el-table :data="routeToSearchRepeatResult" stripe="true" :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}" empty-text="暂无重复站点">
-                  <el-table-column prop="name" label="重复站点名称" width="980">
+                  <el-table-column prop="station_id" label="站点ID" width="320">
+                  </el-table-column>
+                  <el-table-column prop="station_name" label="站点名称" width="330">
+                  </el-table-column>
+                  <el-table-column prop="station_english" label="站点英语名称" width="330">
                   </el-table-column>
                 </el-table>
               </div>
@@ -130,9 +142,9 @@ export default {
         end: ''
       },
       routeToSearchStationResult: {
-        direction: '',
-        interval: '',
-        time: ''
+        lineName: '',
+        time: '',
+        interval: []
       },
       isClearRepeat: false,
       formInlineRepeat: {

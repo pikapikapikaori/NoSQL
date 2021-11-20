@@ -11,6 +11,8 @@
       <el-main style="text-align: left; font-size: 18px">
         <div class="HomeTableData" style="text-align: center">
           <el-table :data="tableData" stripe="true" :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}">
+            <el-table-column prop="stationId" label="站点 Id" width="320">
+            </el-table-column>
             <el-table-column prop="station" label="站点" width="320">
             </el-table-column>
             <el-table-column prop="num" label="线路数量" width="220">

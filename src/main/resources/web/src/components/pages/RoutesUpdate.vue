@@ -10,6 +10,8 @@
 
       <el-main style="text-align: left; font-size: 18px">
         <el-tabs type="border-card">
+
+          <!--
           <el-tab-pane label="线路创建">
             线路创建
             <el-divider></el-divider>
@@ -115,50 +117,50 @@
               </el-form>
             </div>
           </el-tab-pane>
+          -->
 
-          <el-tab-pane label="线路删除更新">
-            线路删除更新
+          <el-tab-pane label="删除整条线路">
+            删除整条线路
             <el-divider></el-divider>
 
-            <el-tabs type="card">
-              <el-tab-pane label="删除整条线路" name="deleteWhole">
-                <div class="deleteWhole" style="text-align: center">
-                  <el-form :inline="true" @submit.native.prevent :model="deleteWhole" class="demo-form-inline">
-                    <el-form-item label="线路">
-                      <el-input v-model="deleteWhole.route" placeholder="线路">
-                        <template slot="append">路</template>
-                      </el-input>
-                    </el-form-item>
-                    <el-form-item>
-                      <el-button type="primary" @click="deleteRoute" native-type="submit">删除</el-button>
-                    </el-form-item>
-                  </el-form>
-                </div>
-              </el-tab-pane>
+            <div class="deleteWhole" style="text-align: center">
+              <el-form :inline="true" @submit.native.prevent :model="deleteWhole" class="demo-form-inline">
+                <el-form-item label="线路">
+                  <el-input v-model="deleteWhole.route" placeholder="线路">
+                    <template slot="append">路</template>
+                  </el-input>
+                </el-form-item>
+                <el-form-item>
+                  <el-button type="primary" @click="deleteRoute" native-type="submit">删除</el-button>
+                </el-form-item>
+              </el-form>
+            </div>
+          </el-tab-pane>
 
-              <el-tab-pane label="替换线路站点" name="substituteStation">
-                <div class="substituteStation" style="text-align: center">
-                  <el-form :inline="true" @submit.native.prevent :model="substituteStation" class="demo-form-inline">
-                    <el-form-item label="线路">
-                      <el-input v-model="substituteStation.route" placeholder="线路">
-                        <template slot="append">路</template>
-                      </el-input>
-                    </el-form-item>
-                    <el-form-item label="被替换站点">
-                      <el-input v-model="substituteStation.originStation" placeholder="被替换站点">
-                      </el-input>
-                    </el-form-item>
-                    <el-form-item label="新站点">
-                      <el-input v-model="substituteStation.newStation" placeholder="被替换站点">
-                      </el-input>
-                    </el-form-item>
-                    <el-form-item>
-                      <el-button type="primary" @click="substitute" native-type="submit">替换</el-button>
-                    </el-form-item>
-                  </el-form>
-                </div>
-              </el-tab-pane>
-            </el-tabs>
+          <el-tab-pane label="替换线路站点">
+            替换线路站点
+            <el-divider></el-divider>
+
+            <div class="substituteStation" style="text-align: center">
+              <el-form :inline="true" @submit.native.prevent :model="substituteStation" class="demo-form-inline">
+                <el-form-item label="线路">
+                  <el-input v-model="substituteStation.route" placeholder="线路">
+                    <template slot="append">路</template>
+                  </el-input>
+                </el-form-item>
+                <el-form-item label="被替换站点 Id">
+                  <el-input v-model="substituteStation.originStation" placeholder="被替换站点 Id">
+                  </el-input>
+                </el-form-item>
+                <el-form-item label="新站点 Id">
+                  <el-input v-model="substituteStation.newStation" placeholder="新站点 Id">
+                  </el-input>
+                </el-form-item>
+                <el-form-item>
+                  <el-button type="primary" @click="substitute" native-type="submit">替换</el-button>
+                </el-form-item>
+              </el-form>
+            </div>
           </el-tab-pane>
         </el-tabs>
       </el-main>

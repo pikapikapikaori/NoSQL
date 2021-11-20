@@ -43,8 +43,8 @@
 
               <div class="searchStationSoon" style="text-align: center">
                 <el-form :inline="true" @submit.native.prevent :model="searchStationSoon" class="demo-form-inline">
-                  <el-form-item label="站点">
-                    <el-input v-model="searchStationSoon.station" placeholder="站点">
+                  <el-form-item label="站点Id">
+                    <el-input v-model="searchStationSoon.station" placeholder="站点 Id">
                     </el-input>
                   </el-form-item>
                   <el-form-item label="基准时间">
@@ -62,9 +62,7 @@
                 </el-form>
                 <div v-show="isClearAllSoon">
                   <el-table :data="searchStationSoonResult" stripe="true" :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}" empty-text="暂无线路">
-                    <el-table-column prop="id" label="站点id" width="320">
-                    </el-table-column>
-                    <el-table-column prop="routes" label="线路" width="660">
+                    <el-table-column prop="routes" label="线路" width="980">
                     </el-table-column>
                   </el-table>
                 </div>
@@ -77,8 +75,8 @@
 
               <div class="searchStationTime" style="text-align: center">
                 <el-form :inline="true" @submit.native.prevent :model="searchStationTime" class="demo-form-inline">
-                  <el-form-item label="站点">
-                    <el-input v-model="searchStationTime.station" placeholder="站点">
+                  <el-form-item label="站点Id">
+                    <el-input v-model="searchStationTime.station" placeholder="站点 Id">
                     </el-input>
                   </el-form-item>
                   <el-form-item label="基准时间">
@@ -89,10 +87,6 @@
                     <el-input v-model="searchStationTime.preRoute" placeholder="预期线路">
                     </el-input>
                   </el-form-item>
-                  <el-form-item label="预期班次数量">
-                    <el-input v-model="searchStationTime.preNum" placeholder="预期班次数量">
-                    </el-input>
-                  </el-form-item>
                   <el-form-item>
                     <el-button type="primary" @click="searchStationForTime" native-type="submit">查询</el-button>
                     <el-button type="primary" @click="clearAllTime" native-type="submit">清空</el-button>
@@ -100,9 +94,7 @@
                 </el-form>
                 <div v-show="isClearAllTime">
                   <el-table :data="searchStationTimeResult" stripe="true" :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}" empty-text="暂无线路">
-                    <el-table-column prop="id" label="站点id" width="320">
-                    </el-table-column>
-                    <el-table-column prop="timeTable" label="班次" width="660">
+                    <el-table-column prop="timeTable" label="班次" width="980">
                     </el-table-column>
                   </el-table>
                 </div>
@@ -144,8 +136,7 @@ export default {
       searchStationTime: {
         station: '',
         curTime: '',
-        preRoute: '',
-        preNum: ''
+        preRoute: ''
       },
       searchStationTimeResult: []
     }

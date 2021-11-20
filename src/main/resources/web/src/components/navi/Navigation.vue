@@ -18,7 +18,7 @@
 
         <el-menu-item index="/routes/information">线路信息</el-menu-item>
         <el-menu-item index="/routes/stations">沿线站点</el-menu-item>
-        <el-menu-item index="/routes/timetable">线路班次</el-menu-item>
+        <!-- <el-menu-item index="/routes/timetable">线路班次</el-menu-item> -->
         <el-menu-item index="/routes/update">线路更新</el-menu-item>
 
       </el-submenu>

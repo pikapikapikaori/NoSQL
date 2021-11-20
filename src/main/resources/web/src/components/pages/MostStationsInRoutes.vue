@@ -13,7 +13,9 @@
           <el-table :data="tableData" stripe="true" :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}">
             <el-table-column type="index" prop="序号" width="300">
             </el-table-column>
-            <el-table-column prop="route" label="线路" width="680">
+            <el-table-column prop="route" label="线路" width="340">
+            </el-table-column>
+            <el-table-column prop="num" label="站点数量" width="340">
             </el-table-column>
           </el-table>
         </div>

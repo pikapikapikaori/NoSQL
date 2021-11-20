@@ -31,11 +31,11 @@
               <div v-if="isClearInfo">
                 <div v-if="haveResult">
                   <el-descriptions title="线路信息">
-                    <el-descriptions-item label="路线">{{routeToSearchInfoResult.routeRoute}}</el-descriptions-item>
+                    <el-descriptions-item label="路线">{{routeToSearchInfoResult.route}}</el-descriptions-item>
                     <el-descriptions-item label="单向行驶时间">{{routeToSearchInfoResult.oneWayTime}}</el-descriptions-item>
                     <el-descriptions-item label="是否为单向线">{{routeToSearchInfoResult.directional}}</el-descriptions-item>
-                    <el-descriptions-item label="行驶距离（千米）">{{routeToSearchInfoResult.kilometer}}</el-descriptions-item>
-                    <el-descriptions-item label="线路名称">{{routeToSearchInfoResult.name}}</el-descriptions-item>
+                    <el-descriptions-item label="行驶距离（千米）">{{routeToSearchInfoResult.length}}</el-descriptions-item>
+                    <el-descriptions-item label="线路名称">{{routeToSearchInfoResult.lineId}}</el-descriptions-item>
                     <el-descriptions-item label="运行时间">{{routeToSearchInfoResult.runTime}}</el-descriptions-item>
                     <el-descriptions-item label="途经站点">{{routeToSearchInfoResult.interval}}</el-descriptions-item>
                     <el-descriptions-item label="类型">{{routeToSearchInfoResult.type}}</el-descriptions-item>
@@ -59,6 +59,14 @@
                   <el-input v-model="formInlineStation.routeToSearchStation" placeholder="线路">
                     <template slot="append">路</template>
                   </el-input>
+                </el-form-item>
+
+                <el-form-item label="线路方向">
+                  <el-select v-model="formInlineStation.direction" placeholder="线路1方向">
+                    <el-option label="上行" value="up"></el-option>
+                    <el-option label="下行" value="down"></el-option>
+                    <el-option label="环线" value="circle"></el-option>
+                  </el-select>
                 </el-form-item>
 
                 <el-form-item>
@@ -107,18 +115,19 @@ export default {
         routeToSearchInfo: ''
       },
       routeToSearchInfoResult: {
-        routeRoute: '',
-        oneWayTime: '约' + '0' + '分',
+        route: '',
         directional: false,
-        kilometer: 0.0,
-        name: 0,
-        runTime: '',
+        length: 0.0,
+        lineId: 0,
         interval: 0,
-        type: ''
+        oneWayTime: '约' + '0' + '分',
+        type: '',
+        runTime: ''
       },
       isClearStation: false,
       formInlineStation: {
-        routeToSearchStation: ''
+        routeToSearchStation: '',
+        direction: ''
       },
       routeToSearchStationResult: [],
       routeToSearchStationResultInterval: 0
@@ -132,24 +141,7 @@ export default {
     searchRouteInfo() {
       this.isClearInfo = true;
       this.haveResult = true;
-      if (parseInt(this.formInlineInfo.routeToSearchInfo) === 30){
-        this.routeToSearchInfoResult = {
-          routeRoute: '燎原-北路湾公交站',
-          oneWayTime: '约' + 49 + '分',
-          directional: true,
-          kilometer: 12.0,
-          name: 30 + '路',
-          runTime: '6:30-22:30',
-          interval: 8,
-          type: '干线'
-        };
-        this.routeToSearchStationResultInterval = 28;
-      }
-      else{
-        this.isClearInfo = true;
-        this.haveResult = false;
-        this.routeToSearchInfoResult = {};
-      }
+
     },
     clearAllInfo(){
       this.isClearInfo = false;
@@ -157,22 +149,7 @@ export default {
     },
     searchRouteStation() {
       this.isClearStation = true;
-      if (parseInt(this.formInlineStation.routeToSearchStation) === 30){
-        this.routeToSearchStationResult = [{
-          station_id: 7542,
-          station_name: '兴义镇（始发站）',
-          station_english: 'XingYiZhen'
-          },
-          {
-            station_id: 7527,
-            station_name: '永盛（始发站）',
-            station_english: 'YongSheng'
-          }];
-      }
-      else{
-        this.isClearStation = true;
-        this.routeToSearchStationResult = [];
-      }
+
     },
     clearAllStation(){
       this.isClearStation = false;
