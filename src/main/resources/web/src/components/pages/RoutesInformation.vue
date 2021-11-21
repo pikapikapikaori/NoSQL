@@ -116,9 +116,9 @@ export default {
       },
       routeToSearchInfoResult: {
         route: '',
-        directional: false,
+        directional: '',
         length: 0.0,
-        lineId: 0,
+        lineId: '',
         interval: 0,
         oneWayTime: '约' + '0' + '分',
         type: '',
@@ -142,6 +142,18 @@ export default {
       this.isClearInfo = true;
       this.haveResult = true;
 
+      this.$axios.get('/route/find_lineId_line', {
+        params: {
+          lineId: this.formInlineInfo.routeToSearchInfo
+        }
+      }).then(function(res) {
+        if(res.data === {}){
+          this.haveResult = false;
+        }
+        else{
+          this.routeToSearchInfoResult = JSON.parse(res);
+        }
+      }).catch((err) => {this.haveResult = false;});
     },
     clearAllInfo(){
       this.isClearInfo = false;
@@ -150,6 +162,18 @@ export default {
     searchRouteStation() {
       this.isClearStation = true;
 
+      this.$axios.get('/route/find_route_station', {
+        params: {
+          station_id: this.formInlineStation.routeToSearchStation,
+          direction: this.formInlineStation.direction
+        }
+      }).then((res) => {
+        this.routeToSearchStationResult = res.data;
+        this.routeToSearchStationResultInterval = res.data.length;
+      }).catch((err) => {
+        this.routeToSearchStationResult = [];
+        this.routeToSearchStationResultInterval = 0;
+      });
     },
     clearAllStation(){
       this.isClearStation = false;

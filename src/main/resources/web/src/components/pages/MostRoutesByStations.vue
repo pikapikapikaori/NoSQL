@@ -48,6 +48,13 @@ export default {
   },
   created: function(){
     //这里写与后端对接的将tableData初始化为最多路线站点的代码
+    this.$axios.get(
+      '/statistics/most_line_station'
+    ).then((res) => {
+      this.tableData = res.data;
+    }).catch((err) => {
+      this.tableData = [];
+    });
   }
 }
 </script>

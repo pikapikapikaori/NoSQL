@@ -165,6 +165,22 @@ export default {
       this.isClearStation = true;
       this.haveResultStation = true;
 
+      this.$axios.get('/route/find_lineId_stationName_path', {
+        params: {
+          lineId: this.formInlineStation.station,
+          stationName1: this.formInlineStation.begin,
+          stationName2: this.formInlineStation.end
+        }
+      }).then((res) => {
+        if(res.data === {}){
+          this.haveResultStation = false;
+        }
+        else{
+          this.routeToSearchStationResult = JSON.parse(res);
+        }
+      }).catch((err) => {
+        this.haveResultStation = false;
+      })
     },
     clearAllStation(){
       this.isClearStation = false;
@@ -172,12 +188,22 @@ export default {
     },
     searchRouteRepeat(){
       this.isClearRepeat = true;
-      this.haveResultRepeat = true;
 
+      this.$axios.get('/route/find_sameStations', {
+        params: {
+          id1: this.formInlineRepeat.route1,
+          direction1: this.formInlineRepeat.route1direction,
+          id2: this.formInlineRepeat.route2,
+          direction2: this.formInlineRepeat.route2direction
+        }
+      }).then((res) => {
+        this.routeToSearchRepeatResult = res.data;
+      }).catch((err) => {
+        this.routeToSearchRepeatResult = [];
+      });
     },
     clearAllRepeat(){
       this.isClearRepeat = false;
-      this.haveResultRepeat = false;
     }
   }
 }

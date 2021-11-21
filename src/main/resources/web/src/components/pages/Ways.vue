@@ -73,12 +73,17 @@ export default {
   methods: {
     searchRoutes() {
       this.isClear = true;
-      if (this.formInline.station1 === '荷花池' && this.formInline.station2 == '环球中心'){
-        this.searchWayResult = [{route: '30路上行'}];
-      }
-      else{
+
+      this.$axios.get('/line/find_directRoute', {
+        params: {
+          station1: this.formInline.station1,
+          station2: this.formInline.station2
+        }
+      }).then((res) => {
+        this.searchWayResult = res.data;
+      }).catch((err) => {
         this.searchWayResult = [];
-      }
+      });
     },
     clearAll(){
       this.isClear = false;

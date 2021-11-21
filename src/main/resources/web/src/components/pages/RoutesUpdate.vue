@@ -293,6 +293,9 @@ export default {
             }, 3000);
 
             // 这里写与后端对接的删除操作
+            this.$axios.post('/route/delete_line', {
+              lineId: this.deleteWhole.route
+            });
           }
           else {
             done();
@@ -327,6 +330,11 @@ export default {
             }, 3000);
 
             // 这里写与后端对接的替换操作
+            this.$axios.post('/route/change_line', {
+              lineId: this.substituteStation.route,
+              stationId: this.substituteStation.originStation,
+              newStationId: this.substituteStation.newStation
+            });
           }
           else {
             done();

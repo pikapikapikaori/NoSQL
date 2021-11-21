@@ -83,10 +83,6 @@
                     <el-input v-model="searchStationTime.curTime" placeholder="基准时间">
                     </el-input>
                   </el-form-item>
-                  <el-form-item label="预期线路">
-                    <el-input v-model="searchStationTime.preRoute" placeholder="预期线路">
-                    </el-input>
-                  </el-form-item>
                   <el-form-item>
                     <el-button type="primary" @click="searchStationForTime" native-type="submit">查询</el-button>
                     <el-button type="primary" @click="clearAllTime" native-type="submit">清空</el-button>
@@ -135,8 +131,7 @@ export default {
       isClearAllTime: false,
       searchStationTime: {
         station: '',
-        curTime: '',
-        preRoute: ''
+        curTime: ''
       },
       searchStationTimeResult: []
     }
@@ -149,6 +144,15 @@ export default {
     searchStationForRoute(){
       this.isClearAllRoute = true;
 
+      this.$axios.get('/station/find_stationName_routeName', {
+        params: {
+          stationName: this.searchStationRoute.station
+        }
+      }).then((res) => {
+        this.searchStationRouteResult = res.data;
+      }).catch((err) => {
+        this.searchStationRouteResult = [];
+      });
     },
     clearAllRoute(){
       this.isClearAllRoute = false;
@@ -156,6 +160,17 @@ export default {
     searchStationForSoon(){
       this.isClearAllSoon= true;
 
+      this.$axios.get('/station/find_station_time_line', {
+        params: {
+          stationId: this.searchStationSoon.station,
+          baseTime: this.searchStationSoon.curTime,
+          lasttime: this.searchStationSoon.preTime
+        }
+      }).then((rses) => {
+        this.searchStationSoonResult = res.data;
+      }).catch((err) => {
+        this.searchStationSoonResult = [];
+      })
     },
     clearAllSoon(){
       this.isClearAllSoon = false;
@@ -163,6 +178,16 @@ export default {
     searchStationForTime(){
       this.isClearAllTime= true;
 
+      this.$axios.get('/station/find_station_time_nearest3', {
+        params: {
+          stationId: this.searchStationTime.station,
+          baseTime: this.searchStationTime.curTime
+        }
+      }).then((res) => {
+        this.searchStationTimeResult = res.data;
+      }).catch((err) => {
+        this.searchStationTimeResult = [];
+      })
     },
     clearAllTime(){
       this.isClearAllTime = false;
