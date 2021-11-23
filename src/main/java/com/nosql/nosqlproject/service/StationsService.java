@@ -1,16 +1,16 @@
 package com.nosql.nosqlproject.service;
 
-import com.nosql.nosqlproject.dao.StationsRepository;
-import com.nosql.nosqlproject.entity.Stations;
+import com.nosql.nosqlproject.dao.StationRepository;
+import com.nosql.nosqlproject.entity.Station;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class StationsService {
     @Autowired
-    StationsRepository stationsrepository;
+    StationRepository stationrepository;
 
-    public Stations find_id_station(int id){
-        return stationsrepository.find_id_station(id);
+    public Station find_id_station(int id){
+        return stationrepository.find_id_station(id);
     }
 }

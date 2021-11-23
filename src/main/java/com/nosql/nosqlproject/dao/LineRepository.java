@@ -11,9 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface LineRepository extends Neo4jRepository<Line, Integer> {
+public interface LineRepository extends Neo4jRepository<Line, String> {
     // Insert database operations here.
-    @Query("match (s:Stations) return s")
-    Station find_id_station(@Param("id") int id);
 }
 

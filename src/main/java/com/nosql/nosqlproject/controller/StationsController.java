@@ -1,6 +1,6 @@
 package com.nosql.nosqlproject.controller;
 
-import com.nosql.nosqlproject.entity.Stations;
+import com.nosql.nosqlproject.entity.Station;
 import com.nosql.nosqlproject.service.StationsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,7 +22,7 @@ public class StationsController {
     get请求通过url传递参数，不在后端开发考虑范围内
      */
     @GetMapping("/find_id_station")
-    public Stations find_id_station(int id){
+    public Station find_id_station(int id){
         return stationsservice.find_id_station(id);
     }
 }
