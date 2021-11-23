@@ -5,7 +5,7 @@ import lombok.Setter;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Property;
-import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -14,7 +14,7 @@ public class Run {
     @Id
     private String line_id;
     @Property
-    private boolean is_up;
+    private String direction;
     @Property
-    private Date[] time;
+    private List<String> time;
 }
