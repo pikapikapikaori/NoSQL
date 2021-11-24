@@ -1,6 +1,8 @@
 package com.nosql.nosqlproject.dao;
 
 import com.nosql.nosqlproject.entity.*;
+import com.nosql.nosqlproject.repository.Demand4;
+import com.nosql.nosqlproject.repository.Demand8;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 import org.springframework.data.repository.query.Param;
