@@ -13,6 +13,4 @@ import java.util.List;
 
 public interface ConnectionRepository extends Neo4jRepository<Connection, Integer> {
     // Insert database operations here.
-    @Query("match (s:Stations) return s")
-    Station find_id_station(@Param("id") int id);
 }

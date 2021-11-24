@@ -10,20 +10,15 @@ import org.springframework.data.neo4j.core.schema.TargetNode;
 import org.springframework.data.neo4j.core.schema.Relationship;
 import java.util.List;
 
-@Getter
-@Setter
-@RelationshipEntity(type = "Connects")
-public class Connection {
+@Node
+public class Demand16 {
     @Id
     @GeneratedValue
     private Long id;
-
-    @EndNode
-    private Station in;
-
-    @StartNode
-    private Station out;
-
     @Property
-    private List<String> lines;
+    private String name;
+    @Property
+    private String direction;
+    @Property
+    private int count;
 }

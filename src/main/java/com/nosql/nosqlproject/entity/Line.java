@@ -5,7 +5,7 @@ import lombok.Setter;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Property;
-import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -24,15 +24,15 @@ public class Line {
     @Property
     private String departure;
     @Property
-    private Date start_time;
+    private String start_time;
     @Property
     private String destination;
     @Property
-    private Date end_time;
+    private String end_time;
     @Property
     private String type;
     @Property
-    private int[] route_up;
+    private List<String> route_up_or_round;
     @Property
-    private int[] route_down;
+    private List<String> route_down;
 }

@@ -1,7 +1,5 @@
 package com.nosql.nosqlproject;
 
-import com.nosql.nosqlproject.dao.StationRepository;
-import com.nosql.nosqlproject.entity.Station;
 import lombok.Value;
 import org.neo4j.driver.AuthTokens;
 import org.neo4j.driver.Driver;

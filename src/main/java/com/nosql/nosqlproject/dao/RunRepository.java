@@ -11,8 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface RunRepository extends Neo4jRepository<Run, Integer> {
+public interface RunRepository extends Neo4jRepository<Run, String> {
     // Insert database operations here.
-    @Query("match (s:Stations) return s")
-    Station find_id_station(@Param("id") int id);
 }

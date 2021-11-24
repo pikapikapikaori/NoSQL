@@ -45,7 +45,7 @@
                     <el-descriptions-item label="运行时长">{{routeToSearchStationResult.time}}</el-descriptions-item>
                   </el-descriptions>
 
-                  <el-table :data="routeToSearchStationResult.interval" stripe="true" :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}" empty-text="暂无线路">
+                  <el-table :data="routeToSearchStationResult.station" stripe="true" :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}" empty-text="暂无线路">
                     <el-table-column prop="id" label="站点id" width="320">
                     </el-table-column>
                     <el-table-column prop="name" label="站点名称" width="330">
@@ -144,7 +144,7 @@ export default {
       routeToSearchStationResult: {
         lineName: '',
         time: '',
-        interval: []
+        station: []
       },
       isClearRepeat: false,
       formInlineRepeat: {
