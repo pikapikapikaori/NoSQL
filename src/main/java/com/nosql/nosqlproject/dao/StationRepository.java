@@ -1,12 +1,7 @@
 package com.nosql.nosqlproject.dao;
 
-import com.nosql.nosqlproject.entity.Station;
-import com.nosql.nosqlproject.entity.Line;
-import com.nosql.nosqlproject.entity.Connection;
-import com.nosql.nosqlproject.entity.Run;
-import com.nosql.nosqlproject.repository.Demand15;
-import com.nosql.nosqlproject.repository.Demand16;
-import com.nosql.nosqlproject.repository.Demand3;
+import com.nosql.nosqlproject.repository.*;
+import com.nosql.nosqlproject.entity.*;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,11 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface StationRepository extends Neo4jRepository<Station, Integer> {
-    // Insert database operations here.
-    @Query("match (s:Stations) return s")
-    Station find_id_station(@Param("id") int id);
-
+    @Query("MATCH (s:Station) RETURN s.id")
     public List<String> get_all_station_id();
+    @Query("MATCH (l:Line{name: {line_id}}) WITH CASE {direction} WHEN '上行' THEN l.route_up_or_round WHEN '下行' THEN l.route_down ELSE null END AS list UNWIND list AS k RETURN (:Station{name: k}) ")
     public Station find_route_station(String line_id, String direction);
     public ArrayList<Demand3> find_stationName_routeName(String station_id);
     public ArrayList<Station> station_lines(String station_id);
