@@ -2,6 +2,7 @@ package com.nosql.nosqlproject.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.nosql.nosqlproject.dao.LineRepository;
+import com.nosql.nosqlproject.entity.Line;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,16 @@ public class RouteService {
     LineRepository linerepository;
     public JSONObject find_lineId_line(String lineId){
         JSONObject obj = new JSONObject();
+        Line line = new Line();
+        line = linerepository.find_lineId_line(lineId);
+        obj.put("route",line.getDeparture()+"-"+line.getDestination());
+        obj.put("directional",line.getDirectional());
+        obj.put("length",line.getKilometer());
+        obj.put("lineId",line.getName());
+        obj.put("interval",line.getInterval());
+        obj.put("oneWayTime",line.getOnewayTime());
+        obj.put("type",line.getType());
+        obj.put("runtime",line.getStart_time()+"-"+line.getEnd_time());
         return obj;
     }
 

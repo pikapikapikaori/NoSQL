@@ -1,3 +1,4 @@
+/*
 package com.nosql.nosqlproject.entity;
 
 import lombok.Getter;
@@ -27,3 +28,4 @@ public class Connection {
     @Property
     private List<String> lines;
 }
+*/
