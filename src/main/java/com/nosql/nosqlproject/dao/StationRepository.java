@@ -2,7 +2,6 @@ package com.nosql.nosqlproject.dao;
 
 import com.nosql.nosqlproject.entity.Station;
 import com.nosql.nosqlproject.entity.Line;
-import com.nosql.nosqlproject.entity.Connection;
 import com.nosql.nosqlproject.entity.Run;
 import com.nosql.nosqlproject.repository.Demand15;
 import com.nosql.nosqlproject.repository.Demand16;

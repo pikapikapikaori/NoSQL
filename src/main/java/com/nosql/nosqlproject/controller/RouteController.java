@@ -1,5 +1,6 @@
 package com.nosql.nosqlproject.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.nosql.nosqlproject.entity.Station;
 import com.nosql.nosqlproject.service.RouteService;
@@ -20,8 +21,8 @@ public class RouteController {
     }
     //需求二
     @GetMapping("/find_route_station")
-    public JSONObject find_route_station(String station_id,String direction){
-        return routeservice.find_route_station(station_id,direction);
+    public JSONArray find_route_station(String line_id, String direction){
+        return routeservice.find_route_station(line_id,direction);
     }
     //需求四
     @GetMapping("/find_lineId_stationName_path")
