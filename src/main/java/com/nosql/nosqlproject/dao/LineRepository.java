@@ -1,5 +1,6 @@
 package com.nosql.nosqlproject.dao;
 
+import com.nosql.nosqlproject.repository.*;
 import com.nosql.nosqlproject.entity.*;
 import com.nosql.nosqlproject.repository.Demand4;
 import com.nosql.nosqlproject.repository.Demand8;
@@ -13,7 +14,9 @@ import java.util.List;
 
 public interface LineRepository extends Neo4jRepository<Line, String> {
 
+    @Query("MATCH (l:Line) RETURN l.name")
     public List<String> get_all_line_names();
+    @Query("MATCH (l:Line{name: {line_id}}) RETURN l")
     public Line find_lineId_line(String line_id);
     public List<Demand4> find_lineId_stationName_path(String line_id, String station_name1, String station_name2);
     public ArrayList<String> find_directRoute();
