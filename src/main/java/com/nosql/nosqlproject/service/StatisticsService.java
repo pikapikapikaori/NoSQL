@@ -9,26 +9,32 @@ import org.springframework.stereotype.Service;
 public class StatisticsService {
     @Autowired
     LineRepository linerepository;
+
+    //10
     public JSONObject most_line_station(){
         JSONObject obj = new JSONObject();
         return obj;
     }
 
+    //12
     public JSONObject count_type(){
         JSONObject obj = new JSONObject();
         return obj;
     }
 
+    //15
     public JSONObject most_connections(){
         JSONObject obj = new JSONObject();
         return obj;
     }
 
+    //16
     public JSONObject most_stations(){
         JSONObject obj = new JSONObject();
         return obj;
     }
 
+    //17
     public JSONObject longest_time(){
         JSONObject obj = new JSONObject();
         return obj;

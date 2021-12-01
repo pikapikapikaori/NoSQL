@@ -23,10 +23,6 @@ public class StationController {
     在函数参数前可以添加注解@RequestBody或@RequestParam来进行与前端的参数匹配，具体支持的json格式与支持的请求模式（get/post）上网搜索
     get请求通过url传递参数，不在后端开发考虑范围内
      */
-    @GetMapping("/find_id_station")
-    public Station find_id_station(int id){
-        return stationservice.find_id_station(id);
-    }
 
     //需求三
     @GetMapping("/find_stationName_routeName")

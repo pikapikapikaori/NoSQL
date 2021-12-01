@@ -16,10 +16,9 @@ public class StationService {
     @Autowired
     StationRepository stationrepository;
 
-    public Station find_id_station(int id){
-        return stationrepository.find_id_station(id);
-    }
 
+
+    //3
     public JSONArray find_stationName_routeName(String stationName){
         JSONArray arr = new JSONArray();
         ArrayList<Demand3> result = new ArrayList<>();
@@ -48,11 +47,14 @@ public class StationService {
         return arr;
     }
 
+    //8
     public JSONObject find_station_time_line(int stationId,String baseTime,int lasttime){
         JSONObject obj = new JSONObject();
+
         return obj;
     }
 
+    //9
     public JSONObject find_station_time_nearest3(int stationId,String basetime){
         JSONObject obj = new JSONObject();
         return obj;

@@ -17,6 +17,8 @@ public class RouteService {
     @Autowired
     LineRepository linerepository;
     StationRepository stationrepository;
+
+    //1
     public JSONObject find_lineId_line(String lineId){
         JSONObject obj = new JSONObject();
         Line line = new Line();
@@ -32,6 +34,7 @@ public class RouteService {
         return obj;
     }
 
+    //2
     public JSONArray find_route_station(String line_id,String direction){
         JSONArray arr = new JSONArray();
         ArrayList<Station> station=new ArrayList<>();
@@ -48,6 +51,7 @@ public class RouteService {
         return arr;
     }
 
+    //4
     public JSONObject find_lineId_stationName_path(String lineId,String stationName1,String stationName2){
         JSONObject obj = new JSONObject();
         Demand4 result = new Demand4();
@@ -71,15 +75,18 @@ public class RouteService {
         return obj;
     }
 
+    //13
     public JSONObject find_sameStations(String id1,String direction1,String id2,String direction2){
         JSONObject obj = new JSONObject();
         return obj;
     }
 
+    //20a
     public void delete_line(String lineId){
         ;
     }
 
+    //20b
     public void change_line(String lineId,String stationId,String newStationId){
         ;
     }
