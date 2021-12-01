@@ -1,3 +1,4 @@
+/*
 package com.nosql.nosqlproject.dao;
 
 import com.nosql.nosqlproject.repository.*;
@@ -12,3 +13,4 @@ import java.util.List;
 public interface ConnectionRepository extends Neo4jRepository<Connection, Integer> {
     // Insert database operations here.
 }
+*/

@@ -13,7 +13,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@RelationshipEntity(type = "Connects")
+@Relationship
 public class Connection {
     @Id
     @GeneratedValue
