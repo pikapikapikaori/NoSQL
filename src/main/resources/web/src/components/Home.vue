@@ -12,6 +12,7 @@
         <el-main style="text-align: left; font-size: 18px">
           <el-divider content-position="left">金河市介绍</el-divider>
           {{intromsg}}
+          <!--
           <el-divider content-position="left">具体功能</el-divider>
           <div class="HomeTableData" style="text-align: center">
             <el-table :data="tableData" stripe="true" :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}">
@@ -25,6 +26,7 @@
               </el-table-column>
             </el-table>
           </div>
+          -->
         </el-main>
 
         <el-footer>
