@@ -36,6 +36,7 @@
                 </div>
               </div>
             </el-tab-pane>
+            <!--
 
             <el-tab-pane label="站点某时线路">
               站点某时线路
@@ -96,6 +97,7 @@
                 </div>
               </div>
             </el-tab-pane>
+            -->
           </el-tabs>
         </el-main>
 
