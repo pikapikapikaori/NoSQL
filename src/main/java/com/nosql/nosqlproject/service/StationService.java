@@ -21,7 +21,7 @@ public class StationService {
     }
 
     public JSONArray find_stationName_routeName(String stationName){
-        JSONArray arr = new JSONArray()
+        JSONArray arr = new JSONArray();
         ArrayList<Demand3> result = new ArrayList<>();
         result =  stationrepository.find_stationName_routeName(stationName);
         for(int i=0;i<result.size();i++)

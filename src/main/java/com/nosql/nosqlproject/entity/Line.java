@@ -14,7 +14,7 @@ public class Line {
     @Id
     private String name;
     @Property
-    private boolean directional;
+    private String directional;
     @Property
     private int interval;
     @Property
