@@ -5,11 +5,11 @@ import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Property;
 
 public class Demand16 {
-    private Long id;
+    public Long id;
 
-    private String name;
+    public String name;
 
-    private String direction;
+    public String direction;
 
-    private int count;
+    public int count;
 }

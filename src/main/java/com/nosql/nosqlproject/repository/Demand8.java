@@ -5,9 +5,9 @@ import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Property;
 
 public class Demand8 {
-    private Long id;
+    public Long id;
 
-    private String lineName;
+    public String lineName;
 
-    private int soon;
+    public int soon;
 }

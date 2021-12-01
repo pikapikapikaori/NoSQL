@@ -2,16 +2,16 @@ package com.nosql.nosqlproject.repository;
 
 import com.nosql.nosqlproject.entity.Station;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Demand4 {
-    private Long id;
+    public Long id;
 
-    private int runtime;
+    public int runtime;
 
-    private String lineName;
+    public String lineName;
 
-    private boolean is_up;
+    public String direction;
 
-    private List<Station> stations;
+    public ArrayList<Station> stations;
 }
