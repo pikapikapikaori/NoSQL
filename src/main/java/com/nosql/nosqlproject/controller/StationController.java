@@ -29,16 +29,18 @@ public class StationController {
     public JSONArray find_station(String stationName){
         return stationservice.find_stationName_routeName(stationName);
     }
-
+/*
     //需求八
     @GetMapping("/find_station_time_line")
-    public JSONObject find_station_time_line(int stationId,String baseTime,int lasttime){
+    public JSONArray find_station_time_line(String stationId,String baseTime,String lasttime){
         return stationservice.find_station_time_line(stationId,baseTime,lasttime);
     }
 
     //需求九
     @GetMapping("/find_station_time_nearest3")
-    public JSONObject find_station_time_nearest3(int stationId,String basetime){
+    public JSONArray find_station_time_nearest3(String stationId,String basetime){
         return stationservice.find_station_time_nearest3(stationId,basetime);
     }
+
+*/
 }

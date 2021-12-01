@@ -31,7 +31,7 @@ public class RouteController {
     }
     //需求十三
     @GetMapping("/find_sameStations")
-    public JSONObject find_sameStations(String id1,String direction1,String id2,String direction2){
+    public JSONArray find_sameStations(String id1,String direction1,String id2,String direction2){
         return routeservice.find_sameStations(id1,direction1,id2,direction2);
     }
     //需求二十a

@@ -76,18 +76,30 @@ public class RouteService {
     }
 
     //13
-    public JSONObject find_sameStations(String id1,String direction1,String id2,String direction2){
-        JSONObject obj = new JSONObject();
-        return obj;
+    public JSONArray find_sameStations(String id1,String direction1,String id2,String direction2){
+        JSONArray arr = new JSONArray();
+        ArrayList<Station> result = new ArrayList<Station>();
+        result = stationrepository.find_sameStation(id1,direction1,id2,direction2);
+        Station sta = new Station();
+        for(int i = 0 ; i < result.size() ; i++)
+        {
+            sta = result.get(i);
+            JSONObject obj = new JSONObject();
+            obj.put("station_id",sta.getId());
+            obj.put("station_name",sta.getName());
+            obj.put("station_english",sta.getEnglish());
+            arr.add(obj);
+        }
+        return arr;
     }
 
     //20a
     public void delete_line(String lineId){
-        ;
+        linerepository.delete_line(lineId);
     }
 
     //20b
     public void change_line(String lineId,String stationId,String newStationId){
-        ;
+        linerepository.change_line(lineId, stationId, newStationId)
     }
 }

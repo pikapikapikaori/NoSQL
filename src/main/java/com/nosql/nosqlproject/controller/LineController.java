@@ -1,5 +1,6 @@
 package com.nosql.nosqlproject.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.nosql.nosqlproject.entity.Line;
 import com.nosql.nosqlproject.service.LineService;
@@ -18,7 +19,7 @@ public class LineController {
     LineService lineservice;
     //需求六
     @GetMapping("/find_directRoute")
-    public JSONObject find_directRoute(String station1,String station2){
+    public JSONArray find_directRoute(String station1, String station2){
         return lineservice.find_directRoute(station1,station2);
     }
 }

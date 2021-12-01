@@ -1,5 +1,6 @@
 package com.nosql.nosqlproject.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.nosql.nosqlproject.entity.Station;
 import com.nosql.nosqlproject.service.StationService;
@@ -23,22 +24,22 @@ public class StatisticsController {
     }
     //需求十二
     @GetMapping("/count_type")
-    public JSONObject count_type(){
+    public JSONArray count_type(){
         return statisticsservice.count_type();
     }
     //需求十五
     @GetMapping("/most_connections")
-    public JSONObject most_connections(){
+    public JSONArray most_connections(){
         return statisticsservice.most_connections();
     }
     //需求十六
     @GetMapping("/most_stations")
-    public JSONObject most_stations(){
+    public JSONArray most_stations(){
         return statisticsservice.most_stations();
     }
     //需求十七
     @GetMapping("/longest_time")
-    public JSONObject longest_time(){
+    public JSONArray longest_time(){
         return statisticsservice.longest_time();
     }
 }

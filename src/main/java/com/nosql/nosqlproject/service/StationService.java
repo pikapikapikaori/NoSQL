@@ -1,10 +1,13 @@
 package com.nosql.nosqlproject.service;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.nosql.nosqlproject.dao.LineRepository;
 import com.nosql.nosqlproject.dao.StationRepository;
 import com.nosql.nosqlproject.entity.Station;
 import com.nosql.nosqlproject.repository.Demand3;
+import com.nosql.nosqlproject.repository.Demand8;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +18,7 @@ import java.util.ArrayList;
 public class StationService {
     @Autowired
     StationRepository stationrepository;
-
+    LineRepository linerepository;
 
 
     //3
@@ -46,17 +49,46 @@ public class StationService {
         }
         return arr;
     }
-
+/*
     //8
-    public JSONObject find_station_time_line(int stationId,String baseTime,int lasttime){
-        JSONObject obj = new JSONObject();
-
-        return obj;
+    public JSONArray find_station_time_line(String stationId,String baseTime,String lasttime){
+        JSONArray arr = new JSONArray();
+        ArrayList<Demand8> result = new ArrayList<>();
+        Demand8 a = new Demand8();
+        result = linerepository.find_station_time_line(stationId,baseTime,lasttime);
+        for(int i = 0; i < result.size(); i++)
+        {
+            a = result.get(i);
+            JSONObject obj = new JSONObject();
+            obj.put("lineName",a.getLineName());
+            String soon = a.soon + "";
+            String s = soon + "分钟后到站";
+            obj.put("soon",s);
+            arr.add(obj);
+        }
+        return arr;
     }
 
     //9
-    public JSONObject find_station_time_nearest3(int stationId,String basetime){
-        JSONObject obj = new JSONObject();
-        return obj;
+
+    public JSONArray find_station_time_nearest3(String stationId,String basetime){
+        JSONArray arr = new JSONArray();
+        ArrayList<Demand8> result = new ArrayList<>();
+        result = linerepository.find_station_time_nearest3(stationId,basetime);
+        Demand8 a = new Demand8();
+        int j = 1;
+        for(int i = 0; i < result.size(); i++)
+        {
+            a = result.get(i);
+            JSONObject obj = new JSONObject();
+            String s1 = a.lineName + "班次" +(j +"");
+            obj.put("lineName",s1);
+            String s2 = a.soon + "分钟后到站";
+            obj.put("soon",s2);
+            arr.add(obj);
+        }
+        return arr;
     }
+*/
+
 }
