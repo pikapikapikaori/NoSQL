@@ -22,8 +22,12 @@ public interface StationRepository extends Neo4jRepository<Station, Integer> {
             return (:Station{name: k}) """)
     public ArrayList<Station> find_route_station(String line_id, String direction);
 
-    @Query("")
-    public ArrayList<Demand3> find_stationName_routeName(String station_id);
+    @Query("""
+match (s:Station{name:{station_name}}) -[r]- ()
+match (l:Line) where l.name in r.lines
+return s.id, collect(l.name), collect(l.direction)
+    """)
+    public ArrayList<Demand3> find_stationName_routeName(String station_name);
 
     public ArrayList<Station> station_lines(String station_id);
 

@@ -45,10 +45,7 @@ public class Line {
     private String type;
 
     @Property
-    private ArrayList<String> route_up_or_round;
-
-    @Property
-    private ArrayList<String> route_down;
+    private ArrayList<String> route;
 
     @Relationship(direction = Relationship.Direction.INCOMING)
     private ArrayList<Run> timetable;
