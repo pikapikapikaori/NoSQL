@@ -4,6 +4,8 @@ import com.nosql.nosqlproject.repository.*;
 import com.nosql.nosqlproject.entity.*;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
+import org.springframework.data.neo4j.repository.query.;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -79,10 +81,24 @@ public interface LineRepository extends Neo4jRepository<Line, String> {
                 """)
     public ArrayList<String> get_start_end_time_in_one_run(String line_name);
 
+    @Transcational
     @Query("""
+    match
+    (n:Line{name:{line_id}})
+detach delete n
+match
+    (r:Run{line_id:n.name})
+detach delete r
+match
+    (a:Station) -[r]-> (b:Station) where n.name in r.lines and size(r.lines) = 1
+delete r
+match 
+    (a:Station) where not (a) -- ()
+delete a
     """)
-    public void delete_line(String line_id);
+    public void delete_line(@Param("lien_id")String line_id);
 
+    @Transcational
     @Query("""
     """)
     public void change_line(String line_id, String station_id, String new_station_id);
