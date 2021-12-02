@@ -19,7 +19,7 @@ public class StatisticsController {
     StatisticsService statisticsservice;
     //需求十
     @GetMapping("/most_line_station")
-    public JSONObject most_line_station(){
+    public JSONArray most_line_station(){
         return statisticsservice.most_line_station();
     }
     //需求十二
