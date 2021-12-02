@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Demand3 {
 
-    public String lineName;
+    public String stationId;
 
     public ArrayList<String> lineIds = new ArrayList<String>();
 
