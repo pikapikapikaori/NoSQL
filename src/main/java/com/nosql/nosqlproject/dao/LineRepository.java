@@ -48,7 +48,7 @@ public interface LineRepository extends Neo4jRepository<Line, String> {
             (l:Line{departure:{station1}}, destination:{station2})
             return l.name + l.direction
             """)
-    public ArrayList<String> find_directRoute(String station1, String station2);
+    public ArrayList<String> find_directRoute();
 
     @Query("""
             match

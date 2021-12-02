@@ -25,9 +25,42 @@ public class StatisticsService {
     StationRepository stationrepository;
 
     //10
-    public JSONObject most_line_station(){
-        JSONObject obj = new JSONObject();
-        return obj;
+    public JSONArray most_line_station(){
+        JSONArray arr = new JSONArray();
+        ArrayList<String> stations = new ArrayList<String>();
+        stations = stationrepository.get_all_station_id();
+        ArrayList<StationLines> sta_lin = new ArrayList<StationLines>();
+        for(int i = 0;i<stations.size();i++)
+        {
+            StationLines a = new StationLines();
+            a.stationId = stations.get(i);
+            a.station = stationrepository.get_station_name_by_id(a.stationId);
+            ArrayList<String> line = new ArrayList<>();
+            line = linerepository.get_lines_in_a_station(a.stationId);
+            String s = "";
+            for(int j = 0;j<line.size();j++)
+            {
+                s+=line.get(i);
+                if(i<line.size()-1)
+                    s+=",";
+            }
+            a.route = s;
+            a.num = line.size();
+            sta_lin.add(a);
+        }
+        Collections.sort(sta_lin,new sortByNum());
+        for(int i = 0;i<15;i++)
+        {
+            JSONObject obj = new JSONObject();
+            StationLines a = new StationLines();
+            a = sta_lin.get(i);
+            obj.put("stationId",a.stationId);
+            obj.put("station",a.station);
+            obj.put("num",a.num);
+            obj.put("route",a.route);
+            arr.add(obj);
+        }
+        return arr;
     }
 
     //12
@@ -50,9 +83,7 @@ public class StatisticsService {
         return arr;
     }
 
-    class sortByCount implements Comparator{
 
-    }
     //15
     public JSONArray most_connections(){
         JSONArray arr = new JSONArray();
@@ -75,15 +106,27 @@ public class StatisticsService {
     //16
     public JSONArray most_stations(){
         JSONArray arr = new JSONArray();
-        ArrayList<Demand16> result = new ArrayList<>();
-        result = stationrepository.most_station();
-        Demand16 a = new Demand16();
-        for(int i = 0 ; i < 15 ;i++)
-        {
-            a = result.get(i);
+        ArrayList<Demand16> result1 = new ArrayList<>();
+        result1 = stationrepository.most_station_up();
+        ArrayList<Demand16> result2 = new ArrayList<>();
+        result2 = stationrepository.most_station_down();
+        Demand16 a,b = new Demand16();
+        int i = 0 , j = 0;
+        while(i+j < 15) {
+            a = result1.get(i);
+            b = result2.get(j);
             JSONObject obj = new JSONObject();
-            obj.put("route",a.name+a.direction);
-            obj.put("num",a.count);
+            if (a.count > b.count) {
+                obj.put("route", a.name + a.direction);
+                obj.put("num", a.count);
+                arr.add(obj);
+                i++;
+            } else {
+                obj.put("route", b.name + b.direction);
+                obj.put("num", b.count);
+                arr.add(obj);
+                j++;
+            }
             arr.add(obj);
         }
         return arr;
@@ -123,6 +166,8 @@ public class StatisticsService {
     }
 }
 
+
+
 class sortByCount implements Comparator{
     public int compare(Object o1,Object o2){
         if(((Demand15)o1).count < ((Demand15)o2).count)
@@ -130,3 +175,19 @@ class sortByCount implements Comparator{
         return -1;
     }
 }
+
+class StationLines{
+    public String stationId;
+    public String station;
+    public int num;
+    public String route;
+}
+
+class sortByNum implements Comparator{
+    public int compare(Object o1,Object o2){
+        if(((StationLines)o1).num < ((StationLines)o2).num)
+            return 1;
+        return -1;
+    }
+}
+

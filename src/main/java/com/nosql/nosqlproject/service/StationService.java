@@ -31,12 +31,12 @@ public class StationService {
             JSONObject obj = new JSONObject();
             Demand3 demand3 = new Demand3();
             demand3 = result.get(i);
-            obj.put("stationId",demand3.getStationID());
+            obj.put("stationId",demand3.stationId);
             String str = null;
             ArrayList<String> lineIds=new ArrayList<>();
-            lineIds =demand3.getLineId();
+            lineIds =demand3.lineIds;
             ArrayList<String> direction=new ArrayList<>();
-            direction = demand3.getDirection();
+            direction = demand3.directions;
             for(int j = 0 ; j < lineIds.size() ; j++)
             {
                 str += "\"";

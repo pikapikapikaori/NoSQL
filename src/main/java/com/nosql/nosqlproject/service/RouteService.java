@@ -24,7 +24,7 @@ public class RouteService {
         Line line = new Line();
         line = linerepository.find_lineId_line(lineId);
         obj.put("route",line.getDeparture()+"-"+line.getDestination());
-        obj.put("directional",line.getDirectional());
+        obj.put("directional",line.getDirection());
         obj.put("length",line.getKilometer());
         obj.put("lineId",line.getName());
         obj.put("interval",line.getInterval());
@@ -56,11 +56,11 @@ public class RouteService {
         JSONObject obj = new JSONObject();
         Demand4 result = new Demand4();
         result = linerepository.find_lineId_stationName_path(lineId,stationName1,stationName2);
-        obj.put("lineName",result.getLineName());
-        obj.put("runTime",result.getRunTime());
+        obj.put("lineName",result.lineName);
+        obj.put("runTime",result.runtime);
         JSONArray arr =new JSONArray();
         ArrayList<Station> sta = new ArrayList<Station>();
-        sta = result.getStations();
+        sta = result.stations;
         for(int i = 0; i < sta.size(); i++)
         {
             JSONObject s = new JSONObject();
@@ -78,12 +78,15 @@ public class RouteService {
     //13
     public JSONArray find_sameStations(String id1,String direction1,String id2,String direction2){
         JSONArray arr = new JSONArray();
-        ArrayList<Station> result = new ArrayList<Station>();
-        result = stationrepository.find_sameStation(id1,direction1,id2,direction2);
+        ArrayList<Station> result1 = new ArrayList<Station>();
+        result1 = stationrepository.find_route_station(id1,direction1);
+        ArrayList<Station> result2 = new ArrayList<Station>();
+        result2 = stationrepository.find_route_station(id2,direction2);
         Station sta = new Station();
-        for(int i = 0 ; i < result.size() ; i++)
+        result1.retainAll(result2);
+        for(int i = 0 ; i < result1.size() ; i++)
         {
-            sta = result.get(i);
+            sta = result1.get(i);
             JSONObject obj = new JSONObject();
             obj.put("station_id",sta.getId());
             obj.put("station_name",sta.getName());
@@ -100,6 +103,6 @@ public class RouteService {
 
     //20b
     public void change_line(String lineId,String stationId,String newStationId){
-        linerepository.change_line(lineId, stationId, newStationId)
+        linerepository.change_line(lineId, stationId, newStationId);
     }
 }
