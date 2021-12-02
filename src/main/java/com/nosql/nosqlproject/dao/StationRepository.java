@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 
-public interface StationRepository extends Neo4jRepository<Station, Integer> {
+public interface StationRepository extends Neo4jRepository<Station, String> {
     @Query("match (s:Station) return s.id")
     public ArrayList<String> get_all_station_id();
 
@@ -19,7 +19,7 @@ public interface StationRepository extends Neo4jRepository<Station, Integer> {
     @Query("""
             match (l:Line{name: {line_id}, direction: {direction}})
             unwind l.route AS k
-            return (:Station{name: k}) """)
+            return (:Station{name: k})""")
     public ArrayList<Station> find_route_station(String line_id, String direction);
 
     @Query("""
@@ -29,10 +29,12 @@ return s.id, collect(l.name), collect(l.direction)
     """)
     public ArrayList<Demand3> find_stationName_routeName(String station_name);
 
+    /*
     public ArrayList<Station> station_lines(String station_id);
 
     @Query("")
     public ArrayList<Station> find_stations_of_two_lines(String id1, String direction, String id2, String direction2);
+     */
 
     @Query("""
             match

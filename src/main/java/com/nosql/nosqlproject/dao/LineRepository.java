@@ -43,6 +43,7 @@ public interface LineRepository extends Neo4jRepository<Line, String> {
             """)
     public ArrayList<String> find_directRoute();
 
+    /*
     @Query("""
             match
              (l:Run) where {station_id} in r.route
@@ -50,6 +51,7 @@ public interface LineRepository extends Neo4jRepository<Line, String> {
     public ArrayList<Demand8> find_station_time_line(String station_id, String base_time, String last_time);
 
     public ArrayList<Demand8> find_station_time_nearest3(String station_id, String base_time);
+     */
 
     @Query("""
             match

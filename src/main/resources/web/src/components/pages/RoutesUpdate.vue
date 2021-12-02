@@ -148,6 +148,10 @@
                     <template slot="append">路</template>
                   </el-input>
                 </el-form-item>
+                <el-form-item label="线路方向">
+                  <el-input v-model="substituteStation.direction" placeholder="线路方向">
+                  </el-input>
+                </el-form-item>
                 <el-form-item label="被替换站点 Id">
                   <el-input v-model="substituteStation.originStation" placeholder="被替换站点 Id">
                   </el-input>
@@ -160,6 +164,17 @@
                   <el-button type="primary" @click="substitute" native-type="submit">替换</el-button>
                 </el-form-item>
               </el-form>
+
+              <div v-show="isClearStation">
+                <el-table :data="substituteStationResult" stripe="true" :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}" empty-text="暂无线路站点信息">
+                  <el-table-column prop="station_id" label="站点ID" width="320">
+                  </el-table-column>
+                  <el-table-column prop="station_name" label="站点名称" width="330">
+                  </el-table-column>
+                  <el-table-column prop="station_english" label="站点英语名称" width="330">
+                  </el-table-column>
+                </el-table>
+              </div>
             </div>
           </el-tab-pane>
         </el-tabs>
@@ -206,9 +221,12 @@ export default {
       },
       substituteStation: {
         route: '',
+        direction: '',
         originStation: '',
         newStation: ''
-      }
+      },
+      isClearStation: false,
+      substituteStationResult: []
     }
   },
   components: {
@@ -304,7 +322,7 @@ export default {
       }).then(() => {
         this.$message({
           type: 'success',
-          message: '删除成功!'
+          message: '提交删除成功!'
         });
       }).catch(() => {
         this.$message({
@@ -314,6 +332,8 @@ export default {
       });
     },
     substitute(){
+      this.isClearStation = false;
+
       this.$confirm('此操作将替换站点, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -333,8 +353,16 @@ export default {
             this.$axios.post('/route/change_line', {
               lineId: this.substituteStation.route,
               stationId: this.substituteStation.originStation,
-              newStationId: this.substituteStation.newStation
+              newStationId: this.substituteStation.newStation,
+              direction: this.direction
+            }).then((res) => {
+              this.subStationResult = res.data;
+            }).catch((err) => {
+              this.subStationResult = [];
             });
+
+            this.isClearStation = true;
+
           }
           else {
             done();
@@ -343,7 +371,7 @@ export default {
       }).then(() => {
         this.$message({
           type: 'success',
-          message: '替换成功!'
+          message: '提交替换成功!'
         });
       }).catch(() => {
         this.$message({
