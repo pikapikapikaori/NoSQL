@@ -17,14 +17,8 @@ public interface StationRepository extends Neo4jRepository<Station, Integer> {
     public String get_station_name_by_id(String id);
 
     @Query("""
-            match (l:Line{name: {line_id}})
-            with
-                case {direction} = "down" then
-                    l.route_down
-                else
-                    l.route_up_or_round
-            end as list
-            unwind list AS k
+            match (l:Line{name: {line_id}, direction: {direction}})
+            unwind l.route AS k
             return (:Station{name: k}) """)
     public ArrayList<Station> find_route_station(String line_id, String direction);
 
@@ -43,16 +37,17 @@ public interface StationRepository extends Neo4jRepository<Station, Integer> {
             """)
     public ArrayList<Demand15> most_connection();
 
+    /* optimal */
     @Query("""
                 match (a:Line)
-            return a.name, a.direction, count(a.route_up_or_round) order by count(a.route_up_or_round) limit 15
+            return a.name, a.direction, count(a.route) order by count(a.route) limit 15
 
                             """)
     public ArrayList<Demand16> most_station_up();
 
     @Query("""
                 match (b:Line)
-            return a.name, a.direction, count(a.route_down) order by count(a.route_down) limit 15
+            return a.name, a.direction, count(a.route) order by count(a.route) limit 15
 
                 """)
     public ArrayList<Demand16> most_station_down();

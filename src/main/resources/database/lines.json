@@ -15,7 +15,7 @@
         "kilometer": 51.0,
         "name": "G95",
         "onewayTime": "约50分",
-        "route": "合江客运站→环球中心",
+        "route": "合江客运站-环球中心",
         "runtime": "6:30-7:00",
         "type": "高峰线"
     },
@@ -385,7 +385,7 @@
         "kilometer": 7.0,
         "name": "198A",
         "onewayTime": "约18分",
-        "route": "银杏园公交站→地铁七河路口",
+        "route": "银杏园公交站-地铁七河路口",
         "runtime": "6:10-22:40",
         "type": "驳接线"
     },
@@ -455,7 +455,7 @@
         "kilometer": 3.0,
         "name": "239",
         "onewayTime": "约14分",
-        "route": "曾家坡公交站→文家场",
+        "route": "曾家坡公交站-文家场",
         "runtime": "7:00-19:30",
         "type": "城乡线"
     },
@@ -495,7 +495,7 @@
         "kilometer": 8.0,
         "name": "261",
         "onewayTime": "约34分",
-        "route": "曾家坡公交站→高朋路首末站",
+        "route": "曾家坡公交站-高朋路首末站",
         "runtime": "6:30-20:30",
         "type": "支线"
     },
@@ -535,7 +535,7 @@
         "kilometer": 10.0,
         "name": "523",
         "onewayTime": "约40分",
-        "route": "万寿乡→永盛",
+        "route": "万寿乡-永盛",
         "runtime": "6:00-18:00",
         "type": "城乡线"
     },
@@ -585,7 +585,7 @@
         "kilometer": 14.5,
         "name": "727A",
         "onewayTime": "约19分",
-        "route": "科北路→天河区公交站",
+        "route": "科北路-天河区公交站",
         "runtime": "7:00-19:30",
         "type": "干线"
     },
@@ -615,7 +615,7 @@
         "kilometer": 46.5,
         "name": "752",
         "onewayTime": "约60分",
-        "route": "合江客运站→地铁钟楼站",
+        "route": "合江客运站-地铁钟楼站",
         "runtime": "5:50-21:00",
         "type": "驳接线"
     },
@@ -635,7 +635,7 @@
         "kilometer": 18.5,
         "name": "G22",
         "onewayTime": "约26分",
-        "route": "金河客运站→锦城西路",
+        "route": "金河客运站-锦城西路",
         "runtime": "7:00-8:00",
         "type": "高峰线"
     },
@@ -645,7 +645,7 @@
         "kilometer": 7.0,
         "name": "G27",
         "onewayTime": "约10分",
-        "route": "燎原→环球中心",
+        "route": "燎原-环球中心",
         "runtime": "7:30-7:50",
         "type": "高峰线"
     },
@@ -655,7 +655,7 @@
         "kilometer": 5.0,
         "name": "G28",
         "onewayTime": "约10分",
-        "route": "金河客运站→新兴工业园",
+        "route": "金河客运站-新兴工业园",
         "runtime": "7:00-7:40",
         "type": "高峰线"
     },
@@ -675,7 +675,7 @@
         "kilometer": 11.0,
         "name": "G35",
         "onewayTime": "约18分",
-        "route": "永丰公交站→锦城西路",
+        "route": "永丰公交站-锦城西路",
         "runtime": "7:20-8:00",
         "type": "高峰线"
     },
@@ -725,7 +725,7 @@
         "kilometer": 17.0,
         "name": "G61",
         "onewayTime": "约26分",
-        "route": "和盛苑→锦城西路",
+        "route": "和盛苑-锦城西路",
         "runtime": "7:20-7:40",
         "type": "高峰线"
     },
@@ -745,7 +745,7 @@
         "kilometer": 14.5,
         "name": "G63",
         "onewayTime": "约24分",
-        "route": "北路湾公交站→锦城西路",
+        "route": "北路湾公交站-锦城西路",
         "runtime": "7:30-8:00",
         "type": "高峰线"
     },
@@ -755,7 +755,7 @@
         "kilometer": 17.0,
         "name": "G69",
         "onewayTime": "约25分",
-        "route": "东林小区→高新软件园公交站",
+        "route": "东林小区-高新软件园公交站",
         "runtime": "7:30-7:40",
         "type": "高峰线"
     },
@@ -765,7 +765,7 @@
         "kilometer": 40.0,
         "name": "G90",
         "onewayTime": "约55分",
-        "route": "天河区公交站→高新新区公交站",
+        "route": "天河区公交站-高新新区公交站",
         "runtime": "7:00-8:20",
         "type": "高峰线"
     },
@@ -805,7 +805,7 @@
         "kilometer": 7.0,
         "name": "K9",
         "onewayTime": "约24分",
-        "route": "钟楼→中海国际",
+        "route": "钟楼-中海国际",
         "runtime": "6:00-22:50",
         "type": "快速公交"
     },
