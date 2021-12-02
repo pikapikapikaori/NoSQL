@@ -102,7 +102,20 @@ public class RouteService {
     }
 
     //20b
-    public void change_line(String lineId,String stationId,String newStationId){
+    public JSONArray change_line(String lineId,String direction,String stationId,String newStationId){
         linerepository.change_line(lineId, stationId, newStationId);
+        JSONArray arr = new JSONArray();
+        ArrayList<Station> station=new ArrayList<>();
+        station = stationrepository.find_route_station(lineId, direction);
+        for(int i = 0; i<station.size();i++)
+        {
+            JSONObject obj = new JSONObject();
+            Station s = station.get(i);
+            obj.put("id",s.getId());
+            obj.put("name",s.getName());
+            obj.put("english",s.getEnglish());
+            arr.add(obj);
+        }
+        return arr;
     }
 }

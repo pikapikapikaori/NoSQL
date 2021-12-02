@@ -42,8 +42,8 @@ public class RouteController {
     }
     //需求20b
     @PostMapping("/change_line")
-    public void change_line(String lineId,String stationId,String newStationId){
-        routeservice.change_line(lineId,stationId,newStationId);
+    public JSONArray change_line(String lineId,String direction,String stationId,String newStationId){
+        return routeservice.change_line(lineId,direction,stationId,newStationId);
     }
 
 }
