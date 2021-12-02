@@ -1,14 +1,14 @@
 package com.nosql.nosqlproject.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import java.util.ArrayList;
+
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Property;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
-import java.util.ArrayList;
-import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -18,7 +18,7 @@ public class Line {
     private String name;
 
     @Property
-    private String directional;
+    private String direction;
 
     @Property
     private int interval;
