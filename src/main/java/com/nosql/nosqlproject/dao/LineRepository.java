@@ -4,7 +4,6 @@ import com.nosql.nosqlproject.repository.*;
 import com.nosql.nosqlproject.entity.*;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
-import org.springframework.data.neo4j.repository.query.;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;

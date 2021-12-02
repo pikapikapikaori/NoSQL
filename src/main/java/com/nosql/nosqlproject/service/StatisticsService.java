@@ -48,7 +48,7 @@ public class StatisticsService {
             a.num = line.size();
             sta_lin.add(a);
         }
-        Collections.sort(sta_lin,new sortByNum());
+        Collections.sort(sta_lin,new SortByNum());
         for(int i = 0;i<15;i++)
         {
             JSONObject obj = new JSONObject();
@@ -89,7 +89,7 @@ public class StatisticsService {
         JSONArray arr = new JSONArray();
         ArrayList<Demand15> result = new ArrayList<Demand15>();
         result = stationrepository.most_connection();
-        Collections.sort(result,new sortByCount());
+        Collections.sort(result,new SortByCount());
         Demand15 a = new Demand15();
         for(int i = 0 ; i < 15 ;i++)
         {
@@ -163,31 +163,6 @@ public class StatisticsService {
             arr.add(obj);
         }
         return arr;
-    }
-}
-
-
-
-class sortByCount implements Comparator{
-    public int compare(Object o1,Object o2){
-        if(((Demand15)o1).count < ((Demand15)o2).count)
-            return 1;
-        return -1;
-    }
-}
-
-class StationLines{
-    public String stationId;
-    public String station;
-    public int num;
-    public String route;
-}
-
-class sortByNum implements Comparator{
-    public int compare(Object o1,Object o2){
-        if(((StationLines)o1).num < ((StationLines)o2).num)
-            return 1;
-        return -1;
     }
 }
 
