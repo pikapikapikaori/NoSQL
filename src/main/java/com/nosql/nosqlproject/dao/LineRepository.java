@@ -28,7 +28,7 @@ public interface LineRepository extends Neo4jRepository<Line, String> {
 
     @Query("""
             match
-                (n:Line {name: {line_id}}) where n.route[0] = {stationname1}
+                (n:Line {name: {line_id}}) where n.route[0] = {station_name1} and n.route[-1] = {station_name2}
             unwind n.route as station
             match
                 (s:Station{name: station})
@@ -61,7 +61,7 @@ public interface LineRepository extends Neo4jRepository<Line, String> {
     public ArrayList<String> get_lines_in_a_station(String station_id);
 
     @Query("""
-            match (l:Line) where l.name ~= "^%d"
+            match (l:Line) where l.name =~ "^%d"
             match (k:Line) where k.name start with "K"
             match (g:Line) where g.name start with "G"
             match (n:Line) where n.name start with "N"
