@@ -26,8 +26,7 @@ public class RouteService {
     //1
     public JSONObject find_lineId_line(String lineId){
         JSONObject obj = new JSONObject();
-        Line line = new Line();
-        line = linerepository.find_lineId_line(lineId);
+        Line line = linerepository.find_lineId_line(lineId);
         obj.put("route",line.getDeparture()+"-"+line.getDestination());
         obj.put("directional",line.getDirection());
         obj.put("length",line.getKilometer());
@@ -44,14 +43,16 @@ public class RouteService {
         JSONArray arr = new JSONArray();
         ArrayList<Station> station=new ArrayList<>();
         station = stationrepository.find_route_station(line_id, direction);
-        for(int i = 0; i<station.size();i++)
-        {
-            JSONObject obj = new JSONObject();
-            Station s = station.get(i);
-            obj.put("id",s.getId());
-            obj.put("name",s.getName());
-            obj.put("english",s.getEnglish());
-            arr.add(obj);
+        if(!station.isEmpty()){
+            for(int i = 0; i<station.size();i++)
+            {
+                JSONObject obj = new JSONObject();
+                Station s = station.get(i);
+                obj.put("id",s.getId());
+                obj.put("name",s.getName());
+                obj.put("english",s.getEnglish());
+                arr.add(obj);
+            }
         }
         return arr;
     }
@@ -66,15 +67,17 @@ public class RouteService {
         JSONArray arr =new JSONArray();
         ArrayList<Station> sta = new ArrayList<Station>();
         sta = result.stations;
-        for(int i = 0; i < sta.size(); i++)
-        {
-            JSONObject s = new JSONObject();
-            Station st = new Station();
-            st = sta.get(i);
-            s.put("id",st.getId());
-            s.put("name",st.getName());
-            s.put("english",st.getEnglish());
-            arr.add(s);
+        if(!sta.isEmpty()){
+            for(int i = 0; i < sta.size(); i++)
+            {
+                JSONObject s = new JSONObject();
+                Station st = new Station();
+                st = sta.get(i);
+                s.put("id",st.getId());
+                s.put("name",st.getName());
+                s.put("english",st.getEnglish());
+                arr.add(s);
+            }
         }
         obj.put("stations",arr);
         return obj;
@@ -89,14 +92,16 @@ public class RouteService {
         result2 = stationrepository.find_route_station(id2,direction2);
         Station sta = new Station();
         result1.retainAll(result2);
-        for(int i = 0 ; i < result1.size() ; i++)
-        {
-            sta = result1.get(i);
-            JSONObject obj = new JSONObject();
-            obj.put("station_id",sta.getId());
-            obj.put("station_name",sta.getName());
-            obj.put("station_english",sta.getEnglish());
-            arr.add(obj);
+        if(!result1.isEmpty()){
+            for(int i = 0 ; i < result1.size() ; i++)
+            {
+                sta = result1.get(i);
+                JSONObject obj = new JSONObject();
+                obj.put("station_id",sta.getId());
+                obj.put("station_name",sta.getName());
+                obj.put("station_english",sta.getEnglish());
+                arr.add(obj);
+            }
         }
         return arr;
     }
@@ -112,14 +117,16 @@ public class RouteService {
         JSONArray arr = new JSONArray();
         ArrayList<Station> station=new ArrayList<>();
         station = stationrepository.find_route_station(lineId, direction);
-        for(int i = 0; i<station.size();i++)
-        {
-            JSONObject obj = new JSONObject();
-            Station s = station.get(i);
-            obj.put("id",s.getId());
-            obj.put("name",s.getName());
-            obj.put("english",s.getEnglish());
-            arr.add(obj);
+        if(!station.isEmpty()){
+            for(int i = 0; i<station.size();i++)
+            {
+                JSONObject obj = new JSONObject();
+                Station s = station.get(i);
+                obj.put("id",s.getId());
+                obj.put("name",s.getName());
+                obj.put("english",s.getEnglish());
+                arr.add(obj);
+            }
         }
         return arr;
     }

@@ -31,26 +31,32 @@ public class StationService {
         JSONArray arr = new JSONArray();
         ArrayList<Demand3> result = new ArrayList<>();
         result =  stationrepository.find_stationName_routeName(stationName);
-        for(int i=0;i<result.size();i++)
-        {
-            JSONObject obj = new JSONObject();
-            Demand3 demand3 = new Demand3();
-            demand3 = result.get(i);
-            obj.put("stationId",demand3.stationId);
-            String str = null;
-            ArrayList<String> lineIds=new ArrayList<>();
-            lineIds =demand3.lineIds;
-            ArrayList<String> direction=new ArrayList<>();
-            direction = demand3.directions;
-            for(int j = 0 ; j < lineIds.size() ; j++)
+        if(!result.isEmpty()){
+            for(int i=0;i<result.size();i++)
             {
-                str += "\"";
-                str += lineIds.get(i);
-                str += direction.get(i);
-                str += "\" ";
+                JSONObject obj = new JSONObject();
+                Demand3 demand3 = new Demand3();
+                demand3 = result.get(i);
+                obj.put("stationId",demand3.stationId);
+                String str = null;
+                ArrayList<String> lineIds=new ArrayList<>();
+                lineIds =demand3.lineIds;
+                ArrayList<String> direction=new ArrayList<>();
+                direction = demand3.directions;
+                if(!lineIds.isEmpty()){
+                    if(!direction.isEmpty()){
+                        for(int j = 0 ; j < lineIds.size() ; j++)
+                        {
+                            str += "\"";
+                            str += lineIds.get(i);
+                            str += direction.get(i);
+                            str += "\" ";
+                        }
+                    }
+                }
+                obj.put("routeName",str);
+                arr.add(obj);
             }
-            obj.put("routeName",str);
-            arr.add(obj);
         }
         return arr;
     }

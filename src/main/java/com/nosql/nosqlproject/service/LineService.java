@@ -23,13 +23,15 @@ public class LineService {
         ArrayList<String> route = new ArrayList<String>();
         route = linerepository.find_directRoute();
         String s = new String();
-        for(int i = 0 ; i<route.size(); i++)
-           {
-               s += route.get(i);
-               JSONObject obj = new JSONObject();
-               obj.put("route",s);
-               arr.add(obj);
-           }
+        if(!route.isEmpty()){
+            for(int i = 0 ; i<route.size(); i++)
+            {
+                s += route.get(i);
+                JSONObject obj = new JSONObject();
+                obj.put("route",s);
+                arr.add(obj);
+            }
+        }
         return arr;
     }
 }
