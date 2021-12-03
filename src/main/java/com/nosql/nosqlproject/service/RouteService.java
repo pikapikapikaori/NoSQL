@@ -26,22 +26,24 @@ public class RouteService {
     //1
     public JSONObject find_lineId_line(String lineId){
         JSONObject obj = new JSONObject();
-        Line line = linerepository.find_lineId_line(lineId);
-        obj.put("route",line.getDeparture()+"-"+line.getDestination());
-        obj.put("directional",line.getDirection());
-        obj.put("length",line.getKilometer());
-        obj.put("lineId",line.getName());
-        obj.put("interval",line.getInterval());
-        obj.put("oneWayTime",line.getOnewayTime());
-        obj.put("type",line.getType());
-        obj.put("runtime",line.getStart_time()+"-"+line.getEnd_time());
+        if(linerepository.find_lineId_line(lineId) != null){
+            Line line = linerepository.find_lineId_line(lineId);
+            obj.put("route",line.getDeparture()+"-"+line.getDestination());
+            obj.put("directional",line.getDirection());
+            obj.put("length",line.getKilometer());
+            obj.put("lineId",line.getName());
+            obj.put("interval",line.getInterval());
+            obj.put("oneWayTime",line.getOnewayTime());
+            obj.put("type",line.getType());
+            obj.put("runtime",line.getStart_time()+"-"+line.getEnd_time());
+        }
         return obj;
     }
 
     //2
     public JSONArray find_route_station(String line_id,String direction){
         JSONArray arr = new JSONArray();
-        ArrayList<Station> station=new ArrayList<>();
+        ArrayList<Station> station;
         station = stationrepository.find_route_station(line_id, direction);
         if(!station.isEmpty()){
             for(int i = 0; i<station.size();i++)
@@ -60,18 +62,18 @@ public class RouteService {
     //4
     public JSONObject find_lineId_stationName_path(String lineId,String stationName1,String stationName2){
         JSONObject obj = new JSONObject();
-        Demand4 result = new Demand4();
+        Demand4 result;
         result = linerepository.find_lineId_stationName_path(lineId,stationName1,stationName2);
         obj.put("lineName",result.lineName);
         obj.put("runTime",result.runtime);
         JSONArray arr =new JSONArray();
-        ArrayList<Station> sta = new ArrayList<Station>();
+        ArrayList<Station> sta;
         sta = result.stations;
         if(!sta.isEmpty()){
             for(int i = 0; i < sta.size(); i++)
             {
                 JSONObject s = new JSONObject();
-                Station st = new Station();
+                Station st;
                 st = sta.get(i);
                 s.put("id",st.getId());
                 s.put("name",st.getName());
@@ -86,11 +88,11 @@ public class RouteService {
     //13
     public JSONArray find_sameStations(String id1,String direction1,String id2,String direction2){
         JSONArray arr = new JSONArray();
-        ArrayList<Station> result1 = new ArrayList<Station>();
+        ArrayList<Station> result1;
         result1 = stationrepository.find_route_station(id1,direction1);
-        ArrayList<Station> result2 = new ArrayList<Station>();
+        ArrayList<Station> result2;
         result2 = stationrepository.find_route_station(id2,direction2);
-        Station sta = new Station();
+        Station sta;
         result1.retainAll(result2);
         if(!result1.isEmpty()){
             for(int i = 0 ; i < result1.size() ; i++)
@@ -115,7 +117,7 @@ public class RouteService {
     public JSONArray change_line(String lineId,String direction,String stationId,String newStationId){
         linerepository.change_line(lineId, stationId, newStationId);
         JSONArray arr = new JSONArray();
-        ArrayList<Station> station=new ArrayList<>();
+        ArrayList<Station> station;
         station = stationrepository.find_route_station(lineId, direction);
         if(!station.isEmpty()){
             for(int i = 0; i<station.size();i++)
