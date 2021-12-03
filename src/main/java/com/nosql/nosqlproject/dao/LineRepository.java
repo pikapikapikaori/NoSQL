@@ -44,13 +44,12 @@ public interface LineRepository extends Neo4jRepository<Line, String> {
     public ArrayList<String> find_directRoute();
 
     /*
-    @Query("""
-            match
-             (l:Run) where {station_id} in r.route
-             """)
-    public ArrayList<Demand8> find_station_time_line(String station_id, String base_time, String last_time);
-
-    public ArrayList<Demand8> find_station_time_nearest3(String station_id, String base_time);
+     * @Query(""" match (l:Run) where {station_id} in r.route """) public
+     * ArrayList<Demand8> find_station_time_line(String station_id, String
+     * base_time, String last_time);
+     * 
+     * public ArrayList<Demand8> find_station_time_nearest3(String station_id,
+     * String base_time);
      */
 
     @Query("""
@@ -62,12 +61,27 @@ public interface LineRepository extends Neo4jRepository<Line, String> {
 
     @Query("""
             match (l:Line) where l.name =~ "^%d"
-            match (k:Line) where k.name start with "K"
-            match (g:Line) where g.name start with "G"
-            match (n:Line) where n.name start with "N"
-            return count(l), count(k), count(g), count(n)
+            return count(l)
                 """)
-    public ArrayList<Integer> count_type();
+    public Integer count_type_l();
+
+    @Query("""
+                    match (k:Line) where k.name start with "K"
+                    return count(k)
+            """)
+    public Integer count_type_k();
+
+    @Query("""
+                    match (g:Line) where g.name start with "G"
+                    return count(g)
+            """)
+    public Integer count_type_g();
+
+    @Query("""
+                    match (n:Line) where n.name start with "N"
+                    return count(n)
+            """)
+    public Integer count_type_n();
 
     @Query("""
             match
