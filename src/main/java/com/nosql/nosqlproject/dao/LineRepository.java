@@ -21,24 +21,24 @@ public interface LineRepository extends Neo4jRepository<Line, String> {
 
     @Query("""
             match
-                (l:Line{name: {line_id}})
+                (l:Line {name: {line_id}})
             return l
             """)
     public Line find_lineId_line(String line_id);
 
     @Query("""
             match
-                (n:Line{name:{line_id}}) where n.route[0] = {stationname1}
+                (n:Line {name: {line_id}}) where n.route[0] = {stationname1}
             unwind n.route as station
             match
-                (s:Station{name:station})
+                (s:Station{name: station})
             return n.onewayTime, n.name , n.direction , s
             """)
     public Demand4 find_lineId_stationName_path(String line_id, String station_name1, String station_name2);
 
     @Query("""
             optional match
-            (l:Line{departure:{station1}}, destination:{station2})
+            (l:Line {departure: {station1}}, destination: {station2})
             return l.name + l.direction
             """)
     public ArrayList<String> find_directRoute();
@@ -78,7 +78,7 @@ public interface LineRepository extends Neo4jRepository<Line, String> {
 
     @Query("""
             match
-                (n:Line{name:{line_id}})
+                (n:Line {name:{line_id}})
             detach delete n
             match
                 (r:Run{line_id:n.name})
@@ -95,15 +95,15 @@ public interface LineRepository extends Neo4jRepository<Line, String> {
 
     @Query("""
             match
-                (l:Line{name: {line_id}}) where {station_id} in l.route
+                (l:Line {name: {line_id}}) where {station_id} in l.route
             with apoc.coll.indexOf(l.route, {station_id}) as i
             set l.route[i] = {new_station_id}
             with l.route[i-1] as prev, l.route[i+1] as next
             case prev
                 when not null then
-                    match (p:Station{id:prev}) -[r]-> (n:Station{id:{station_id}})
+                    match (p:Station{id: prev}) -[r]-> (n:Station{id: {station_id}})
                     set r.lines = [x IN r.lines WHERE x <> {line_id}];
-                    merge p -[rh]-> (m:Station{id:{new_station_id}})
+                    merge p -[rh]-> (m:Station{id: {new_station_id}})
                     on match
                         set rh.lines= rh.lines + {line_id}
                     on create
@@ -111,9 +111,9 @@ public interface LineRepository extends Neo4jRepository<Line, String> {
             end
             case next
                 when not null then
-                    match (p:Station{id:{station_id}}) -[r]-> (n:Station{id:next})
+                    match (p:Station{id: {station_id}}) -[r]-> (n: Station{id: next})
                     set r.lines = [x IN r.lines WHERE x <> {line_id}];
-                    merge (m:Station{id:{new_station_id}}) -[rk]-> n
+                    merge (m: Station{id: {new_station_id}}) -[rk]-> n
                     on match
                         set rk.lines = rk.lines + {line_id}
                     on create
