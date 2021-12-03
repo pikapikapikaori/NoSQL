@@ -76,17 +76,21 @@ public class StatisticsService {
     //12
     public JSONArray count_type(){
         JSONArray arr = new JSONArray();
-        ArrayList<Integer> count = linerepository.count_type();
+        int count[] = new int[4];
+        count[0] = linerepository.count_type_l();
+        count[1] = linerepository.count_type_k();
+        count[2] = linerepository.count_type_g();
+        count[3] = linerepository.count_type_n();
         ArrayList<String> type = new ArrayList<String>();
         type.add("常规公交");
         type.add("快速公交");
         type.add("高峰公交");
         type.add("夜班公交");
-        if(!count.isEmpty()){
+        if(count != null){
             for(int i = 0 ; i < 4; i++)
             {
                 JSONObject obj = new JSONObject();
-                int a = count.get(i);
+                int a = count[i];
                 obj.put("type",type.get(i));
                 obj.put("num",a);
                 arr.add(obj);

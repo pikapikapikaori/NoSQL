@@ -20,8 +20,8 @@ public class LineService {
     //6
     public JSONArray find_directRoute(String station1, String station2){
         JSONArray arr = new JSONArray();
-        ArrayList<String> route = new ArrayList<String>();
-        route = linerepository.find_directRoute();
+        ArrayList<String> route;
+        route = linerepository.find_directRoute(station1, station2);
         String s = new String();
         if(!route.isEmpty()){
             for(int i = 0 ; i<route.size(); i++)

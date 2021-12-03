@@ -37,11 +37,11 @@ public interface LineRepository extends Neo4jRepository<Line, String> {
     public Demand4 find_lineId_stationName_path(String line_id, String station_name1, String station_name2);
 
     @Query("""
-            optional match
-            (l:Line {departure: {station1}}, destination: {station2})
+            match
+            (l:Line {departure: {station1}, destination: {station2}})
             return l.name + l.direction
             """)
-    public ArrayList<String> find_directRoute();
+    public ArrayList<String> find_directRoute(String station1, String station2);
 
     /*
      * @Query(""" match (l:Run) where {station_id} in r.route """) public
@@ -66,19 +66,19 @@ public interface LineRepository extends Neo4jRepository<Line, String> {
     public Integer count_type_l();
 
     @Query("""
-                    match (k:Line) where k.name start with "K"
+                    match (k:Line) where k.name starts with "K"
                     return count(k)
             """)
     public Integer count_type_k();
 
     @Query("""
-                    match (g:Line) where g.name start with "G"
+                    match (g:Line) where g.name starts with "G"
                     return count(g)
             """)
     public Integer count_type_g();
 
     @Query("""
-                    match (n:Line) where n.name start with "N"
+                    match (n:Line) where n.name starts with "N"
                     return count(n)
             """)
     public Integer count_type_n();

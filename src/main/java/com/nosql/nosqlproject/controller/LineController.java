@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin //写这个注解保证不需要额外配置跨域请求
 @RestController
-@RequestMapping("/line")
+@RequestMapping(value="/line", produces="application/json;charset=UTF-8")
 public class LineController {
     LineService lineservice;
 

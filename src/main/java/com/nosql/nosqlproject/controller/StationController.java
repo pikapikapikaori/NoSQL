@@ -13,7 +13,7 @@ import com.alibaba.fastjson.JSON;
 
 @CrossOrigin //写这个注解保证不需要额外配置跨域请求
 @RestController
-@RequestMapping("/station")
+@RequestMapping(value="/station", produces="application/json;charset=UTF-8")
 public class StationController {
     StationService stationservice;
 

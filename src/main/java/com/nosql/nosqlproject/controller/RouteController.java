@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin //写这个注解保证不需要额外配置跨域请求
 @RestController
-@RequestMapping("/route")
+@RequestMapping(value="/route", produces="application/json;charset=UTF-8")
 public class RouteController {
     RouteService routeservice;
 
