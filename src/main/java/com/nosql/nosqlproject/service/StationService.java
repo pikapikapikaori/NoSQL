@@ -16,9 +16,14 @@ import java.util.ArrayList;
 
 @Service
 public class StationService {
-    @Autowired
     StationRepository stationrepository;
     LineRepository linerepository;
+
+    @Autowired
+    public StationService(StationRepository stationrepository, LineRepository linerepository){
+        this.stationrepository = stationrepository;
+        this.linerepository = linerepository;
+    }
 
 
     //3

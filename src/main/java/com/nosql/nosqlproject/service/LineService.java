@@ -10,8 +10,12 @@ import java.util.ArrayList;
 
 @Service
 public class LineService {
-    @Autowired
     LineRepository linerepository;
+
+    @Autowired
+    public LineService(LineRepository linerepository){
+        this.linerepository = linerepository;
+    }
 
     //6
     public JSONArray find_directRoute(String station1, String station2){

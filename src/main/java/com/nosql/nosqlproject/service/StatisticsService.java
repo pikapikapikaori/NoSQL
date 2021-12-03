@@ -20,9 +20,15 @@ import java.util.Date;
 
 @Service
 public class StatisticsService {
-    @Autowired
+
     LineRepository linerepository;
     StationRepository stationrepository;
+
+    @Autowired
+    public StatisticsService(LineRepository linerepository, StationRepository stationrepository){
+        this.linerepository = linerepository;
+        this.stationrepository = stationrepository;
+    }
 
     //10
     public JSONArray most_line_station(){

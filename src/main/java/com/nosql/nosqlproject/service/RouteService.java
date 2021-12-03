@@ -14,9 +14,14 @@ import java.util.ArrayList;
 
 @Service
 public class RouteService {
-    @Autowired
     LineRepository linerepository;
     StationRepository stationrepository;
+
+    @Autowired
+    public RouteService(LineRepository linerepository, StationRepository stationrepository){
+        this.linerepository = linerepository;
+        this.stationrepository = stationrepository;
+    }
 
     //1
     public JSONObject find_lineId_line(String lineId){
