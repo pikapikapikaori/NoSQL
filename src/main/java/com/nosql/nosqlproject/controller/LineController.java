@@ -15,8 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/line")
 public class LineController {
-    @Autowired
     LineService lineservice;
+
+    @Autowired
+    public LineController(LineService lineservice){
+        this.lineservice = lineservice;
+    }
+
     //需求六
     @GetMapping("/find_directRoute")
     public JSONArray find_directRoute(String station1, String station2){

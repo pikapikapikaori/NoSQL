@@ -12,8 +12,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/route")
 public class RouteController {
-    @Autowired
     RouteService routeservice;
+
+    @Autowired
+    public RouteController(RouteService routeservice){
+        this.routeservice = routeservice;
+    }
+
     //需求一
     @GetMapping("/find_lineId_line")
     public JSONObject find_lineId_line(String lineId){

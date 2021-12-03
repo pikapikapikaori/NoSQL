@@ -20,9 +20,15 @@ import java.util.Date;
 
 @Service
 public class StatisticsService {
-    @Autowired
+
     LineRepository linerepository;
     StationRepository stationrepository;
+
+    @Autowired
+    public StatisticsService(LineRepository linerepository, StationRepository stationrepository){
+        this.linerepository = linerepository;
+        this.stationrepository = stationrepository;
+    }
 
     //10
     public JSONArray most_line_station(){
@@ -38,27 +44,31 @@ public class StatisticsService {
             ArrayList<String> line = new ArrayList<>();
             line = linerepository.get_lines_in_a_station(a.stationId);
             String s = "";
-            for(int j = 0;j<line.size();j++)
-            {
-                s+=line.get(i);
-                if(i<line.size()-1)
-                    s+=",";
+            if(!line.isEmpty()){
+                for(int j = 0;j<line.size();j++)
+                {
+                    s+=line.get(i);
+                    if(i<line.size()-1)
+                        s+=",";
+                }
             }
             a.route = s;
             a.num = line.size();
             sta_lin.add(a);
         }
         Collections.sort(sta_lin,new SortByNum());
-        for(int i = 0;i<15;i++)
-        {
-            JSONObject obj = new JSONObject();
-            StationLines a = new StationLines();
-            a = sta_lin.get(i);
-            obj.put("stationId",a.stationId);
-            obj.put("station",a.station);
-            obj.put("num",a.num);
-            obj.put("route",a.route);
-            arr.add(obj);
+        if(!sta_lin.isEmpty()){
+            for(int i = 0;i<15;i++)
+            {
+                JSONObject obj = new JSONObject();
+                StationLines a = new StationLines();
+                a = sta_lin.get(i);
+                obj.put("stationId",a.stationId);
+                obj.put("station",a.station);
+                obj.put("num",a.num);
+                obj.put("route",a.route);
+                arr.add(obj);
+            }
         }
         return arr;
     }
@@ -72,13 +82,15 @@ public class StatisticsService {
         type.add("快速公交");
         type.add("高峰公交");
         type.add("夜班公交");
-        for(int i = 0 ; i < 4; i++)
-        {
-            JSONObject obj = new JSONObject();
-            int a = count.get(i);
-            obj.put("type",type.get(i));
-            obj.put("num",a);
-            arr.add(obj);
+        if(!count.isEmpty()){
+            for(int i = 0 ; i < 4; i++)
+            {
+                JSONObject obj = new JSONObject();
+                int a = count.get(i);
+                obj.put("type",type.get(i));
+                obj.put("num",a);
+                arr.add(obj);
+            }
         }
         return arr;
     }
@@ -91,14 +103,16 @@ public class StatisticsService {
         result = stationrepository.most_connection();
         Collections.sort(result,new SortByCount());
         Demand15 a = new Demand15();
-        for(int i = 0 ; i < 15 ;i++)
-        {
-            a = result.get(i);
-            JSONObject obj = new JSONObject();
-            obj.put("station1",a.name_in);
-            obj.put("station2",a.name_out);
-            obj.put("num",a.count);
-            arr.add(obj);
+        if(!result.isEmpty()){
+            for(int i = 0 ; i < 15 ;i++)
+            {
+                a = result.get(i);
+                JSONObject obj = new JSONObject();
+                obj.put("station1",a.name_in);
+                obj.put("station2",a.name_out);
+                obj.put("num",a.count);
+                arr.add(obj);
+            }
         }
         return arr;
     }
@@ -112,22 +126,24 @@ public class StatisticsService {
         result2 = stationrepository.most_station_down();
         Demand16 a,b = new Demand16();
         int i = 0 , j = 0;
-        while(i+j < 15) {
-            a = result1.get(i);
-            b = result2.get(j);
-            JSONObject obj = new JSONObject();
-            if (a.count > b.count) {
-                obj.put("route", a.name + a.direction);
-                obj.put("num", a.count);
+        if(!result1.isEmpty() && !result2.isEmpty()){
+            while(i+j < 15) {
+                a = result1.get(i);
+                b = result2.get(j);
+                JSONObject obj = new JSONObject();
+                if (a.count > b.count) {
+                    obj.put("route", a.name + a.direction);
+                    obj.put("num", a.count);
+                    arr.add(obj);
+                    i++;
+                } else {
+                    obj.put("route", b.name + b.direction);
+                    obj.put("num", b.count);
+                    arr.add(obj);
+                    j++;
+                }
                 arr.add(obj);
-                i++;
-            } else {
-                obj.put("route", b.name + b.direction);
-                obj.put("num", b.count);
-                arr.add(obj);
-                j++;
             }
-            arr.add(obj);
         }
         return arr;
     }
@@ -137,30 +153,34 @@ public class StatisticsService {
         JSONArray arr = new JSONArray();
         ArrayList<String> linenames = new ArrayList<String>();
         linenames = linerepository.get_all_line_names();
-        for(int i = 0 ; i < linenames.size() ; i++)
-        {
-            ArrayList<String> start_end_time = new ArrayList<String>();
-            String s = linenames.get(i);
-            start_end_time = linerepository.get_start_end_time_in_one_run(s);
-            SimpleDateFormat ft = new SimpleDateFormat ("mm:ss");
-            Date t1;
-            long l1;
-            Date t2;
-            long l2;
-            int runtime;
-            JSONObject obj = new JSONObject();
-            obj.put("route",s);
-            try {
-                t1 = ft.parse(start_end_time.get(0));
-                l1 = t1.getTime();
-                t2 = ft.parse(start_end_time.get(1));
-                l2 = t2.getTime();
-                runtime = (int)((l2 - l1)/60000);
-                obj.put("time",runtime);
-            } catch (ParseException e) {
-                System.out.println("Unparseable using " + ft);
+        if(!linenames.isEmpty()){
+            for(int i = 0 ; i < linenames.size() ; i++)
+            {
+                ArrayList<String> start_end_time = new ArrayList<String>();
+                String s = linenames.get(i);
+                start_end_time = linerepository.get_start_end_time_in_one_run(s);
+                SimpleDateFormat ft = new SimpleDateFormat ("mm:ss");
+                Date t1;
+                long l1;
+                Date t2;
+                long l2;
+                int runtime;
+                JSONObject obj = new JSONObject();
+                obj.put("route",s);
+                if(!start_end_time.isEmpty()){
+                    try {
+                        t1 = ft.parse(start_end_time.get(0));
+                        l1 = t1.getTime();
+                        t2 = ft.parse(start_end_time.get(1));
+                        l2 = t2.getTime();
+                        runtime = (int)((l2 - l1)/60000);
+                        obj.put("time",runtime);
+                    } catch (ParseException e) {
+                        System.out.println("Unparseable using " + ft);
+                    }
+                    arr.add(obj);
+                }
             }
-            arr.add(obj);
         }
         return arr;
     }

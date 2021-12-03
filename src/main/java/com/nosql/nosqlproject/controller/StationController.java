@@ -13,10 +13,15 @@ import com.alibaba.fastjson.JSON;
 
 @CrossOrigin //写这个注解保证不需要额外配置跨域请求
 @RestController
-@RequestMapping("/staion")
+@RequestMapping("/station")
 public class StationController {
-    @Autowired
     StationService stationservice;
+
+    @Autowired
+    public StationController(StationService stationservice){
+        this.stationservice = stationservice;
+    }
+
     //这个函数我前端调用时地址为"/station/find_id_station"，第一个/前默认为localhost:8080
     /*
     GetMapping表示匹配前端获取数据的请求，可以认为是不会对数据库的数据做出改变，这次项目中只有需求19、20需要用PostMapping

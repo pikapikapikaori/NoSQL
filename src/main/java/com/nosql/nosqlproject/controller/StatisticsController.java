@@ -15,8 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/statistics")
 public class StatisticsController {
-    @Autowired
     StatisticsService statisticsservice;
+
+    @Autowired
+    public StatisticsController(StatisticsService statisticsservice){
+        this.statisticsservice = statisticsservice;
+    }
+
     //需求十
     @GetMapping("/most_line_station")
     public JSONArray most_line_station(){

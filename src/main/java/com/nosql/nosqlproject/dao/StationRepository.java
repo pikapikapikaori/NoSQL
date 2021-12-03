@@ -17,13 +17,13 @@ public interface StationRepository extends Neo4jRepository<Station, String> {
     public String get_station_name_by_id(String id);
 
     @Query("""
-            match (l:Line{name: {line_id}, direction: {direction}})
+            match (l:Line {name: {line_id}, direction: {direction}})
             unwind l.route AS k
-            return (:Station{name: k})""")
+            return (:Station {name: k}) """)
     public ArrayList<Station> find_route_station(String line_id, String direction);
 
     @Query("""
-match (s:Station{name:{station_name}}) -[r]- ()
+match (s:Station {name: {station_name}}) -[r]- ()
 match (l:Line) where l.name in r.lines
 return s.id, collect(l.name), collect(l.direction)
     """)
