@@ -40,7 +40,7 @@ with open("./src/main/resources/database/routes.json") as f:
         if route_dict['name'].endswith('下行'):
             down_list = line_list[index].copy()
             down_list['direction'] = 'down'
-            down_list.pop( 'route' )
+            down_list.pop('route')
             line_list.append(down_list)
             index = len(line_list) - 1
             line_index[route_dict['name']] = index
@@ -70,10 +70,10 @@ with open("./src/main/resources/database/timetables.json") as f:
             run_list.append(inner_dict)
 
 with open("./src/main/resources/database/true_runs.json", "w") as f:
-    json.dump(run_list, f)
+    json.dump(run_list, f, ensure_ascii=False)
 
-with open("./src/main/resources/database/true_line.json") as f:
-    json.dump(line_list, f)
+with open("./src/main/resources/database/true_lines.json", "w") as f:
+    json.dump(line_list, f, ensure_ascii=False)
 
-with open("./src/main/resources/database/true_station.json") as f:
-    json.dump(station_list, f)
+with open("./src/main/resources/database/true_stations.json", "w") as f:
+    json.dump(station_list, f, ensure_ascii=False)
