@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -35,11 +36,24 @@ return s
     ArrayList<Station> find_route_station(String line_id, String direction);
 
     @Query("""
-            match (s:Station {name: {station_name}}) -[r]- ()
-            match (l:Line) where l.name in r.lines
-            return s.id, collect(l.name), collect(l.direction)
+            match (s:Station {name: {station_name}})
+            return s.id
              """)
-    ArrayList<Demand3> find_stationName_routeName(String station_name);
+    ArrayList<String> find_stationName_routeName_stationId(String station_name);
+
+    @Query("""
+            match (s:Station {id: {station_id}}) -[r]- ()
+            match (l:Line) where l.name in r.lines
+            return l.name
+             """)
+    ArrayList<String> find_stationName_routeName_lineId(String station_id);
+
+    @Query("""
+            match (s:Station {id: {station_id}}) -[r]- ()
+            match (l:Line) where l.name in r.lines
+            return l.direction
+             """)
+    ArrayList<String> find_stationName_routeName_direction(String station_id);
 
     /*
     public ArrayList<Station> station_lines(String station_id);

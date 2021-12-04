@@ -63,6 +63,7 @@ public class RouteService {
     //4
     public JSONObject find_lineId_stationName_path(String lineId,String stationName1,String stationName2){
         JSONObject obj = new JSONObject();
+        /*
         Demand4 result;
         result = linerepository.find_lineId_stationName_path(lineId,stationName1,stationName2);
         if(result != null){
@@ -85,6 +86,8 @@ public class RouteService {
             }
             obj.put("stations",arr);
         }
+
+         */
         return obj;
     }
 

@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Service
 public class StationService {
@@ -25,16 +27,43 @@ public class StationService {
     //3
     public JSONArray find_stationName_routeName(String stationName){
         JSONArray arr = new JSONArray();
-        ArrayList<Demand3> result;
-        result =  stationrepository.find_stationName_routeName(stationName);
+        ArrayList<String> res_stationId = stationrepository.find_stationName_routeName_stationId(stationName);
+
+        ArrayList<ArrayList<String>> res_lineId = new ArrayList<>();
+        ArrayList<ArrayList<String>> res_direction = new ArrayList<>();
+
+        if(!res_stationId.isEmpty()){
+
+            for(int i = 0; i < res_stationId.size(); i ++){
+                String tmpid = res_stationId.get(i);
+                ArrayList<String> tmpres_lineId =  stationrepository.find_stationName_routeName_lineId(tmpid);
+                ArrayList<String> tmpres_direction = stationrepository.find_stationName_routeName_direction(tmpid);
+
+                res_lineId.add(tmpres_lineId);
+                res_direction.add(tmpres_direction);
+            }
+        }
+
+        ArrayList<Demand3> result = new ArrayList<>();
+
+        if(!res_stationId.isEmpty()){
+            for(int i = 0; i < res_stationId.size(); i ++){
+                Demand3 dem = new Demand3();
+                dem.stationId = res_stationId.get(i);
+                dem.lineIds = res_lineId.get(i);
+                dem.directions = res_direction.get(i);
+                result.add(dem);
+            }
+        }
+
         if(!result.isEmpty()){
             for(int i=0;i<result.size();i++)
             {
                 JSONObject obj = new JSONObject();
                 Demand3 demand3 = new Demand3();
                 demand3 = result.get(i);
-                obj.put("stationId",demand3.stationId);
-                String str = null;
+                obj.put("id",demand3.stationId);
+                String str = "";
                 ArrayList<String> lineIds;
                 lineIds =demand3.lineIds;
                 ArrayList<String> direction;
@@ -44,13 +73,13 @@ public class StationService {
                         for(int j = 0 ; j < lineIds.size() ; j++)
                         {
                             str += "\"";
-                            str += lineIds.get(i);
-                            str += direction.get(i);
+                            str += lineIds.get(j);
+                            str += direction.get(j);
                             str += "\" ";
                         }
                     }
                 }
-                obj.put("routeName",str);
+                obj.put("routes",str);
                 arr.add(obj);
             }
         }
