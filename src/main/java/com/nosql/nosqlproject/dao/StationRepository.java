@@ -66,7 +66,7 @@ return s
     @Query("""
             match
             (a:Station) -[r]-> (b:Station)
-            with a, b, count(r.lines) as cnt
+            with a, b, length(r.lines) as cnt
             order by cnt desc
             return a.name limit 15
             """)
@@ -75,7 +75,7 @@ return s
     @Query("""
             match
             (a:Station) -[r]-> (b:Station)
-            with a, b, count(r.lines) as cnt
+            with a, b, length(r.lines) as cnt
             order by cnt desc
             return b.name limit 15
             """)
@@ -84,7 +84,7 @@ return s
     @Query("""
             match
             (a:Station) -[r]-> (b:Station)
-            with a, b, count(r.lines) as cnt
+            with a, b, length(r.lines) as cnt
             order by cnt desc
             return cnt limit 15
             """)
