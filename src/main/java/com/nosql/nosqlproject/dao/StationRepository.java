@@ -20,6 +20,14 @@ public interface StationRepository extends Neo4jRepository<Station, String> {
     String get_station_name_by_id(String id);
 
     @Query("""
+    match
+    (l:Line{name:{name}, direction:{direction}})
+with l.route[{i}] as sid
+match (s:Station{id:sid})
+return s
+    """)
+    Station find_route_station_by_index(String name, String direction, Integer i);
+    @Query("""
             match (l:Line {name: {line_id}, direction: {direction}})
             unwind l.route as k
             match (s:Station {id: k})

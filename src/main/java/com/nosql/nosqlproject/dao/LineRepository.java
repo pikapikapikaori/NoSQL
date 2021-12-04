@@ -30,22 +30,22 @@ public interface LineRepository extends Neo4jRepository<Line, String> {
     Line find_lineId_line(String line_id);
 
     @Query("""
-            match (s1:Station{name:{station_name1}}), (s2:Station{name:{station_name2}})
-            with s1.id as pid, s2.id as nid
-            match
-                (n:Line {name: {line_name}}) where n.route[0] = pid and n.route[-1] = nid
-            unwind n.route as station
-            match
-                (s:Station{id: station})
-            return n.onewayTime, n.name , n.direction , s limit 1
-            """)
+    match (s1:Station{name:"大悦城"}), (s2:Station{name:"小吃街"})
+with s1.id as pid, s2.id as nid
+match
+    (n:Line {name: "10"}) where apoc.coll.indexOf(n.route, pid) > 0 and  apoc.coll.indexOf(n.route, pid) < apoc.coll.indexOf(n.route, nid)
+with apoc.coll.indexOf(n.route, pid) as pindex, apoc.coll.indexOf(n.route, nid) as nindex,n
+match (r:Run {line_id: n.name, direction:n.direction})
+with  n.name as name, n.direction as direction, r.time as time, pindex, nindex
+return name, direction, time[pindex], time[nindex], pindex, nindex limit 1
+    """)
     Demand4 find_lineId_stationName_path(String line_name, String station_name1, String station_name2);
 
     @Query("""
             match (s1:Station{name:{station1}}), (s2:Station{name:{station2}})
             with s1.id as departure, s2.id as destination
             match
-                (l:Line) where apoc.coll.indexOf(l.route, departure) > 0 and apoc.coll.indexOf(l.route, departure) < apoc.coll.indexOf(l.route, destination)
+                (l:Line) where apoc.coll.indexOf(l.route, departure) < 0 and apoc.coll.indexOf(l.route, departure) > apoc.coll.indexOf(l.route, destination)
             return l.name + l.direction
             """)
     ArrayList<String> find_directRoute(String station1, String station2);

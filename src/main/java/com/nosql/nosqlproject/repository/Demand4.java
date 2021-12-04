@@ -5,11 +5,18 @@ import com.nosql.nosqlproject.entity.Station;
 import java.util.ArrayList;
 
 public class Demand4 {
-    public int runtime;
 
     public String lineName;
 
     public String direction;
 
-    public ArrayList<Station> stations = new ArrayList<>();
+    public int runtime;
+
+    public String departure_time;
+
+    public String destination_time;
+
+    public int departure_index;
+
+    public int destination_index;
 }
