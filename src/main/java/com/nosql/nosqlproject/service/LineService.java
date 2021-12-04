@@ -26,7 +26,14 @@ public class LineService {
         if(!route.isEmpty()){
             for(int i = 0 ; i<route.size(); i++)
             {
-                s += route.get(i);
+                String tmp1 = route.get(i);
+                if(tmp1.contains("up"))
+                    tmp1 = tmp1.replace("up", "上行");
+                else if(tmp1.contains("down"))
+                    tmp1 = tmp1.replace("down", "下行");
+                else if(tmp1.contains("circle"))
+                    tmp1 = tmp1.replace("circle", "环线");
+                s += tmp1;
                 JSONObject obj = new JSONObject();
                 obj.put("route",s);
                 arr.add(obj);

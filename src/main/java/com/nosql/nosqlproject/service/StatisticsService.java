@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Objects;
 
 @Service
 public class StatisticsService {
@@ -152,6 +153,12 @@ public class StatisticsService {
             for(int i = 0; i < result.size(); i ++){
                 JSONObject obj = new JSONObject();
                 res = result.get(i);
+                if(Objects.equals(res.direction, "up"))
+                    res.direction = "上行";
+                else if(Objects.equals(res.direction, "down"))
+                    res.direction = "下行";
+                else if(Objects.equals(res.direction, "circle"))
+                    res.direction = "环线";
                 obj.put("route", res.name + res.direction);
                 obj.put("num", res.count);
                 arr.add(obj);
