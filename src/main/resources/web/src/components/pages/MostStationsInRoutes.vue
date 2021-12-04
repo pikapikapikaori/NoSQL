@@ -45,9 +45,10 @@ export default {
     Copyright
   },
   created: function(){
+    const axios = require('axios');
     //这里写与后端对接的将tableData初始化的代码
-    this.$axios.get(
-      '/statistics/most_stations'
+    axios.get(
+      'http://localhost:8080/statistics/most_stations'
     ).then((res) => {
       this.tableData = res.data;
     }).catch((err) => {

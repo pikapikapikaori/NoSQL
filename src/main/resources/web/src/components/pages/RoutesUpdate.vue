@@ -295,6 +295,8 @@ export default {
       });
     },
     deleteRoute(){
+      const axios = require('axios');
+
       this.$confirm('此操作将删除路线, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -311,7 +313,7 @@ export default {
             }, 3000);
 
             // 这里写与后端对接的删除操作
-            this.$axios.post('/route/delete_line', {
+            axios.post('http://localhost:8080/route/delete_line', {
               lineId: this.deleteWhole.route
             });
           }
@@ -332,6 +334,8 @@ export default {
       });
     },
     substitute(){
+      const axios = require('axios');
+
       this.isClearStation = false;
 
       this.$confirm('此操作将替换站点, 是否继续?', '提示', {
@@ -350,7 +354,7 @@ export default {
             }, 3000);
 
             // 这里写与后端对接的替换操作
-            this.$axios.post('/route/change_line', {
+            axios.post('http://localhost:8080/route/change_line', {
               lineId: this.substituteStation.route,
               stationId: this.substituteStation.originStation,
               newStationId: this.substituteStation.newStation,

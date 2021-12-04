@@ -139,10 +139,12 @@ export default {
   },
   methods: {
     searchRouteInfo() {
+      const axios = require('axios');
+
       this.isClearInfo = true;
       this.haveResult = true;
 
-      this.$axios.get('/route/find_lineId_line', {
+      axios.get('http://localhost:8080/route/find_lineId_line', {
         params: {
           lineId: this.formInlineInfo.routeToSearchInfo
         }
@@ -160,9 +162,11 @@ export default {
       this.haveResult = false;
     },
     searchRouteStation() {
+      const axios = require('axios');
+
       this.isClearStation = true;
 
-      this.$axios.get('/route/find_route_station', {
+      axios.get('http://localhost:8080/route/find_route_station', {
         params: {
           station_id: this.formInlineStation.routeToSearchStation,
           direction: this.formInlineStation.direction
