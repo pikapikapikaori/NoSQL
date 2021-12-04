@@ -42,8 +42,10 @@ public interface LineRepository extends Neo4jRepository<Line, String> {
     Demand4 find_lineId_stationName_path(String line_name, String station_name1, String station_name2);
 
     @Query("""
+            match (s1:Station{name:{station1}}), (s2:Station{name:{station2}})
+            with s1.id as departure, s2.id as destination
             match
-                (l:Line {departure: {station1}, destination: {station2}})
+                (l:Line) where apoc.coll.indexOf(l.route, departure) > 0 and apoc.coll.indexOf(l.route, departure) < apoc.coll.indexOf(l.route, destination)
             return l.name + l.direction
             """)
     ArrayList<String> find_directRoute(String station1, String station2);
@@ -52,7 +54,7 @@ public interface LineRepository extends Neo4jRepository<Line, String> {
      * @Query(""" match (l:Run) where {station_id} in r.route """) public
      * ArrayList<Demand8> find_station_time_line(String station_id, String
      * base_time, String last_time);
-     * 
+     *
      * public ArrayList<Demand8> find_station_time_nearest3(String station_id,
      * String base_time);
      */
