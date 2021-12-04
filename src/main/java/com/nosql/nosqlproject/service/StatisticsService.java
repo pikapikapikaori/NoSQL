@@ -9,6 +9,7 @@ import com.nosql.nosqlproject.repository.Demand16;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -98,11 +99,22 @@ public class StatisticsService {
     //15
     public JSONArray most_connections(){
         JSONArray arr = new JSONArray();
-        ArrayList<Demand15> result;
-        result = stationrepository.most_connection();
-        Collections.sort(result,new SortByCount());
-        Demand15 a = new Demand15();
-        if(!result.isEmpty()){
+        ArrayList<String> res_in = stationrepository.most_connection_in();
+        ArrayList<String> res_out = stationrepository.most_connection_out();
+        ArrayList<Integer> res_cnt = stationrepository.most_connection_count();
+        ArrayList<Demand15> result = new ArrayList<>();
+        if(!res_cnt.isEmpty()){
+            for(int i = 0; i < res_cnt.size(); i++){
+                Demand15 dem = new Demand15();
+                dem.name_in = res_in.get(i);
+                dem.name_out = res_out.get(i);
+                dem.count = res_cnt.get(i);
+                result.add(dem);
+            }
+
+            Collections.sort(result,new SortByCount());
+            Demand15 a = new Demand15();
+
             for(int i = 0 ; i < 15 ;i++)
             {
                 a = result.get(i);
@@ -119,28 +131,29 @@ public class StatisticsService {
     //16
     public JSONArray most_stations(){
         JSONArray arr = new JSONArray();
-        ArrayList<Demand16> result1;
-        result1 = stationrepository.most_station_up();
-        ArrayList<Demand16> result2;
-        result2 = stationrepository.most_station_down();
-        Demand16 a,b = new Demand16();
-        int i = 0 , j = 0;
-        if(!result1.isEmpty() && !result2.isEmpty()){
-            while(i+j < 15) {
-                a = result1.get(i);
-                b = result2.get(j);
+
+        ArrayList<String> res_name = stationrepository.most_station_name();
+        ArrayList<String> res_direction = stationrepository.most_station_direction();
+        ArrayList<Integer> res_cnt = stationrepository.most_station_count();
+       ArrayList<Demand16> result = new ArrayList<>();
+
+        if(!res_cnt.isEmpty()){
+            for(int i = 0; i < res_cnt.size(); i ++){
+                Demand16 dem = new Demand16();
+                dem.name = res_name.get(i);
+                dem.direction = res_direction.get(i);
+                dem.count = res_cnt.get(i);
+                result.add(dem);
+            }
+        }
+
+        Demand16 res = new Demand16();
+        if(!result.isEmpty()){
+            for(int i = 0; i < result.size(); i ++){
                 JSONObject obj = new JSONObject();
-                if (a.count > b.count) {
-                    obj.put("route", a.name + a.direction);
-                    obj.put("num", a.count);
-                    arr.add(obj);
-                    i++;
-                } else {
-                    obj.put("route", b.name + b.direction);
-                    obj.put("num", b.count);
-                    arr.add(obj);
-                    j++;
-                }
+                res = result.get(i);
+                obj.put("route", res.name + res.direction);
+                obj.put("num", res.count);
                 arr.add(obj);
             }
         }

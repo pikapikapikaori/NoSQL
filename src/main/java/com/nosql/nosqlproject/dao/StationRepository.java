@@ -52,20 +52,54 @@ return s
     @Query("""
             match
             (a:Station) -[r]-> (b:Station)
-            return a.name , b.name , count(r.lines) order by count(r.lines) desc limit 5
+            with a, b, count(r.lines) as cnt
+            order by cnt desc
+            return a.name limit 15
             """)
-    ArrayList<Demand15> most_connection();
+    ArrayList<String> most_connection_in();
+
+    @Query("""
+            match
+            (a:Station) -[r]-> (b:Station)
+            with a, b, count(r.lines) as cnt
+            order by cnt desc
+            return b.name limit 15
+            """)
+    ArrayList<String> most_connection_out();
+
+    @Query("""
+            match
+            (a:Station) -[r]-> (b:Station)
+            with a, b, count(r.lines) as cnt
+            order by cnt desc
+            return cnt limit 15
+            """)
+    ArrayList<Integer> most_connection_count();
 
     /* can optimalize */
     @Query("""
             match (a:Line)
-            return a.name, a.direction, count(a.route) order by count(a.route) desc limit 15
+            with a, length(a.route) as cnt 
+            order by cnt desc
+            return a.name limit 15
             """)
-    ArrayList<Demand16> most_station_up();
+    ArrayList<String> most_station_name();
 
+    /* can optimalize */
     @Query("""
-            match (b:Line)
-            return b.name, b.direction, count(b.route) order by count(b.route) desc limit 15
+            match (a:Line)
+            with a, length(a.route) as cnt 
+            order by cnt desc
+            return a.direction limit 15
             """)
-    ArrayList<Demand16> most_station_down();
+    ArrayList<String> most_station_direction();
+
+    /* can optimalize */
+    @Query("""
+            match (a:Line)
+            with a, length(a.route) as cnt 
+            order by cnt desc
+            return cnt limit 15
+            """)
+    ArrayList<Integer> most_station_count();
 }
