@@ -112,7 +112,7 @@ public class RouteService {
                         }
                     }
                 }
-                if(has == false){
+                if(!has){
                     to_delete.add(result1.get(i));
                 }
             }
