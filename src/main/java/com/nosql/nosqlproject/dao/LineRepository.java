@@ -45,7 +45,7 @@ return name, direction, time[pindex], time[nindex], pindex, nindex limit 1
             match (s1:Station{name:{station1}}), (s2:Station{name:{station2}})
             with s1.id as departure, s2.id as destination
             match
-                (l:Line) where apoc.coll.indexOf(l.route, departure) < 0 and apoc.coll.indexOf(l.route, departure) > apoc.coll.indexOf(l.route, destination)
+                (l:Line) where apoc.coll.indexOf(l.route, departure) > 0 and apoc.coll.indexOf(l.route, departure) < apoc.coll.indexOf(l.route, destination)
             return l.name + l.direction
             """)
     ArrayList<String> find_directRoute(String station1, String station2);
