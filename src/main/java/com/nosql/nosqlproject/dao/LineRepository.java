@@ -8,7 +8,11 @@ import com.nosql.nosqlproject.repository.Demand4;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+@Repository
+@Transactional
 public interface LineRepository extends Neo4jRepository<Line, String> {
 
     @Query("""
@@ -22,6 +26,7 @@ public interface LineRepository extends Neo4jRepository<Line, String> {
             match
                 (l:Line {name: {line_id}})
             return l
+            limit 1
             """)
     Line find_lineId_line(String line_id);
 
@@ -53,7 +58,7 @@ public interface LineRepository extends Neo4jRepository<Line, String> {
 
     @Query("""
             match
-                (l:Line) where {station_id} in r.route
+                (l:Line) where {station_id} in l.route
             return l.name
             """)
     ArrayList<String> get_lines_in_a_station(String station_id);
