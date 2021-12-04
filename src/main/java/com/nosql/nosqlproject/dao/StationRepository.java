@@ -13,7 +13,7 @@ import java.util.ArrayList;
 @Repository
 @Transactional
 public interface StationRepository extends Neo4jRepository<Station, String> {
-    @Query("match (s:Station) return s.id")
+    @Query("match (s:Station) return s.id limit 1")
     ArrayList<String> get_all_station_id();
 
     @Query("match (s:Station{id:{id}}) return s.name limit 1")

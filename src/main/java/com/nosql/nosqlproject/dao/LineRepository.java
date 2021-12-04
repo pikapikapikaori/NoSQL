@@ -25,8 +25,7 @@ public interface LineRepository extends Neo4jRepository<Line, String> {
     @Query("""
             match
                 (l:Line {name: {line_id}})
-            return l
-            limit 1
+            return l limit 1
             """)
     Line find_lineId_line(String line_id);
 
@@ -36,7 +35,7 @@ public interface LineRepository extends Neo4jRepository<Line, String> {
             unwind n.route as station
             match
                 (s:Station{name: station})
-            return n.onewayTime, n.name , n.direction , s
+            return n.onewayTime, n.name , n.direction , s limit 1
             """)
     Demand4 find_lineId_stationName_path(String line_id, String station_name1, String station_name2);
 
@@ -107,7 +106,7 @@ public interface LineRepository extends Neo4jRepository<Line, String> {
             match
                 (a:Station) where not (a) -- ()
             delete a
-            return n
+            return n limit 1
             """)
     Line delete_line(@Param("lien_id") String line_id);
 
@@ -137,7 +136,7 @@ public interface LineRepository extends Neo4jRepository<Line, String> {
                     on create
                         set rk.lines = [{line_id}]
             end
-            return l
+            return l limit 1
             """)
     Line change_line(String line_id, String station_id, String new_station_id);
 }
