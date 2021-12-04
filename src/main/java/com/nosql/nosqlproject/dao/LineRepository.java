@@ -63,7 +63,7 @@ public interface LineRepository extends Neo4jRepository<Line, String> {
     ArrayList<String> get_lines_in_a_station(String station_id);
 
     @Query("""
-            match (l:Line) where l.name =~ "^%d"
+            match (l:Line) where l.name =~ "^[0-9]+"
             return count(l)
             """)
     Integer count_type_l();
