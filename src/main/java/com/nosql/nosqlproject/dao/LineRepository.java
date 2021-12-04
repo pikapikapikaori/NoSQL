@@ -30,14 +30,16 @@ public interface LineRepository extends Neo4jRepository<Line, String> {
     Line find_lineId_line(String line_id);
 
     @Query("""
+            match (s1:Station{name:{station_name1}}), (s2:Station{name:{station_name2}})
+            with s1.id as pid, s2.id as nid
             match
-                (n:Line {name: {line_id}}) where n.route[0] = {station_name1} and n.route[-1] = {station_name2}
+                (n:Line {name: {line_name}}) where n.route[0] = pid and n.route[-1] = nid
             unwind n.route as station
             match
-                (s:Station{name: station})
+                (s:Station{id: station})
             return n.onewayTime, n.name , n.direction , s limit 1
             """)
-    Demand4 find_lineId_stationName_path(String line_id, String station_name1, String station_name2);
+    Demand4 find_lineId_stationName_path(String line_name, String station_name1, String station_name2);
 
     @Query("""
             match
@@ -63,7 +65,7 @@ public interface LineRepository extends Neo4jRepository<Line, String> {
     ArrayList<String> get_lines_in_a_station(String station_id);
 
     @Query("""
-            match (l:Line) where l.name =~ "^[0-9]+"
+            match (l:Line) where line.name =~ "^[0-9]+"
             return count(l)
             """)
     Integer count_type_l();
