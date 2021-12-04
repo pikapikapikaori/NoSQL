@@ -1,4 +1,4 @@
-call apoc.load.json("file:///runs.json") yield value as vr
+call apoc.load.json("./runs.json") yield value as vr
 create
 (r:Run
 {
