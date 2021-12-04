@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 @Service
 public class RouteService {
@@ -95,7 +96,31 @@ public class RouteService {
         ArrayList<Station> result2;
         result2 = stationrepository.find_route_station(id2,direction2);
         Station sta;
-        result1.retainAll(result2);
+        //result1.retainAll(result2);
+
+
+
+        ArrayList<Station> to_delete = new ArrayList<>();
+        if(!result1.isEmpty()){
+            for(int i = 0; i < result1.size(); i ++){
+                boolean has = false;
+                if(!result2.isEmpty()){
+                    for(int j = 0; j < result2.size(); j ++){
+                        if(Objects.equals(result1.get(i).getId(), result2.get(j).getId())){
+                            has = true;
+                            break;
+                        }
+                    }
+                }
+                if(has == false){
+                    to_delete.add(result1.get(i));
+                }
+            }
+        }
+
+        for(int i = 0; i < to_delete.size(); i ++)
+            result1.remove(to_delete.get(i));
+
         if(!result1.isEmpty()){
             for(int i = 0 ; i < result1.size() ; i++)
             {
