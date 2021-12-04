@@ -11,5 +11,5 @@ public class Demand4 {
 
     public String direction;
 
-    public ArrayList<Station> stations = new ArrayList<Station>();
+    public ArrayList<Station> stations = new ArrayList<>();
 }

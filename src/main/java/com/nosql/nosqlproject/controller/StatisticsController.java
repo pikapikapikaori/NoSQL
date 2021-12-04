@@ -1,9 +1,6 @@
 package com.nosql.nosqlproject.controller;
 
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.nosql.nosqlproject.entity.Station;
-import com.nosql.nosqlproject.service.StationService;
 import com.nosql.nosqlproject.service.StatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
