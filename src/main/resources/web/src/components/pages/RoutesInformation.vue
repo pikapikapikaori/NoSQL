@@ -36,7 +36,7 @@
                     <el-descriptions-item label="是否为单向线">{{routeToSearchInfoResult.directional}}</el-descriptions-item>
                     <el-descriptions-item label="行驶距离（千米）">{{routeToSearchInfoResult.length}}</el-descriptions-item>
                     <el-descriptions-item label="线路名称">{{routeToSearchInfoResult.lineId}}</el-descriptions-item>
-                    <el-descriptions-item label="运行时间">{{routeToSearchInfoResult.runTime}}</el-descriptions-item>
+                    <el-descriptions-item label="运行时间">{{routeToSearchInfoResult.runtime}}</el-descriptions-item>
                     <el-descriptions-item label="途经站点">{{routeToSearchInfoResult.interval}}</el-descriptions-item>
                     <el-descriptions-item label="类型">{{routeToSearchInfoResult.type}}</el-descriptions-item>
                   </el-descriptions>
@@ -119,10 +119,10 @@ export default {
         directional: '',
         length: 0.0,
         lineId: '',
+        runtime: '',
         interval: 0,
-        oneWayTime: '约' + '0' + '分',
         type: '',
-        runTime: ''
+        oneWayTime: 0
       },
       isClearStation: false,
       formInlineStation: {
@@ -148,12 +148,12 @@ export default {
         params: {
           lineId: this.formInlineInfo.routeToSearchInfo
         }
-      }).then(function(res) {
+      }).then((res) => {
         if(res.data === {}){
           this.haveResult = false;
         }
         else{
-          this.routeToSearchInfoResult = JSON.parse(res);
+          this.routeToSearchInfoResult = res.data;
         }
       }).catch((err) => {this.haveResult = false;});
     },

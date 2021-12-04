@@ -24,10 +24,10 @@ public class Line {
     private int interval;
 
     @Property
-    private float kilometer;
+    private double kilometer;
 
     @Property
-    private String onewayTime;
+    private int onewayTime;
 
     @Property
     private String departure;
