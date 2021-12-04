@@ -6,14 +6,17 @@ import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 
+@Repository
+@Transactional
 public interface StationRepository extends Neo4jRepository<Station, String> {
     @Query("match (s:Station) return s.id")
     ArrayList<String> get_all_station_id();
 
-    @Query("match (s:Station{id:{id}}) return s.name")
+    @Query("match (s:Station{id:{id}}) return s.name limit 1")
     String get_station_name_by_id(String id);
 
     @Query("""
