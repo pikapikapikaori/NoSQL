@@ -48,23 +48,24 @@ return s
     public ArrayList<Station> find_stations_of_two_lines(String id1, String direction, String id2, String direction2);
      */
 
+    /* can optimalize */
     @Query("""
             match
             (a:Station) -[r]-> (b:Station)
-            return a.name , b.name , count(r.lines)
+            return a.name , b.name , count(r.lines) order by count(r.lines) desc limit 5
             """)
     ArrayList<Demand15> most_connection();
 
-    /* optimal */
+    /* can optimalize */
     @Query("""
             match (a:Line)
-            return a.name, a.direction, count(a.route) order by count(a.route) limit 15
+            return a.name, a.direction, count(a.route) order by count(a.route) desc limit 15
             """)
     ArrayList<Demand16> most_station_up();
 
     @Query("""
             match (b:Line)
-            return b.name, b.direction, count(b.route) order by count(b.route) limit 15
+            return b.name, b.direction, count(b.route) order by count(b.route) desc limit 15
             """)
     ArrayList<Demand16> most_station_down();
 }
