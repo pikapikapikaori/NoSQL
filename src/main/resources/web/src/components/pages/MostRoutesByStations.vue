@@ -47,9 +47,10 @@ export default {
     Copyright
   },
   created: function(){
+    const axios = require('axios');
     //这里写与后端对接的将tableData初始化为最多路线站点的代码
-    this.$axios.get(
-      '/statistics/most_line_station'
+    axios.get(
+      'http://localhost:8080/statistics/most_line_station'
     ).then((res) => {
       this.tableData = res.data;
     }).catch((err) => {

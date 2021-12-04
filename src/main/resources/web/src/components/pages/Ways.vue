@@ -72,9 +72,11 @@ export default {
   },
   methods: {
     searchRoutes() {
+      const axios = require('axios');
+
       this.isClear = true;
 
-      this.$axios.get('/line/find_directRoute', {
+      axios.get('http://localhost:8080/line/find_directRoute', {
         params: {
           station1: this.formInline.station1,
           station2: this.formInline.station2

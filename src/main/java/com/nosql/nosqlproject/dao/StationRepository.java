@@ -11,23 +11,24 @@ import java.util.ArrayList;
 
 public interface StationRepository extends Neo4jRepository<Station, String> {
     @Query("match (s:Station) return s.id")
-    public ArrayList<String> get_all_station_id();
+    ArrayList<String> get_all_station_id();
 
     @Query("match (s:Station{id:{id}}) return s.name")
-    public String get_station_name_by_id(String id);
+    String get_station_name_by_id(String id);
 
     @Query("""
             match (l:Line {name: {line_id}, direction: {direction}})
-            unwind l.route AS k
-            return (:Station {name: k}) """)
-    public ArrayList<Station> find_route_station(String line_id, String direction);
+            unwind l.route as k
+            match (s:Station {name: k})
+            return s""")
+    ArrayList<Station> find_route_station(String line_id, String direction);
 
     @Query("""
-match (s:Station {name: {station_name}}) -[r]- ()
-match (l:Line) where l.name in r.lines
-return s.id, collect(l.name), collect(l.direction)
-    """)
-    public ArrayList<Demand3> find_stationName_routeName(String station_name);
+            match (s:Station {name: {station_name}}) -[r]- ()
+            match (l:Line) where l.name in r.lines
+            return s.id, collect(l.name), collect(l.direction)
+             """)
+    ArrayList<Demand3> find_stationName_routeName(String station_name);
 
     /*
     public ArrayList<Station> station_lines(String station_id);
@@ -41,20 +42,18 @@ return s.id, collect(l.name), collect(l.direction)
             (a:Station) -[r]-> (b:Station)
             return a.name , b.name , count(r.lines)
             """)
-    public ArrayList<Demand15> most_connection();
+    ArrayList<Demand15> most_connection();
 
     /* optimal */
     @Query("""
-                match (a:Line)
+            match (a:Line)
             return a.name, a.direction, count(a.route) order by count(a.route) limit 15
-
-                            """)
-    public ArrayList<Demand16> most_station_up();
+            """)
+    ArrayList<Demand16> most_station_up();
 
     @Query("""
-                match (b:Line)
-            return a.name, a.direction, count(a.route) order by count(a.route) limit 15
-
-                """)
-    public ArrayList<Demand16> most_station_down();
+            match (b:Line)
+            return b.name, b.direction, count(b.route) order by count(b.route) limit 15
+            """)
+    ArrayList<Demand16> most_station_down();
 }

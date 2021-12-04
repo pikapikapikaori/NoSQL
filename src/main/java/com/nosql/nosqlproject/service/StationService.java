@@ -1,17 +1,13 @@
 package com.nosql.nosqlproject.service;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.nosql.nosqlproject.dao.LineRepository;
 import com.nosql.nosqlproject.dao.StationRepository;
-import com.nosql.nosqlproject.entity.Station;
 import com.nosql.nosqlproject.repository.Demand3;
-import com.nosql.nosqlproject.repository.Demand8;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 @Service
@@ -29,7 +25,7 @@ public class StationService {
     //3
     public JSONArray find_stationName_routeName(String stationName){
         JSONArray arr = new JSONArray();
-        ArrayList<Demand3> result = new ArrayList<>();
+        ArrayList<Demand3> result;
         result =  stationrepository.find_stationName_routeName(stationName);
         if(!result.isEmpty()){
             for(int i=0;i<result.size();i++)
@@ -39,9 +35,9 @@ public class StationService {
                 demand3 = result.get(i);
                 obj.put("stationId",demand3.stationId);
                 String str = null;
-                ArrayList<String> lineIds=new ArrayList<>();
+                ArrayList<String> lineIds;
                 lineIds =demand3.lineIds;
-                ArrayList<String> direction=new ArrayList<>();
+                ArrayList<String> direction;
                 direction = demand3.directions;
                 if(!lineIds.isEmpty()){
                     if(!direction.isEmpty()){

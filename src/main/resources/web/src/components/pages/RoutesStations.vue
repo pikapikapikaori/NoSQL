@@ -162,10 +162,12 @@ export default {
   },
   methods: {
     searchRouteStation(){
+      const axios = require('axios');
+
       this.isClearStation = true;
       this.haveResultStation = true;
 
-      this.$axios.get('/route/find_lineId_stationName_path', {
+      axios.get('http://localhost:8080/route/find_lineId_stationName_path', {
         params: {
           lineId: this.formInlineStation.station,
           stationName1: this.formInlineStation.begin,
@@ -187,9 +189,11 @@ export default {
       this.haveResultStation = false;
     },
     searchRouteRepeat(){
+      const axios = require('axios');
+
       this.isClearRepeat = true;
 
-      this.$axios.get('/route/find_sameStations', {
+      axios.get('http://localhost:8080/route/find_sameStations', {
         params: {
           id1: this.formInlineRepeat.route1,
           direction1: this.formInlineRepeat.route1direction,

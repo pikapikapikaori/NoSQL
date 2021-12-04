@@ -10,8 +10,6 @@ import VueAxios from 'vue-axios'
 
 Vue.config.productionTip = false
 
-Vue.prototype.$axios = axios
-
 Vue.use(ElementUI)
 
 /* eslint-disable no-new */

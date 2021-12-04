@@ -64,24 +64,26 @@ public class RouteService {
         JSONObject obj = new JSONObject();
         Demand4 result;
         result = linerepository.find_lineId_stationName_path(lineId,stationName1,stationName2);
-        obj.put("lineName",result.lineName);
-        obj.put("runTime",result.runtime);
-        JSONArray arr =new JSONArray();
-        ArrayList<Station> sta;
-        sta = result.stations;
-        if(!sta.isEmpty()){
-            for(int i = 0; i < sta.size(); i++)
-            {
-                JSONObject s = new JSONObject();
-                Station st;
-                st = sta.get(i);
-                s.put("id",st.getId());
-                s.put("name",st.getName());
-                s.put("english",st.getEnglish());
-                arr.add(s);
+        if(result != null){
+            obj.put("lineName",result.lineName);
+            obj.put("runTime",result.runtime);
+            JSONArray arr =new JSONArray();
+            ArrayList<Station> sta;
+            sta = result.stations;
+            if(!sta.isEmpty()){
+                for(int i = 0; i < sta.size(); i++)
+                {
+                    JSONObject s = new JSONObject();
+                    Station st;
+                    st = sta.get(i);
+                    s.put("id",st.getId());
+                    s.put("name",st.getName());
+                    s.put("english",st.getEnglish());
+                    arr.add(s);
+                }
             }
+            obj.put("stations",arr);
         }
-        obj.put("stations",arr);
         return obj;
     }
 

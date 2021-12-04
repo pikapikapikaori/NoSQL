@@ -2,15 +2,13 @@ package com.nosql.nosqlproject.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.nosql.nosqlproject.entity.Station;
 import com.nosql.nosqlproject.service.RouteService;
-import com.nosql.nosqlproject.service.StationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin //写这个注解保证不需要额外配置跨域请求
 @RestController
-@RequestMapping("/route")
+@RequestMapping(value="/route", produces="application/json;charset=UTF-8")
 public class RouteController {
     RouteService routeservice;
 

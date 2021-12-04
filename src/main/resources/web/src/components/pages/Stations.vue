@@ -144,9 +144,11 @@ export default {
   },
   methods: {
     searchStationForRoute(){
+      const axios = require('axios');
+
       this.isClearAllRoute = true;
 
-      this.$axios.get('/station/find_stationName_routeName', {
+      axios.get('http://localhost:8080/station/find_stationName_routeName', {
         params: {
           stationName: this.searchStationRoute.station
         }
@@ -160,9 +162,11 @@ export default {
       this.isClearAllRoute = false;
     },
     searchStationForSoon(){
+      const axios = require('axios');
+
       this.isClearAllSoon= true;
 
-      this.$axios.get('/station/find_station_time_line', {
+      axios.get('http://localhost:8080/station/find_station_time_line', {
         params: {
           stationId: this.searchStationSoon.station,
           baseTime: this.searchStationSoon.curTime,
@@ -178,9 +182,11 @@ export default {
       this.isClearAllSoon = false;
     },
     searchStationForTime(){
+      const axios = require('axios');
+
       this.isClearAllTime= true;
 
-      this.$axios.get('/station/find_station_time_nearest3', {
+      axios.get('http://localhost:8080/station/find_station_time_nearest3', {
         params: {
           stationId: this.searchStationTime.station,
           baseTime: this.searchStationTime.curTime
