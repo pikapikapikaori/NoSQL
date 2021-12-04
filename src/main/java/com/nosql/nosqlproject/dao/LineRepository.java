@@ -93,7 +93,7 @@ return name, direction, time[pindex], time[nindex], pindex, nindex limit 1
     @Query("""
             match
                 (r:Run{line_id:{line_name}})
-            return r.time[0], r.time[-1]
+            return r.time[0], r.time[-1] limit 1
             """)
     ArrayList<String> get_start_end_time_in_one_run(String line_name);
 
