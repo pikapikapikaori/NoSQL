@@ -77,11 +77,11 @@
 
               <div v-show="isClearStation">
                 <el-table :data="routeToSearchStationResult" stripe="true" :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}" empty-text="暂无线路信息">
-                  <el-table-column prop="station_id" label="站点ID" width="320">
+                  <el-table-column prop="id" label="站点ID" width="320">
                   </el-table-column>
-                  <el-table-column prop="station_name" label="站点名称" width="330">
+                  <el-table-column prop="name" label="站点名称" width="330">
                   </el-table-column>
-                  <el-table-column prop="station_english" label="站点英语名称" width="330">
+                  <el-table-column prop="english" label="站点英语名称" width="330">
                   </el-table-column>
                 </el-table>
                 <p>
@@ -168,7 +168,7 @@ export default {
 
       axios.get('http://localhost:8080/route/find_route_station', {
         params: {
-          station_id: this.formInlineStation.routeToSearchStation,
+          line_id: this.formInlineStation.routeToSearchStation,
           direction: this.formInlineStation.direction
         }
       }).then((res) => {

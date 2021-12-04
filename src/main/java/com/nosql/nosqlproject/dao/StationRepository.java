@@ -22,7 +22,7 @@ public interface StationRepository extends Neo4jRepository<Station, String> {
     @Query("""
             match (l:Line {name: {line_id}, direction: {direction}})
             unwind l.route as k
-            match (s:Station {name: k})
+            match (s:Station {id: k})
             return s""")
     ArrayList<Station> find_route_station(String line_id, String direction);
 

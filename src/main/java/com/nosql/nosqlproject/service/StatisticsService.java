@@ -44,8 +44,8 @@ public class StatisticsService {
             if(!line.isEmpty()){
                 for(int j = 0;j<line.size();j++)
                 {
-                    s += line.get(i);
-                    if(i < line.size() - 1)
+                    s += line.get(j);
+                    if(j < line.size() - 1)
                         s+=",";
                 }
             }
