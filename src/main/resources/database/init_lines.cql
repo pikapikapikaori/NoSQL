@@ -1,4 +1,4 @@
-call apoc.load.json("file:./lines.json") yield value as vl
+call apoc.load.json("file:///lines.json") yield value as vl
 create
 (l:Line
 {name: vl.name,
@@ -11,5 +11,6 @@ destination: vl.destination,
 type: vl.type,
 onewayTime: vl.onewayTime,
 kilometer: vl.kilometer,
-interval: vl.interval})
+interval: vl.interval,
+directional: vl.directional})
 
