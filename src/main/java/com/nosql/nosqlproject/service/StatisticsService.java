@@ -40,8 +40,25 @@ public class StatisticsService {
             StationLines a = new StationLines();
             a.stationId = stations.get(i);
             a.station = stationrepository.get_station_name_by_id(a.stationId);
-            ArrayList<String> line;
-            line = linerepository.get_lines_in_a_station(a.stationId);
+            ArrayList<String> line_f;
+            line_f = linerepository.get_lines_in_a_station(a.stationId);
+
+            ArrayList<String> line = new ArrayList<>();
+
+            if(!line_f.isEmpty()){
+               for(int k = 0; k < line_f.size(); k ++){
+                   String tmp = line_f.get(k);
+                   if(tmp.contains("up"))
+                       tmp = tmp.replace("up", "上行");
+                   else if(tmp.contains("down"))
+                       tmp = tmp.replace("down", "下行");
+                   else if(tmp.contains("circle"))
+                       tmp = tmp.replace("circle", "环线");
+
+                   line.add(tmp);
+               }
+            }
+
             String s = "";
             if(!line.isEmpty()){
                 for(int j = 0;j<line.size();j++)
@@ -136,7 +153,7 @@ public class StatisticsService {
         ArrayList<String> res_name = stationrepository.most_station_name();
         ArrayList<String> res_direction = stationrepository.most_station_direction();
         ArrayList<Integer> res_cnt = stationrepository.most_station_count();
-       ArrayList<Demand16> result = new ArrayList<>();
+        ArrayList<Demand16> result = new ArrayList<>();
 
         if(!res_cnt.isEmpty()){
             for(int i = 0; i < res_cnt.size(); i ++){

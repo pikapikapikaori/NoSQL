@@ -42,10 +42,10 @@
                 <div v-if="haveResultStation">
                   <el-descriptions title="查询结果">
                     <el-descriptions-item label="运行方向">{{routeToSearchStationResult.lineName}}</el-descriptions-item>
-                    <el-descriptions-item label="运行时长">{{routeToSearchStationResult.time}}</el-descriptions-item>
+                    <el-descriptions-item label="运行时长">{{routeToSearchStationResult.runTime}}</el-descriptions-item>
                   </el-descriptions>
 
-                  <el-table :data="routeToSearchStationResult.station" stripe="true" :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}" empty-text="暂无线路">
+                  <el-table :data="routeToSearchStationResult.stations" stripe="true" :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}" empty-text="暂无线路">
                     <el-table-column prop="id" label="站点id" width="320">
                     </el-table-column>
                     <el-table-column prop="name" label="站点名称" width="330">
@@ -143,8 +143,8 @@ export default {
       },
       routeToSearchStationResult: {
         lineName: '',
-        time: '',
-        station: []
+        runTime: '',
+        stations: []
       },
       isClearRepeat: false,
       formInlineRepeat: {
@@ -178,7 +178,7 @@ export default {
           this.haveResultStation = false;
         }
         else{
-          this.routeToSearchStationResult = JSON.parse(res);
+          this.routeToSearchStationResult = res.data;
         }
       }).catch((err) => {
         this.haveResultStation = false;

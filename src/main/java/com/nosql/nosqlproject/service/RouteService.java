@@ -33,7 +33,7 @@ public class RouteService {
         if(linerepository.find_lineId_line(lineId) != null){
             Line line = linerepository.find_lineId_line(lineId);
             obj.put("route",line.getDeparture()+"-"+line.getDestination());
-            obj.put("directional",line.getDirection());
+            obj.put("directional",line.getDirectional());
             obj.put("length",line.getKilometer());
             obj.put("lineId",line.getName());
             obj.put("interval",line.getInterval());
@@ -66,10 +66,32 @@ public class RouteService {
     //4
     public JSONObject find_lineId_stationName_path(String lineId,String stationName1,String stationName2){
         JSONObject obj = new JSONObject();
-        Demand4 result;
-        result = linerepository.find_lineId_stationName_path(lineId,stationName1,stationName2);
+        Demand4 result = new Demand4();
+
+        String res_lineName = linerepository.find_lineId_stationName_path_lineName(lineId, stationName1, stationName2);
+        String res_direction = linerepository.find_lineId_stationName_path_direction(lineId, stationName1, stationName2);
+        String res_depttime = linerepository.find_lineId_stationName_path_departtime(lineId, stationName1, stationName2);
+        String res_desttime = linerepository.find_lineId_stationName_path_desttime(lineId, stationName1, stationName2);
+        int res_deptind = linerepository.find_lineId_stationName_path_departind(lineId, stationName1, stationName2);
+        int res_destind = linerepository.find_lineId_stationName_path_destind(lineId, stationName1, stationName2);
+
+        String res_direct = new String();
+        if(Objects.equals(res_direction, "up"))
+            res_direct = "上行";
+        else if (Objects.equals(res_direction, "down"))
+            res_direct = "下行";
+        else if (Objects.equals(res_direction, "circle"))
+            res_direct = "环线";
+
+        result.lineName = res_lineName;
+        result.direction = res_direction;
+        result.departure_time = res_depttime;
+        result.destination_time = res_desttime;
+        result.departure_index = res_deptind;
+        result.destination_index = res_destind;
+
         if(result != null){
-            obj.put("lineName",result.lineName+result.direction);
+            obj.put("lineName",result.lineName+res_direct);
             SimpleDateFormat ft = new SimpleDateFormat ("mm:ss");
             Date t1;
             long l1;

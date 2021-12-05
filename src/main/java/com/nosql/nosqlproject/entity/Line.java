@@ -18,6 +18,9 @@ public class Line {
     private String name;
 
     @Property
+    private boolean directional;
+
+    @Property
     private String direction;
 
     @Property
@@ -49,4 +52,8 @@ public class Line {
 
     @Relationship(direction = Relationship.Direction.INCOMING)
     private ArrayList<Run> timetable;
+
+    public boolean getDirectional(){
+        return this.directional;
+    }
 }
