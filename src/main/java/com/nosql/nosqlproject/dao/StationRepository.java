@@ -37,23 +37,16 @@ return s
 
     @Query("""
             match (s:Station {name: {station_name}})
-            return s.id
+            return distinct s.id
              """)
     ArrayList<String> find_stationName_routeName_stationId(String station_name);
 
     @Query("""
             match (s:Station {id: {station_id}}) -[r]- ()
             match (l:Line) where l.name in r.lines
-            return l.name
+            return distinct l.name + l.direction
              """)
     ArrayList<String> find_stationName_routeName_lineId(String station_id);
-
-    @Query("""
-            match (s:Station {id: {station_id}}) -[r]- ()
-            match (l:Line) where l.name in r.lines
-            return l.direction
-             """)
-    ArrayList<String> find_stationName_routeName_direction(String station_id);
 
     /*
     public ArrayList<Station> station_lines(String station_id);
@@ -93,7 +86,7 @@ return s
     /* can optimalize */
     @Query("""
             match (a:Line)
-            with a, length(a.route) as cnt 
+            with a, length(a.route) as cnt
             order by cnt desc
             return a.name limit 15
             """)
@@ -102,7 +95,7 @@ return s
     /* can optimalize */
     @Query("""
             match (a:Line)
-            with a, length(a.route) as cnt 
+            with a, length(a.route) as cnt
             order by cnt desc
             return a.direction limit 15
             """)
@@ -111,7 +104,7 @@ return s
     /* can optimalize */
     @Query("""
             match (a:Line)
-            with a, length(a.route) as cnt 
+            with a, length(a.route) as cnt
             order by cnt desc
             return cnt limit 15
             """)

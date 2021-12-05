@@ -62,7 +62,7 @@ return name, direction, time[pindex], time[nindex], pindex, nindex limit 1
     @Query("""
             match
                 (l:Line) where {station_id} in l.route
-            return l.name
+            return l.name + l.direction
             """)
     ArrayList<String> get_lines_in_a_station(String station_id);
 
