@@ -28,11 +28,11 @@ public class LineService {
             {
                 String tmp1 = route.get(i);
                 if(tmp1.contains("up"))
-                    tmp1 = tmp1.replace("up", "上行");
+                    tmp1 = tmp1.replace("up", "路上行");
                 else if(tmp1.contains("down"))
-                    tmp1 = tmp1.replace("down", "下行");
+                    tmp1 = tmp1.replace("down", "路下行");
                 else if(tmp1.contains("circle"))
-                    tmp1 = tmp1.replace("circle", "环线");
+                    tmp1 = tmp1.replace("circle", "路环线");
                 s += tmp1;
                 JSONObject obj = new JSONObject();
                 obj.put("route",s);

@@ -7,6 +7,7 @@ import com.nosql.nosqlproject.dao.StationRepository;
 import com.nosql.nosqlproject.entity.Line;
 import com.nosql.nosqlproject.repository.Demand15;
 import com.nosql.nosqlproject.repository.Demand16;
+import com.nosql.nosqlproject.repository.Demand17;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,11 +51,11 @@ public class StatisticsService {
                for(int k = 0; k < line_f.size(); k ++){
                    String tmp = line_f.get(k);
                    if(tmp.contains("up"))
-                       tmp = tmp.replace("up", "上行");
+                       tmp = tmp.replace("up", "路上行");
                    else if(tmp.contains("down"))
-                       tmp = tmp.replace("down", "下行");
+                       tmp = tmp.replace("down", "路下行");
                    else if(tmp.contains("circle"))
-                       tmp = tmp.replace("circle", "环线");
+                       tmp = tmp.replace("circle", "路环线");
 
                    line.add(tmp);
                }
@@ -177,7 +178,7 @@ public class StatisticsService {
                     res.direction = "下行";
                 else if(Objects.equals(res.direction, "circle"))
                     res.direction = "环线";
-                obj.put("route", res.name + res.direction);
+                obj.put("route", res.name + "路" + res.direction);
                 obj.put("num", res.count);
                 arr.add(obj);
             }
@@ -190,6 +191,9 @@ public class StatisticsService {
         JSONArray arr = new JSONArray();
         ArrayList<Line> linenames;
         linenames = linerepository.get_all_line_names();
+
+        ArrayList<Demand17> result = new ArrayList<>();
+
         if(!linenames.isEmpty()){
             for(int i = 0 ; i < linenames.size() ; i++)
             {
@@ -206,16 +210,16 @@ public class StatisticsService {
 
                 String dir = new String();
                 if(Objects.equals(direct, "up"))
-                    dir = "上行";
+                    dir = "路上行";
                 else if(Objects.equals(direct, "down"))
-                    dir = "下行";
+                    dir = "路下行";
                 else if(Objects.equals(direct, "circle"))
-                    dir = "环线";
+                    dir = "路环线";
 
                 nam += dir;
 
-                JSONObject obj = new JSONObject();
-                obj.put("route",nam);
+                Demand17 dem = new Demand17();
+                dem.name = nam;
 
                 try {
                     t1 = ft.parse(start_time);
@@ -223,10 +227,30 @@ public class StatisticsService {
                     t2 = ft.parse(end_time);
                     l2 = t2.getTime();
                     runtime = (int)((l2 - l1)/60000);
-                    obj.put("time",runtime);
+                    dem.time = runtime;
                 } catch (ParseException e) {
                     System.out.println("Unparseable using " + ft);
                 }
+
+                result.add(dem);
+            }
+        }
+
+        Collections.sort(result,new SortDemand17ByTime());
+
+        ArrayList<Demand17> res = new ArrayList<>();
+
+        for(int i = 0; i < 15; i ++){
+            res.add(result.get(i));
+        }
+
+        if(!res.isEmpty()){
+            for(int i = 0; i < res.size(); i ++){
+                Demand17 tmp_dem = res.get(i);
+
+                JSONObject obj = new JSONObject();
+                obj.put("route", tmp_dem.name);
+                obj.put("time", tmp_dem.time);
                 arr.add(obj);
             }
         }

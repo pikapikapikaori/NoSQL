@@ -35,7 +35,7 @@ public class RouteService {
             obj.put("route",line.getDeparture()+"-"+line.getDestination());
             obj.put("directional",line.getDirectional());
             obj.put("length",line.getKilometer());
-            obj.put("lineId",line.getName());
+            obj.put("lineId",line.getName() + "路");
             obj.put("interval",line.getInterval());
             obj.put("oneWayTime",line.getOnewayTime());
             obj.put("type",line.getType());
@@ -91,7 +91,7 @@ public class RouteService {
         result.destination_index = res_destind;
 
         if(result != null){
-            obj.put("lineName",result.lineName+res_direct);
+            obj.put("lineName",result.lineName + "路" + res_direct);
             SimpleDateFormat ft = new SimpleDateFormat ("HH:mm");
             Date t1;
             long l1;

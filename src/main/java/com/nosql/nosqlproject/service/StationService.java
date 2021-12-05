@@ -43,11 +43,11 @@ public class StationService {
                     for(int k = 0; k < tmpres_lineId_t.size(); k ++){
                         String tmp = tmpres_lineId_t.get(k);
                         if(tmp.contains("up"))
-                            tmp = tmp.replace("up", "上行");
+                            tmp = tmp.replace("up", "路上行");
                         else if(tmp.contains("down"))
-                            tmp = tmp.replace("down", "下行");
+                            tmp = tmp.replace("down", "路下行");
                         else if(tmp.contains("circle"))
-                            tmp = tmp.replace("circle", "环线");
+                            tmp = tmp.replace("circle", "路环线");
 
                         tmpres_lineId.add(tmp);
                     }
