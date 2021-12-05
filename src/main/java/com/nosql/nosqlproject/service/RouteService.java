@@ -92,7 +92,7 @@ public class RouteService {
 
         if(result != null){
             obj.put("lineName",result.lineName+res_direct);
-            SimpleDateFormat ft = new SimpleDateFormat ("mm:ss");
+            SimpleDateFormat ft = new SimpleDateFormat ("HH:mm");
             Date t1;
             long l1;
             Date t2;
@@ -105,7 +105,7 @@ public class RouteService {
                     l1 = t1.getTime();
                     t2 = ft.parse(result.departure_time);
                     l2 = t2.getTime();
-                    runtime = (int)((l2 - l1)/60000);
+                    runtime = (int)((l1 - l2)/60000);
                     obj.put("runTime",runtime);
                 }catch (ParseException e){
                     System.out.println("Unparseable using " + ft);

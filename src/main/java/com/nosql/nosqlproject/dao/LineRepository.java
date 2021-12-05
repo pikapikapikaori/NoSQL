@@ -18,9 +18,9 @@ public interface LineRepository extends Neo4jRepository<Line, String> {
     @Query("""
             match
                 (l:Line)
-            return l.name
+            return l
             """)
-    ArrayList<String> get_all_line_names();
+    ArrayList<Line> get_all_line_names();
 
     @Query("""
             match
@@ -152,10 +152,17 @@ return nindex limit 1
 
     @Query("""
             match
-                (r:Run{line_id:{line_name}})
-            return r.time[0], r.time[-1] limit 1
+                (r:Run{line_id:{line_name}, direction: {line_direct}})
+            return r.time[0] limit 1
             """)
-    ArrayList<String> get_start_end_time_in_one_run(String line_name);
+    String get_start_time_in_one_run(String line_name, String line_direct);
+
+    @Query("""
+            match
+                (r:Run{line_id:{line_name}, direction: {line_direct}})
+            return r.time[-1] limit 1
+            """)
+    String get_end_time_in_one_run(String line_name, String line_direct);
 
     @Query("""
             match

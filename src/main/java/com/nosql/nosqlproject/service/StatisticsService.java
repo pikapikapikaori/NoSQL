@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.nosql.nosqlproject.dao.LineRepository;
 import com.nosql.nosqlproject.dao.StationRepository;
+import com.nosql.nosqlproject.entity.Line;
 import com.nosql.nosqlproject.repository.Demand15;
 import com.nosql.nosqlproject.repository.Demand16;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -187,35 +188,46 @@ public class StatisticsService {
     //17
     public JSONArray longest_time(){
         JSONArray arr = new JSONArray();
-        ArrayList<String> linenames;
+        ArrayList<Line> linenames;
         linenames = linerepository.get_all_line_names();
         if(!linenames.isEmpty()){
             for(int i = 0 ; i < linenames.size() ; i++)
             {
-                ArrayList<String> start_end_time;
-                String s = linenames.get(i);
-                start_end_time = linerepository.get_start_end_time_in_one_run(s);
-                SimpleDateFormat ft = new SimpleDateFormat ("mm:ss");
+                String nam = linenames.get(i).getName();
+                String direct = linenames.get(i).getDirection();
+                String start_time = linerepository.get_start_time_in_one_run(nam, direct);
+                String end_time = linerepository.get_end_time_in_one_run(nam, direct);
+                SimpleDateFormat ft = new SimpleDateFormat ("HH:mm");
                 Date t1;
                 long l1;
                 Date t2;
                 long l2;
                 int runtime;
+
+                String dir = new String();
+                if(Objects.equals(direct, "up"))
+                    dir = "上行";
+                else if(Objects.equals(direct, "down"))
+                    dir = "下行";
+                else if(Objects.equals(direct, "circle"))
+                    dir = "环线";
+
+                nam += dir;
+
                 JSONObject obj = new JSONObject();
-                obj.put("route",s);
-                if(!start_end_time.isEmpty()){
-                    try {
-                        t1 = ft.parse(start_end_time.get(0));
-                        l1 = t1.getTime();
-                        t2 = ft.parse(start_end_time.get(1));
-                        l2 = t2.getTime();
-                        runtime = (int)((l2 - l1)/60000);
-                        obj.put("time",runtime);
-                    } catch (ParseException e) {
-                        System.out.println("Unparseable using " + ft);
-                    }
-                    arr.add(obj);
+                obj.put("route",nam);
+
+                try {
+                    t1 = ft.parse(start_time);
+                    l1 = t1.getTime();
+                    t2 = ft.parse(end_time);
+                    l2 = t2.getTime();
+                    runtime = (int)((l2 - l1)/60000);
+                    obj.put("time",runtime);
+                } catch (ParseException e) {
+                    System.out.println("Unparseable using " + ft);
                 }
+                arr.add(obj);
             }
         }
         return arr;
