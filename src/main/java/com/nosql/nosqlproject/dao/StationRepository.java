@@ -1,15 +1,13 @@
 package com.nosql.nosqlproject.dao;
 
-import com.nosql.nosqlproject.entity.*;
-import com.nosql.nosqlproject.repository.*;
+import java.util.ArrayList;
+
+import com.nosql.nosqlproject.entity.Station;
+
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Repository
 @Transactional
@@ -21,13 +19,14 @@ public interface StationRepository extends Neo4jRepository<Station, String> {
     String get_station_name_by_id(String id);
 
     @Query("""
-    match
-    (l:Line{name:{name}, direction:{direction}})
-with l.route[{i}] as sid
-match (s:Station{id:sid})
-return s
-    """)
+                match
+                (l:Line{name:{name}, direction:{direction}})
+            with l.route[{i}] as sid
+            match (s:Station{id:sid})
+            return s
+                """)
     Station find_route_station_by_index(String name, String direction, Integer i);
+
     @Query("""
             match (l:Line {name: {line_id}, direction: {direction}})
             unwind l.route as k
@@ -37,29 +36,22 @@ return s
 
     @Query("""
             match (s:Station {name: {station_name}})
-            return s.id
+            return distinct s.id
              """)
     ArrayList<String> find_stationName_routeName_stationId(String station_name);
 
     @Query("""
             match (s:Station {id: {station_id}}) -[r]- ()
-            match (l:Line) where l.name in r.lines
-            return l.name
+            match (l:Line) where l.name in r.lines and s.id in l.route
+            return distinct l.name + l.direction
              """)
     ArrayList<String> find_stationName_routeName_lineId(String station_id);
 
-    @Query("""
-            match (s:Station {id: {station_id}}) -[r]- ()
-            match (l:Line) where l.name in r.lines
-            return l.direction
-             """)
-    ArrayList<String> find_stationName_routeName_direction(String station_id);
-
     /*
-    public ArrayList<Station> station_lines(String station_id);
-
-    @Query("")
-    public ArrayList<Station> find_stations_of_two_lines(String id1, String direction, String id2, String direction2);
+     * public ArrayList<Station> station_lines(String station_id);
+     * 
+     * @Query("") public ArrayList<Station> find_stations_of_two_lines(String id1,
+     * String direction, String id2, String direction2);
      */
 
     /* can optimalize */
@@ -93,7 +85,7 @@ return s
     /* can optimalize */
     @Query("""
             match (a:Line)
-            with a, length(a.route) as cnt 
+            with a, length(a.route) as cnt
             order by cnt desc
             return a.name limit 15
             """)
@@ -102,7 +94,7 @@ return s
     /* can optimalize */
     @Query("""
             match (a:Line)
-            with a, length(a.route) as cnt 
+            with a, length(a.route) as cnt
             order by cnt desc
             return a.direction limit 15
             """)
@@ -111,7 +103,7 @@ return s
     /* can optimalize */
     @Query("""
             match (a:Line)
-            with a, length(a.route) as cnt 
+            with a, length(a.route) as cnt
             order by cnt desc
             return cnt limit 15
             """)

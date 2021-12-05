@@ -4,8 +4,10 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.nosql.nosqlproject.dao.LineRepository;
 import com.nosql.nosqlproject.dao.StationRepository;
+import com.nosql.nosqlproject.entity.Line;
 import com.nosql.nosqlproject.repository.Demand15;
 import com.nosql.nosqlproject.repository.Demand16;
+import com.nosql.nosqlproject.repository.Demand17;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,8 +42,25 @@ public class StatisticsService {
             StationLines a = new StationLines();
             a.stationId = stations.get(i);
             a.station = stationrepository.get_station_name_by_id(a.stationId);
-            ArrayList<String> line;
-            line = linerepository.get_lines_in_a_station(a.stationId);
+            ArrayList<String> line_f;
+            line_f = linerepository.get_lines_in_a_station(a.stationId);
+
+            ArrayList<String> line = new ArrayList<>();
+
+            if(!line_f.isEmpty()){
+               for(int k = 0; k < line_f.size(); k ++){
+                   String tmp = line_f.get(k);
+                   if(tmp.contains("up"))
+                       tmp = tmp.replace("up", "路上行");
+                   else if(tmp.contains("down"))
+                       tmp = tmp.replace("down", "路下行");
+                   else if(tmp.contains("circle"))
+                       tmp = tmp.replace("circle", "路环线");
+
+                   line.add(tmp);
+               }
+            }
+
             String s = "";
             if(!line.isEmpty()){
                 for(int j = 0;j<line.size();j++)
@@ -136,7 +155,7 @@ public class StatisticsService {
         ArrayList<String> res_name = stationrepository.most_station_name();
         ArrayList<String> res_direction = stationrepository.most_station_direction();
         ArrayList<Integer> res_cnt = stationrepository.most_station_count();
-       ArrayList<Demand16> result = new ArrayList<>();
+        ArrayList<Demand16> result = new ArrayList<>();
 
         if(!res_cnt.isEmpty()){
             for(int i = 0; i < res_cnt.size(); i ++){
@@ -159,7 +178,7 @@ public class StatisticsService {
                     res.direction = "下行";
                 else if(Objects.equals(res.direction, "circle"))
                     res.direction = "环线";
-                obj.put("route", res.name + res.direction);
+                obj.put("route", res.name + "路" + res.direction);
                 obj.put("num", res.count);
                 arr.add(obj);
             }
@@ -170,35 +189,69 @@ public class StatisticsService {
     //17
     public JSONArray longest_time(){
         JSONArray arr = new JSONArray();
-        ArrayList<String> linenames;
+        ArrayList<Line> linenames;
         linenames = linerepository.get_all_line_names();
+
+        ArrayList<Demand17> result = new ArrayList<>();
+
         if(!linenames.isEmpty()){
             for(int i = 0 ; i < linenames.size() ; i++)
             {
-                ArrayList<String> start_end_time;
-                String s = linenames.get(i);
-                start_end_time = linerepository.get_start_end_time_in_one_run(s);
-                SimpleDateFormat ft = new SimpleDateFormat ("mm:ss");
+                String nam = linenames.get(i).getName();
+                String direct = linenames.get(i).getDirection();
+                String start_time = linerepository.get_start_time_in_one_run(nam, direct);
+                String end_time = linerepository.get_end_time_in_one_run(nam, direct);
+                SimpleDateFormat ft = new SimpleDateFormat ("HH:mm");
                 Date t1;
                 long l1;
                 Date t2;
                 long l2;
                 int runtime;
-                JSONObject obj = new JSONObject();
-                obj.put("route",s);
-                if(!start_end_time.isEmpty()){
-                    try {
-                        t1 = ft.parse(start_end_time.get(0));
-                        l1 = t1.getTime();
-                        t2 = ft.parse(start_end_time.get(1));
-                        l2 = t2.getTime();
-                        runtime = (int)((l2 - l1)/60000);
-                        obj.put("time",runtime);
-                    } catch (ParseException e) {
-                        System.out.println("Unparseable using " + ft);
-                    }
-                    arr.add(obj);
+
+                String dir = new String();
+                if(Objects.equals(direct, "up"))
+                    dir = "路上行";
+                else if(Objects.equals(direct, "down"))
+                    dir = "路下行";
+                else if(Objects.equals(direct, "circle"))
+                    dir = "路环线";
+
+                nam += dir;
+
+                Demand17 dem = new Demand17();
+                dem.name = nam;
+
+                try {
+                    t1 = ft.parse(start_time);
+                    l1 = t1.getTime();
+                    t2 = ft.parse(end_time);
+                    l2 = t2.getTime();
+                    runtime = (int)((l2 - l1)/60000);
+                    dem.time = runtime;
+                } catch (ParseException e) {
+                    System.out.println("Unparseable using " + ft);
                 }
+
+                result.add(dem);
+            }
+        }
+
+        Collections.sort(result,new SortDemand17ByTime());
+
+        ArrayList<Demand17> res = new ArrayList<>();
+
+        for(int i = 0; i < 15; i ++){
+            res.add(result.get(i));
+        }
+
+        if(!res.isEmpty()){
+            for(int i = 0; i < res.size(); i ++){
+                Demand17 tmp_dem = res.get(i);
+
+                JSONObject obj = new JSONObject();
+                obj.put("route", tmp_dem.name);
+                obj.put("time", tmp_dem.time);
+                arr.add(obj);
             }
         }
         return arr;

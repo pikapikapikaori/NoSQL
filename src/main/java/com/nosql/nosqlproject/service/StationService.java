@@ -30,17 +30,30 @@ public class StationService {
         ArrayList<String> res_stationId = stationrepository.find_stationName_routeName_stationId(stationName);
 
         ArrayList<ArrayList<String>> res_lineId = new ArrayList<>();
-        ArrayList<ArrayList<String>> res_direction = new ArrayList<>();
 
         if(!res_stationId.isEmpty()){
 
             for(int i = 0; i < res_stationId.size(); i ++){
                 String tmpid = res_stationId.get(i);
-                ArrayList<String> tmpres_lineId =  stationrepository.find_stationName_routeName_lineId(tmpid);
-                ArrayList<String> tmpres_direction = stationrepository.find_stationName_routeName_direction(tmpid);
+                ArrayList<String> tmpres_lineId_t =  stationrepository.find_stationName_routeName_lineId(tmpid);
+
+                ArrayList<String> tmpres_lineId = new ArrayList<>();
+
+                if(!tmpres_lineId_t.isEmpty()){
+                    for(int k = 0; k < tmpres_lineId_t.size(); k ++){
+                        String tmp = tmpres_lineId_t.get(k);
+                        if(tmp.contains("up"))
+                            tmp = tmp.replace("up", "路上行");
+                        else if(tmp.contains("down"))
+                            tmp = tmp.replace("down", "路下行");
+                        else if(tmp.contains("circle"))
+                            tmp = tmp.replace("circle", "路环线");
+
+                        tmpres_lineId.add(tmp);
+                    }
+                }
 
                 res_lineId.add(tmpres_lineId);
-                res_direction.add(tmpres_direction);
             }
         }
 
@@ -51,7 +64,6 @@ public class StationService {
                 Demand3 dem = new Demand3();
                 dem.stationId = res_stationId.get(i);
                 dem.lineIds = res_lineId.get(i);
-                dem.directions = res_direction.get(i);
                 result.add(dem);
             }
         }
@@ -66,17 +78,12 @@ public class StationService {
                 String str = "";
                 ArrayList<String> lineIds;
                 lineIds =demand3.lineIds;
-                ArrayList<String> direction;
-                direction = demand3.directions;
                 if(!lineIds.isEmpty()){
-                    if(!direction.isEmpty()){
-                        for(int j = 0 ; j < lineIds.size() ; j++)
-                        {
-                            str += "\"";
-                            str += lineIds.get(j);
-                            str += direction.get(j);
-                            str += "\" ";
-                        }
+                    for(int j = 0 ; j < lineIds.size() ; j++)
+                    {
+                        str += "\"";
+                        str += lineIds.get(j);
+                        str += "\" ";
                     }
                 }
                 obj.put("routes",str);

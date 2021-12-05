@@ -18,9 +18,9 @@ public interface LineRepository extends Neo4jRepository<Line, String> {
     @Query("""
             match
                 (l:Line)
-            return l.name
+            return l
             """)
-    ArrayList<String> get_all_line_names();
+    ArrayList<Line> get_all_line_names();
 
     @Query("""
             match
@@ -30,16 +30,76 @@ public interface LineRepository extends Neo4jRepository<Line, String> {
     Line find_lineId_line(String line_id);
 
     @Query("""
-    match (s1:Station{name:"大悦城"}), (s2:Station{name:"小吃街"})
+    match (s1:Station{name: {station_name1}}), (s2:Station{name: {station_name2}})
 with s1.id as pid, s2.id as nid
 match
-    (n:Line {name: "10"}) where apoc.coll.indexOf(n.route, pid) > 0 and  apoc.coll.indexOf(n.route, pid) < apoc.coll.indexOf(n.route, nid)
+    (n:Line {name: {line_name}}) where apoc.coll.indexOf(n.route, pid) > 0 and  apoc.coll.indexOf(n.route, pid) < apoc.coll.indexOf(n.route, nid)
 with apoc.coll.indexOf(n.route, pid) as pindex, apoc.coll.indexOf(n.route, nid) as nindex,n
 match (r:Run {line_id: n.name, direction:n.direction})
 with  n.name as name, n.direction as direction, r.time as time, pindex, nindex
-return name, direction, time[pindex], time[nindex], pindex, nindex limit 1
+return name limit 1
     """)
-    Demand4 find_lineId_stationName_path(String line_name, String station_name1, String station_name2);
+    String find_lineId_stationName_path_lineName(String line_name, String station_name1, String station_name2);
+
+    @Query("""
+    match (s1:Station{name: {station_name1}}), (s2:Station{name: {station_name2}})
+with s1.id as pid, s2.id as nid
+match
+    (n:Line {name: {line_name}}) where apoc.coll.indexOf(n.route, pid) > 0 and  apoc.coll.indexOf(n.route, pid) < apoc.coll.indexOf(n.route, nid)
+with apoc.coll.indexOf(n.route, pid) as pindex, apoc.coll.indexOf(n.route, nid) as nindex,n
+match (r:Run {line_id: n.name, direction:n.direction})
+with  n.name as name, n.direction as direction, r.time as time, pindex, nindex
+return direction limit 1
+    """)
+    String find_lineId_stationName_path_direction(String line_name, String station_name1, String station_name2);
+
+    @Query("""
+    match (s1:Station{name: {station_name1}}), (s2:Station{name: {station_name2}})
+with s1.id as pid, s2.id as nid
+match
+    (n:Line {name: {line_name}}) where apoc.coll.indexOf(n.route, pid) > 0 and  apoc.coll.indexOf(n.route, pid) < apoc.coll.indexOf(n.route, nid)
+with apoc.coll.indexOf(n.route, pid) as pindex, apoc.coll.indexOf(n.route, nid) as nindex,n
+match (r:Run {line_id: n.name, direction:n.direction})
+with  n.name as name, n.direction as direction, r.time as time, pindex, nindex
+return time[pindex] limit 1
+    """)
+    String find_lineId_stationName_path_departtime(String line_name, String station_name1, String station_name2);
+
+    @Query("""
+    match (s1:Station{name: {station_name1}}), (s2:Station{name: {station_name2}})
+with s1.id as pid, s2.id as nid
+match
+    (n:Line {name: {line_name}}) where apoc.coll.indexOf(n.route, pid) > 0 and  apoc.coll.indexOf(n.route, pid) < apoc.coll.indexOf(n.route, nid)
+with apoc.coll.indexOf(n.route, pid) as pindex, apoc.coll.indexOf(n.route, nid) as nindex,n
+match (r:Run {line_id: n.name, direction:n.direction})
+with  n.name as name, n.direction as direction, r.time as time, pindex, nindex
+return time[nindex] limit 1
+    """)
+    String find_lineId_stationName_path_desttime(String line_name, String station_name1, String station_name2);
+
+    @Query("""
+    match (s1:Station{name: {station_name1}}), (s2:Station{name: {station_name2}})
+with s1.id as pid, s2.id as nid
+match
+    (n:Line {name: {line_name}}) where apoc.coll.indexOf(n.route, pid) > 0 and  apoc.coll.indexOf(n.route, pid) < apoc.coll.indexOf(n.route, nid)
+with apoc.coll.indexOf(n.route, pid) as pindex, apoc.coll.indexOf(n.route, nid) as nindex,n
+match (r:Run {line_id: n.name, direction:n.direction})
+with  n.name as name, n.direction as direction, r.time as time, pindex, nindex
+return pindex limit 1
+    """)
+    int find_lineId_stationName_path_departind(String line_name, String station_name1, String station_name2);
+
+    @Query("""
+    match (s1:Station{name: {station_name1}}), (s2:Station{name: {station_name2}})
+with s1.id as pid, s2.id as nid
+match
+    (n:Line {name: {line_name}}) where apoc.coll.indexOf(n.route, pid) > 0 and  apoc.coll.indexOf(n.route, pid) < apoc.coll.indexOf(n.route, nid)
+with apoc.coll.indexOf(n.route, pid) as pindex, apoc.coll.indexOf(n.route, nid) as nindex,n
+match (r:Run {line_id: n.name, direction:n.direction})
+with  n.name as name, n.direction as direction, r.time as time, pindex, nindex
+return nindex limit 1
+    """)
+    int find_lineId_stationName_path_destind(String line_name, String station_name1, String station_name2);
 
     @Query("""
             match (s1:Station{name:{station1}}), (s2:Station{name:{station2}})
@@ -62,7 +122,7 @@ return name, direction, time[pindex], time[nindex], pindex, nindex limit 1
     @Query("""
             match
                 (l:Line) where {station_id} in l.route
-            return l.name
+            return l.name + l.direction
             """)
     ArrayList<String> get_lines_in_a_station(String station_id);
 
@@ -92,10 +152,17 @@ return name, direction, time[pindex], time[nindex], pindex, nindex limit 1
 
     @Query("""
             match
-                (r:Run{line_id:{line_name}})
-            return r.time[0], r.time[-1] limit 1
+                (r:Run{line_id:{line_name}, direction: {line_direct}})
+            return r.time[0] limit 1
             """)
-    ArrayList<String> get_start_end_time_in_one_run(String line_name);
+    String get_start_time_in_one_run(String line_name, String line_direct);
+
+    @Query("""
+            match
+                (r:Run{line_id:{line_name}, direction: {line_direct}})
+            return r.time[-1] limit 1
+            """)
+    String get_end_time_in_one_run(String line_name, String line_direct);
 
     @Query("""
             match
