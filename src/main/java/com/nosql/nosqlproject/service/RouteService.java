@@ -10,7 +10,10 @@ import com.nosql.nosqlproject.repository.Demand4;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 
 @Service
@@ -63,31 +66,44 @@ public class RouteService {
     //4
     public JSONObject find_lineId_stationName_path(String lineId,String stationName1,String stationName2){
         JSONObject obj = new JSONObject();
-        /*
         Demand4 result;
         result = linerepository.find_lineId_stationName_path(lineId,stationName1,stationName2);
         if(result != null){
-            obj.put("lineName",result.lineName);
-            obj.put("runTime",result.runtime);
-            JSONArray arr =new JSONArray();
-            ArrayList<Station> sta;
-            sta = result.stations;
-            if(!sta.isEmpty()){
-                for(int i = 0; i < sta.size(); i++)
-                {
-                    JSONObject s = new JSONObject();
-                    Station st;
-                    st = sta.get(i);
-                    s.put("id",st.getId());
-                    s.put("name",st.getName());
-                    s.put("english",st.getEnglish());
-                    arr.add(s);
+            obj.put("lineName",result.lineName+result.direction);
+            SimpleDateFormat ft = new SimpleDateFormat ("mm:ss");
+            Date t1;
+            long l1;
+            Date t2;
+            long l2;
+            int runtime;
+            if((!(result.departure_time==null))&&(!(result.destination_time==null)))
+            {
+                try{
+                    t1 = ft.parse(result.destination_time);
+                    l1 = t1.getTime();
+                    t2 = ft.parse(result.departure_time);
+                    l2 = t2.getTime();
+                    runtime = (int)((l2 - l1)/60000);
+                    obj.put("runTime",runtime);
+                }catch (ParseException e){
+                    System.out.println("Unparseable using " + ft);
                 }
+            }
+            JSONArray arr =new JSONArray();
+            int departure_index = result.departure_index;
+            int destination_index = result.destination_index;
+            for(int i = departure_index;i<=destination_index;i++)
+            {
+                Station sta = stationrepository.find_route_station_by_index(result.lineName,result.direction,i);
+                JSONObject s = new JSONObject();
+                s.put("id",sta.getId());
+                s.put("name",sta.getName());
+                s.put("english",sta.getEnglish());
+                arr.add(s);
             }
             obj.put("stations",arr);
         }
 
-         */
         return obj;
     }
 
