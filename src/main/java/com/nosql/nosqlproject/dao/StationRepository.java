@@ -19,13 +19,14 @@ public interface StationRepository extends Neo4jRepository<Station, String> {
     String get_station_name_by_id(String id);
 
     @Query("""
-    match
-    (l:Line{name:{name}, direction:{direction}})
-with l.route[{i}] as sid
-match (s:Station{id:sid})
-return s
-    """)
+                match
+                (l:Line{name:{name}, direction:{direction}})
+            with l.route[{i}] as sid
+            match (s:Station{id:sid})
+            return s
+                """)
     Station find_route_station_by_index(String name, String direction, Integer i);
+
     @Query("""
             match (l:Line {name: {line_id}, direction: {direction}})
             unwind l.route as k
@@ -47,10 +48,10 @@ return s
     ArrayList<String> find_stationName_routeName_lineId(String station_id);
 
     /*
-    public ArrayList<Station> station_lines(String station_id);
-
-    @Query("")
-    public ArrayList<Station> find_stations_of_two_lines(String id1, String direction, String id2, String direction2);
+     * public ArrayList<Station> station_lines(String station_id);
+     * 
+     * @Query("") public ArrayList<Station> find_stations_of_two_lines(String id1,
+     * String direction, String id2, String direction2);
      */
 
     /* can optimalize */
