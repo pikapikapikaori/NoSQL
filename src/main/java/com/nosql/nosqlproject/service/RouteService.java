@@ -76,7 +76,7 @@ public class RouteService {
             Date t2;
             long l2;
             int runtime;
-            if((!(result.departure_time==null))&&(!(result.destination_time==null)))
+            if((result.departure_time!=null)&&(result.destination_time!=null))
             {
                 try{
                     t1 = ft.parse(result.destination_time);
