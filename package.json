@@ -1,7 +1,0 @@
-{
-  "name": "NoSQL",
-  "version": "1.0.0",
-  "devDependencies": {
-    "axios": "^0.24.0"
-  }
-}
