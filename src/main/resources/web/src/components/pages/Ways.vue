@@ -41,7 +41,6 @@
                 </div>
               </div>
             </el-tab-pane>
-            <!--
 
             <el-tab-pane label="最短路线查询（基于Id）">
               最短路线查询（基于Id）
@@ -66,13 +65,19 @@
                 <div>
                   <div v-if="isClearId">
                     <el-table :data="searchIdResult" stripe="true" :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}" empty-text="暂无直达路线">
-                      <el-table-column prop="route" label="路线" width="980">
+                      <el-table-column prop="id" label="站点id" width="320">
+                      </el-table-column>
+                      <el-table-column prop="name" label="站点名称" width="330">
+                      </el-table-column>
+                      <el-table-column prop="english" label="站点英语" width="330">
                       </el-table-column>
                     </el-table>
                   </div>
                 </div>
               </div>
             </el-tab-pane>
+
+
 
             <el-tab-pane label="最短路线查询（基于名称）">
               最短路线查询（基于名称）
@@ -96,14 +101,18 @@
                 <div>
                   <div v-if="isClearName">
                     <el-table :data="searchNameResult" stripe="true" :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}" empty-text="暂无直达路线">
-                      <el-table-column prop="route" label="路线" width="980">
+                      <el-table-column prop="id" label="站点id" width="320">
+                      </el-table-column>
+                      <el-table-column prop="name" label="站点名称" width="330">
+                      </el-table-column>
+                      <el-table-column prop="english" label="站点英语" width="330">
                       </el-table-column>
                     </el-table>
                   </div>
                 </div>
               </div>
             </el-tab-pane>
-            -->
+
           </el-tabs>
         </el-main>
 

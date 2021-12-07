@@ -128,9 +128,24 @@ return nindex limit 1
 
     @Query("""
         match (ss:Station{id:{station_id1}}), (se:Station{id:{station_id2}})
-        return nodes(shortestpath((ss)-[*0..15]-> (se)))
+        unwind nodes(shortestpath((ss)-[*0..15]-> (se))) as res
+        return res.id
     """)
-    ArrayList<Station> shortestpath_by_id(String station_id1, String station_id2);
+    ArrayList<String> shortestpath_by_id_id(String station_id1, String station_id2);
+
+    @Query("""
+        match (ss:Station{id:{station_id1}}), (se:Station{id:{station_id2}})
+        unwind nodes(shortestpath((ss)-[*0..15]-> (se))) as res
+        return res.name
+    """)
+    ArrayList<String> shortestpath_by_id_name(String station_id1, String station_id2);
+
+    @Query("""
+        match (ss:Station{id:{station_id1}}), (se:Station{id:{station_id2}})
+        unwind nodes(shortestpath((ss)-[*0..15]-> (se))) as res
+        return res.english
+    """)
+    ArrayList<String> shortestpath_by_id_eng(String station_id1, String station_id2);
 
     @Query("""
         match (s:Station{name:{station_name}})
