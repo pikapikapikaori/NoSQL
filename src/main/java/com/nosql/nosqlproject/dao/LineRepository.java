@@ -3,7 +3,7 @@ package com.nosql.nosqlproject.dao;
 import java.util.ArrayList;
 
 import com.nosql.nosqlproject.entity.Line;
-import com.nosql.nosqlproject.repository.Demand4;
+import com.nosql.nosqlproject.entity.Station;
 
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
@@ -125,6 +125,18 @@ return nindex limit 1
             return l.name + l.direction
             """)
     ArrayList<String> get_lines_in_a_station(String station_id);
+
+    @Query("""
+        match (ss:Station{id:{station_id1}}), (se:Station{id:{station_id2}})
+        return nodes(shortestpath((ss)-[*0..15]-> (se)))
+    """)
+    ArrayList<Station> shortestpath_by_id(String station_id1, String station_id2);
+
+    @Query("""
+        match (s:Station{name:{station_name}})
+        return s.id
+    """)
+    ArrayList<String> get_all_station_ids_by_name(String station_name);
 
     @Query("""
             match (l:Line) where l.name =~ "^[0-9]+"

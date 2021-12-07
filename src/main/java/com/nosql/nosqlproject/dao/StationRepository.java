@@ -19,6 +19,24 @@ public interface StationRepository extends Neo4jRepository<Station, String> {
     String get_station_name_by_id(String id);
 
     @Query("""
+                match (s:Station) where s.name starts with "地铁"
+            return distinct s.name
+            """)
+    ArrayList<String> count_subway_station();
+
+    @Query("""
+            match (s:Station) where s.name ends with "(始发站)" or not () --> (s)
+            return distinct s.name
+                """)
+    ArrayList<String> count_start_station();
+
+    @Query("""
+            match (s:Station) where s.name ends with "(终点站)" or not (s) --> (s)
+            return distinct s.name
+            """)
+    ArrayList<String> count_end_station();
+
+    @Query("""
                 match
                 (l:Line{name:{name}, direction:{direction}})
             with l.route[{i}] as sid
