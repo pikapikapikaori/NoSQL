@@ -45,9 +45,7 @@
         <el-menu-item-group>
           <span slot="title">数量</span>
           <el-menu-item index="/stastics/routestype">路线类型统计</el-menu-item>
-          <!--
           <el-menu-item index="/stastics/specialstation">统计特殊站台</el-menu-item>
-          -->
         </el-menu-item-group>
       </el-submenu>
 
