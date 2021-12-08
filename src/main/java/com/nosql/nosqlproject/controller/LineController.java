@@ -19,6 +19,18 @@ public class LineController {
         this.lineservice = lineservice;
     }
 
+    //需求五a
+    @GetMapping("/find_shortestRoute_id")
+    public JSONArray find_shortestRoute_id(String station1, String station2){
+        return lineservice.find_shortestRoute_id(station1,station2);
+    }
+
+    //需求五b
+    @GetMapping("/find_shortestRoute_name")
+    public JSONArray find_shortestRoute_name(String station1, String station2){
+        return lineservice.find_shortestRoute_name(station1,station2);
+    }
+
     //需求六
     @GetMapping("/find_directRoute")
     public JSONArray find_directRoute(String station1, String station2){

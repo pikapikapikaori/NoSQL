@@ -12,6 +12,7 @@ import MostRoutesBetweenStations from '@/components/pages/MostRoutesBetweenStati
 import MostStationsInRoutes from '@/components/pages/MostStationsInRoutes'
 import LongestTimeRoutes from '@/components/pages/LongestTimeRoutes'
 import RoutesType from '@/components/pages/RoutesType'
+import SpecialStation from '@/components/pages/SpecialStation'
 
 Vue.use(Router)
 
@@ -76,6 +77,11 @@ export default new Router({
       path: '/stastics/routestype',
       name: 'RoutesType',
       component: RoutesType
+    },
+    {
+      path: '/stastics/specialstation',
+      name: 'SpecialStation',
+      component: SpecialStation
     }
   ]
 })
