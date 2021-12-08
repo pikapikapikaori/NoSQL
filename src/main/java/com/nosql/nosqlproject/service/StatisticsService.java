@@ -91,6 +91,63 @@ public class StatisticsService {
         return arr;
     }
 
+    //11a
+    public JSONArray special_station(){
+        JSONArray arr = new JSONArray();
+        ArrayList<String> subway;
+        subway = stationrepository.count_subway_station();
+        ArrayList<String> start;
+        start = stationrepository.count_start_station();
+        ArrayList<String> end;
+        end = stationrepository.count_end_station();
+        if(!subway.isEmpty())
+        {
+            JSONObject obj = new JSONObject();
+            obj.put("type","地铁站");
+            obj.put("amount",subway.size());
+            String s = "";
+            for(int i =0;i<subway.size();i++)
+            {
+
+                s+=subway.get(i);
+                s+=" ";
+            }
+            obj.put("stations",s);
+            arr.add(obj);
+        }
+        if(!start.isEmpty())
+        {
+            JSONObject obj = new JSONObject();
+            obj.put("type","始发站");
+            obj.put("amount",start.size());
+            String s = "";
+            for(int i =0;i<start.size();i++)
+            {
+
+                s+=start.get(i);
+                s+=" ";
+            }
+            obj.put("stations",s);
+            arr.add(obj);
+        }
+        if(!end.isEmpty())
+        {
+            JSONObject obj = new JSONObject();
+            obj.put("type","终点站");
+            obj.put("amount",end.size());
+            String s = "";
+            for(int i =0;i<end.size();i++)
+            {
+                s+=end.get(i);
+                s+=" ";
+            }
+            obj.put("stations",s);
+            arr.add(obj);
+        }
+
+        return arr;
+    }
+
     //12
     public JSONArray count_type(){
         JSONArray arr = new JSONArray();

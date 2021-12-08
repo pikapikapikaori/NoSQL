@@ -24,6 +24,11 @@ public class StatisticsController {
     public JSONArray most_line_station(){
         return statisticsservice.most_line_station();
     }
+    //需求十一a
+    @GetMapping("/special_station")
+    public JSONArray special_station(){
+        return statisticsservice.special_station();
+    }
     //需求十二
     @GetMapping("/count_type")
     public JSONArray count_type(){
