@@ -11,11 +11,11 @@
       <el-main style="text-align: left; font-size: 18px">
         <div class="HomeTableData" style="text-align: center">
           <el-table :data="tableData" stripe="true" :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}">
-            <el-table-column prop="station" label="地铁站" width="320">
+            <el-table-column prop="type" label="站点类型" width="270">
             </el-table-column>
-            <el-table-column prop="start" label="起点站" width="330">
+            <el-table-column prop="amount" label="包含站点数量" width="270">
             </el-table-column>
-            <el-table-column prop="end" label="终点站" width="330">
+            <el-table-column prop="stations" label="全部站点" width="440">
             </el-table-column>
           </el-table>
         </div>

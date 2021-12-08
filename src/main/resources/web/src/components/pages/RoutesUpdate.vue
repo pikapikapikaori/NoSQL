@@ -149,8 +149,11 @@
                   </el-input>
                 </el-form-item>
                 <el-form-item label="线路方向">
-                  <el-input v-model="substituteStation.direction" placeholder="线路方向">
-                  </el-input>
+                  <el-select v-model="substituteStation.direction" placeholder="线路方向">
+                    <el-option label="上行" value="up"></el-option>
+                    <el-option label="下行" value="down"></el-option>
+                    <el-option label="环线" value="circle"></el-option>
+                  </el-select>
                 </el-form-item>
                 <el-form-item label="被替换站点 Id">
                   <el-input v-model="substituteStation.originStation" placeholder="被替换站点 Id">
