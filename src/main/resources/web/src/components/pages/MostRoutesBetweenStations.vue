@@ -5,12 +5,13 @@
     </el-aside>
     <el-container>
       <el-header style="text-align: center; font-size: 36px">
-        {{headmsg}}
+        {{ headmsg }}
       </el-header>
 
       <el-main style="text-align: left; font-size: 18px">
         <div class="HomeTableData" style="text-align: center">
-          <el-table :data="tableData" stripe="true" :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}">
+          <el-table :data="tableData" stripe="true" :header-cell-style="{textAlign: 'center'}"
+                    :cell-style="{textAlign: 'center'}">
             <el-table-column type="index" prop="序号" width="150">
             </el-table-column>
             <el-table-column prop="station1" label="站点1" width="340">
@@ -36,9 +37,9 @@ import Copyright from '../../components/copyright/Copyright'
 
 export default {
   name: "MostRoutesBetweenStations",
-  data(){
-    return{
-      headmsg:'线路最多站台',
+  data() {
+    return {
+      headmsg: '线路最多站台',
       tableData: []
     }
   },
@@ -46,7 +47,7 @@ export default {
     Navigation,
     Copyright
   },
-  created: function(){
+  created: function () {
     const axios = require('axios');
     //这里写与后端对接的将tableData初始化的代码
     axios.get(

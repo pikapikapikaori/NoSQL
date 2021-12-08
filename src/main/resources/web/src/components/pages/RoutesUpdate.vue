@@ -5,7 +5,7 @@
     </el-aside>
     <el-container>
       <el-header style="text-align: center; font-size: 36px">
-        {{headmsg}}
+        {{ headmsg }}
       </el-header>
 
       <el-main style="text-align: left; font-size: 18px">
@@ -169,7 +169,8 @@
               </el-form>
 
               <div v-show="isClearStation">
-                <el-table :data="substituteStationResult" stripe="true" :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}" empty-text="暂无线路站点信息">
+                <el-table :data="substituteStationResult" stripe="true" :header-cell-style="{textAlign: 'center'}"
+                          :cell-style="{textAlign: 'center'}" empty-text="暂无线路站点信息">
                   <el-table-column prop="station_id" label="站点ID" width="320">
                   </el-table-column>
                   <el-table-column prop="station_name" label="站点名称" width="330">
@@ -196,9 +197,9 @@ import Copyright from '../../components/copyright/Copyright'
 
 export default {
   name: "RoutesUpdate",
-  data(){
-    return{
-      headmsg:'线路更新',
+  data() {
+    return {
+      headmsg: '线路更新',
       formInlineCreate: {
         route: '',
         oneWayTime: '',
@@ -237,13 +238,13 @@ export default {
     Copyright
   },
   methods: {
-    addStation(){
-        this.formInlineCreate.intervals.push({
-          name: '',
-          english: '',
-          id: '',
-          key: Date.now()
-        });
+    addStation() {
+      this.formInlineCreate.intervals.push({
+        name: '',
+        english: '',
+        id: '',
+        key: Date.now()
+      });
     },
     removeStation(interval) {
       var index = this.formInlineCreate.intervals.indexOf(interval)
@@ -251,7 +252,7 @@ export default {
         this.formInlineCreate.intervals.splice(index, 1)
       }
     },
-    addTime(){
+    addTime() {
       this.formInlineCreate.timeTables.push({
         time: '',
         key: Date.now()
@@ -263,7 +264,7 @@ export default {
         this.formInlineCreate.timeTables.splice(index, 1)
       }
     },
-    submitRoute(){
+    submitRoute() {
       this.$confirm('此操作将提交路线, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -280,8 +281,7 @@ export default {
             }, 3000);
 
             // 这里写与后端对接的新建操作
-          }
-          else {
+          } else {
             done();
           }
         }
@@ -297,7 +297,7 @@ export default {
         });
       });
     },
-    deleteRoute(){
+    deleteRoute() {
       const axios = require('axios');
 
       this.$confirm('此操作将删除路线, 是否继续?', '提示', {
@@ -319,8 +319,7 @@ export default {
             axios.post('http://localhost:8080/route/delete_line', {
               lineId: this.deleteWhole.route
             });
-          }
-          else {
+          } else {
             done();
           }
         }
@@ -336,7 +335,7 @@ export default {
         });
       });
     },
-    substitute(){
+    substitute() {
       const axios = require('axios');
 
       this.isClearStation = false;
@@ -370,8 +369,7 @@ export default {
 
             this.isClearStation = true;
 
-          }
-          else {
+          } else {
             done();
           }
         }

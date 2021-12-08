@@ -109,8 +109,10 @@ public class StatisticsService {
             String s = "";
             for(int i =0;i<subway.size();i++)
             {
+                JSONObject t = new JSONObject();
                 s = subway.get(i);
-                arr.add(s);
+                t.put("station", s);
+                arr.add(t);
             }
             obj1.put("stations",arr);
             obj.put("subway",obj1);
@@ -124,8 +126,10 @@ public class StatisticsService {
             String s = "";
             for(int i =0;i<start.size();i++)
             {
+                JSONObject t = new JSONObject();
                 s = start.get(i);
-                arr.add(s);
+                t.put("station", s);
+                arr.add(t);
             }
             obj1.put("stations",arr);
             obj.put("start",obj1);
@@ -139,8 +143,10 @@ public class StatisticsService {
             String s = "";
             for(int i =0;i<end.size();i++)
             {
+                JSONObject t = new JSONObject();
                 s = end.get(i);
-                arr.add(s);
+                t.put("station", s);
+                arr.add(t);
             }
             obj1.put("stations",arr);
             obj.put("end",obj1);

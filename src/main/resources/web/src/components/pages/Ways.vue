@@ -6,7 +6,7 @@
       </el-aside>
       <el-container>
         <el-header style="text-align: center; font-size: 36px">
-          {{headmsg}}
+          {{ headmsg }}
         </el-header>
 
         <el-main style="text-align: left; font-size: 18px">
@@ -33,7 +33,8 @@
 
                 <div>
                   <div v-if="isClear">
-                    <el-table :data="searchWayResult" stripe="true" :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}" empty-text="暂无直达路线">
+                    <el-table :data="searchWayResult" stripe="true" :header-cell-style="{textAlign: 'center'}"
+                              :cell-style="{textAlign: 'center'}" empty-text="暂无直达路线">
                       <el-table-column prop="route" label="路线" width="980">
                       </el-table-column>
                     </el-table>
@@ -64,7 +65,8 @@
 
                 <div>
                   <div v-if="isClearId">
-                    <el-table :data="searchIdResult" stripe="true" :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}" empty-text="暂无直达路线">
+                    <el-table :data="searchIdResult" stripe="true" :header-cell-style="{textAlign: 'center'}"
+                              :cell-style="{textAlign: 'center'}" empty-text="暂无直达路线">
                       <el-table-column prop="id" label="站点id" width="320">
                       </el-table-column>
                       <el-table-column prop="name" label="站点名称" width="330">
@@ -76,7 +78,6 @@
                 </div>
               </div>
             </el-tab-pane>
-
 
 
             <el-tab-pane label="最短路线查询（基于名称）">
@@ -100,7 +101,8 @@
 
                 <div>
                   <div v-if="isClearName">
-                    <el-table :data="searchNameResult" stripe="true" :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}" empty-text="暂无直达路线">
+                    <el-table :data="searchNameResult" stripe="true" :header-cell-style="{textAlign: 'center'}"
+                              :cell-style="{textAlign: 'center'}" empty-text="暂无直达路线">
                       <el-table-column prop="id" label="站点id" width="320">
                       </el-table-column>
                       <el-table-column prop="name" label="站点名称" width="330">
@@ -130,8 +132,8 @@ import Copyright from '../../components/copyright/Copyright'
 
 export default {
   name: "Ways",
-  data(){
-    return{
+  data() {
+    return {
       headmsg: '路线查询',
       isClear: false,
       formInline: {
@@ -153,7 +155,7 @@ export default {
       searchNameResult: []
     }
   },
-  components:{
+  components: {
     Navigation,
     Copyright
   },
@@ -174,7 +176,7 @@ export default {
         this.searchWayResult = [];
       });
     },
-    clearAll(){
+    clearAll() {
       this.isClear = false;
     },
     searchRoutesId() {
@@ -193,7 +195,7 @@ export default {
         this.searchIdResult = [];
       });
     },
-    clearAllId(){
+    clearAllId() {
       this.isClearId = false;
     },
     searchRoutesName() {
@@ -212,7 +214,7 @@ export default {
         this.searchNameResult = [];
       });
     },
-    clearAllName(){
+    clearAllName() {
       this.isClearName = false;
     }
   }

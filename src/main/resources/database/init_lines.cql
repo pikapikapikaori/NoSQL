@@ -1,4 +1,4 @@
-call apoc.load.json("file:///lines.json") yield value as vl
+call apoc.load.json("file:///trye_lines.json") yield value as vl
 create
 (l:Line
 {name: vl.name,

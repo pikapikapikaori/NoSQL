@@ -5,7 +5,7 @@
     </el-aside>
     <el-container>
       <el-header style="text-align: center; font-size: 36px">
-        {{headmsg}}
+        {{ headmsg }}
       </el-header>
 
       <el-main style="text-align: left; font-size: 18px">
@@ -41,11 +41,13 @@
               <div v-if="isClearStation">
                 <div v-if="haveResultStation">
                   <el-descriptions title="查询结果">
-                    <el-descriptions-item label="运行方向">{{routeToSearchStationResult.lineName}}</el-descriptions-item>
-                    <el-descriptions-item label="运行时长">{{routeToSearchStationResult.runTime}}</el-descriptions-item>
+                    <el-descriptions-item label="运行方向">{{ routeToSearchStationResult.lineName }}</el-descriptions-item>
+                    <el-descriptions-item label="运行时长">{{ routeToSearchStationResult.runTime }}</el-descriptions-item>
                   </el-descriptions>
 
-                  <el-table :data="routeToSearchStationResult.stations" stripe="true" :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}" empty-text="暂无线路">
+                  <el-table :data="routeToSearchStationResult.stations" stripe="true"
+                            :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}"
+                            empty-text="暂无线路">
                     <el-table-column prop="id" label="站点id" width="320">
                     </el-table-column>
                     <el-table-column prop="name" label="站点名称" width="330">
@@ -104,7 +106,8 @@
               </el-form>
 
               <div v-show="isClearRepeat">
-                <el-table :data="routeToSearchRepeatResult" stripe="true" :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}" empty-text="暂无重复站点">
+                <el-table :data="routeToSearchRepeatResult" stripe="true" :header-cell-style="{textAlign: 'center'}"
+                          :cell-style="{textAlign: 'center'}" empty-text="暂无重复站点">
                   <el-table-column prop="station_id" label="站点ID" width="320">
                   </el-table-column>
                   <el-table-column prop="station_name" label="站点名称" width="330">
@@ -131,9 +134,9 @@ import Copyright from '../../components/copyright/Copyright'
 
 export default {
   name: "RoutesStations",
-  data(){
-    return{
-      headmsg:'沿线站点',
+  data() {
+    return {
+      headmsg: '沿线站点',
       isClearStation: false,
       haveResultStation: false,
       formInlineStation: {
@@ -161,7 +164,7 @@ export default {
     Copyright
   },
   methods: {
-    searchRouteStation(){
+    searchRouteStation() {
       const axios = require('axios');
 
       this.isClearStation = true;
@@ -174,21 +177,20 @@ export default {
           stationName2: this.formInlineStation.end
         }
       }).then((res) => {
-        if(res.data === {}){
+        if (res.data === {}) {
           this.haveResultStation = false;
-        }
-        else{
+        } else {
           this.routeToSearchStationResult = res.data;
         }
       }).catch((err) => {
         this.haveResultStation = false;
       })
     },
-    clearAllStation(){
+    clearAllStation() {
       this.isClearStation = false;
       this.haveResultStation = false;
     },
-    searchRouteRepeat(){
+    searchRouteRepeat() {
       const axios = require('axios');
 
       this.isClearRepeat = true;
@@ -206,7 +208,7 @@ export default {
         this.routeToSearchRepeatResult = [];
       });
     },
-    clearAllRepeat(){
+    clearAllRepeat() {
       this.isClearRepeat = false;
     }
   }

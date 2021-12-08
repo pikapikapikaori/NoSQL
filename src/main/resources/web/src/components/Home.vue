@@ -6,12 +6,12 @@
       </el-aside>
       <el-container>
         <el-header style="text-align: center; font-size: 36px">
-          {{headmsg}}
+          {{ headmsg }}
         </el-header>
 
         <el-main style="text-align: left; font-size: 18px">
           <el-divider content-position="left">金河市介绍</el-divider>
-          {{intromsg}}
+          {{ intromsg }}
           <!--
           <el-divider content-position="left">具体功能</el-divider>
           <div class="HomeTableData" style="text-align: center">
@@ -43,8 +43,8 @@ import Copyright from './copyright/Copyright'
 
 export default {
   name: "",
-  data(){
-    return{
+  data() {
+    return {
       tableData: [
         {
           func: '线路基本信息',
@@ -87,7 +87,7 @@ export default {
       return index * 2 + 2;
     }
   },
-  components:{
+  components: {
     Navigation,
     Copyright
   }

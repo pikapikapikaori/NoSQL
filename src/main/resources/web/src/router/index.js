@@ -32,7 +32,7 @@ export default new Router({
       path: '/ways',
       name: 'Ways',
       component: Ways
-    },,
+    }, ,
     {
       path: '/routes/information',
       name: 'RoutesInformation',

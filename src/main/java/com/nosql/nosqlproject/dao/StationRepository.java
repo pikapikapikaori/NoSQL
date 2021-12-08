@@ -31,7 +31,7 @@ public interface StationRepository extends Neo4jRepository<Station, String> {
     ArrayList<String> count_start_station();
 
     @Query("""
-            match (s:Station) where s.name ends with "(终点站)" or not (s) --> (s)
+            match (s:Station) where s.name ends with "(终点站)" or not (s) --> ()
             return distinct s.name
             """)
     ArrayList<String> count_end_station();

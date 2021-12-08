@@ -5,12 +5,12 @@
     </el-aside>
     <el-container>
       <el-header style="text-align: center; font-size: 36px">
-        {{headmsg}}
+        {{ headmsg }}
       </el-header>
 
       <el-main style="text-align: left; font-size: 18px">
         <div class="spacehd" style="text-align: center">
-          {{'\xa0'}}
+          {{ '\xa0' }}
         </div>
 
         <div class="forminline" style="text-align: center">
@@ -36,7 +36,8 @@
 
           <div>
             <div v-if="isClear">
-              <el-table :data="searchResult" stripe="true" :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}" empty-text="暂无班次信息">
+              <el-table :data="searchResult" stripe="true" :header-cell-style="{textAlign: 'center'}"
+                        :cell-style="{textAlign: 'center'}" empty-text="暂无班次信息">
                 <el-table-column prop="time" label="班次" width="980">
                 </el-table-column>
               </el-table>
@@ -58,9 +59,9 @@ import Copyright from '../../components/copyright/Copyright'
 
 export default {
   name: "RoutesTimetable",
-  data(){
-    return{
-      headmsg:'线路班次',
+  data() {
+    return {
+      headmsg: '线路班次',
       isClear: false,
       formInline: {
         route: '',
@@ -74,11 +75,11 @@ export default {
     Copyright
   },
   methods: {
-    searchRoutes(){
+    searchRoutes() {
       this.isClear = true;
 
     },
-    clearAll(){
+    clearAll() {
       this.isClear = false;
     }
   }

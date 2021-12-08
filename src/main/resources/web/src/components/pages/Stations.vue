@@ -6,7 +6,7 @@
       </el-aside>
       <el-container>
         <el-header style="text-align: center; font-size: 36px">
-          {{headmsg}}
+          {{ headmsg }}
         </el-header>
 
         <el-main style="text-align: left; font-size: 18px">
@@ -27,7 +27,8 @@
                   </el-form-item>
                 </el-form>
                 <div v-show="isClearAllRoute">
-                  <el-table :data="searchStationRouteResult" stripe="true" :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}" empty-text="暂无线路">
+                  <el-table :data="searchStationRouteResult" stripe="true" :header-cell-style="{textAlign: 'center'}"
+                            :cell-style="{textAlign: 'center'}" empty-text="暂无线路">
                     <el-table-column prop="id" label="站点id" width="320">
                     </el-table-column>
                     <el-table-column prop="routes" label="线路" width="660">
@@ -115,9 +116,9 @@ import Copyright from '../../components/copyright/Copyright'
 
 export default {
   name: "Stations",
-  data(){
-    return{
-      headmsg:'站点信息查询',
+  data() {
+    return {
+      headmsg: '站点信息查询',
       isClearAllRoute: false,
       searchStationRoute: {
         station: ''
@@ -143,7 +144,7 @@ export default {
     Copyright
   },
   methods: {
-    searchStationForRoute(){
+    searchStationForRoute() {
       const axios = require('axios');
 
       this.isClearAllRoute = true;
@@ -158,13 +159,13 @@ export default {
         this.searchStationRouteResult = [];
       });
     },
-    clearAllRoute(){
+    clearAllRoute() {
       this.isClearAllRoute = false;
     },
-    searchStationForSoon(){
+    searchStationForSoon() {
       const axios = require('axios');
 
-      this.isClearAllSoon= true;
+      this.isClearAllSoon = true;
 
       axios.get('http://localhost:8080/station/find_station_time_line', {
         params: {
@@ -178,13 +179,13 @@ export default {
         this.searchStationSoonResult = [];
       })
     },
-    clearAllSoon(){
+    clearAllSoon() {
       this.isClearAllSoon = false;
     },
-    searchStationForTime(){
+    searchStationForTime() {
       const axios = require('axios');
 
-      this.isClearAllTime= true;
+      this.isClearAllTime = true;
 
       axios.get('http://localhost:8080/station/find_station_time_nearest3', {
         params: {
@@ -197,7 +198,7 @@ export default {
         this.searchStationTimeResult = [];
       })
     },
-    clearAllTime(){
+    clearAllTime() {
       this.isClearAllTime = false;
     }
   }

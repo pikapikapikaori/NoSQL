@@ -5,7 +5,7 @@
     </el-aside>
     <el-container>
       <el-header style="text-align: center; font-size: 36px">
-        {{headmsg}}
+        {{ headmsg }}
       </el-header>
 
       <el-main style="text-align: left; font-size: 18px">
@@ -31,14 +31,15 @@
               <div v-if="isClearInfo">
                 <div v-if="haveResult">
                   <el-descriptions title="线路信息">
-                    <el-descriptions-item label="路线">{{routeToSearchInfoResult.route}}</el-descriptions-item>
-                    <el-descriptions-item label="单向行驶时间">{{routeToSearchInfoResult.oneWayTime}}</el-descriptions-item>
-                    <el-descriptions-item label="是否为单向线">{{routeToSearchInfoResult.directional}}</el-descriptions-item>
-                    <el-descriptions-item label="行驶距离（千米）">{{routeToSearchInfoResult.length}}</el-descriptions-item>
-                    <el-descriptions-item label="线路名称">{{routeToSearchInfoResult.lineId}}</el-descriptions-item>
-                    <el-descriptions-item label="运行时间">{{routeToSearchInfoResult.runtime}}</el-descriptions-item>
-                    <el-descriptions-item label="途经站点">{{routeToSearchInfoResult.interval}}</el-descriptions-item>
-                    <el-descriptions-item label="类型">{{routeToSearchInfoResult.type}}</el-descriptions-item>
+                    <el-descriptions-item label="路线">{{ routeToSearchInfoResult.route }}</el-descriptions-item>
+                    <el-descriptions-item label="单向行驶时间">{{ routeToSearchInfoResult.oneWayTime }}</el-descriptions-item>
+                    <el-descriptions-item label="是否为单向线">{{ routeToSearchInfoResult.directional }}
+                    </el-descriptions-item>
+                    <el-descriptions-item label="行驶距离（千米）">{{ routeToSearchInfoResult.length }}</el-descriptions-item>
+                    <el-descriptions-item label="线路名称">{{ routeToSearchInfoResult.lineId }}</el-descriptions-item>
+                    <el-descriptions-item label="运行时间">{{ routeToSearchInfoResult.runtime }}</el-descriptions-item>
+                    <el-descriptions-item label="途经站点">{{ routeToSearchInfoResult.interval }}</el-descriptions-item>
+                    <el-descriptions-item label="类型">{{ routeToSearchInfoResult.type }}</el-descriptions-item>
                   </el-descriptions>
                 </div>
                 <div v-else>
@@ -76,7 +77,8 @@
               </el-form>
 
               <div v-show="isClearStation">
-                <el-table :data="routeToSearchStationResult" stripe="true" :header-cell-style="{textAlign: 'center'}" :cell-style="{textAlign: 'center'}" empty-text="暂无线路信息">
+                <el-table :data="routeToSearchStationResult" stripe="true" :header-cell-style="{textAlign: 'center'}"
+                          :cell-style="{textAlign: 'center'}" empty-text="暂无线路信息">
                   <el-table-column prop="id" label="站点ID" width="320">
                   </el-table-column>
                   <el-table-column prop="name" label="站点名称" width="330">
@@ -85,7 +87,7 @@
                   </el-table-column>
                 </el-table>
                 <p>
-                  共{{routeToSearchStationResultInterval}}个站点
+                  共{{ routeToSearchStationResultInterval }}个站点
                 </p>
               </div>
             </div>
@@ -106,8 +108,8 @@ import Copyright from '../../components/copyright/Copyright'
 
 export default {
   name: "RoutesInformation",
-  data(){
-    return{
+  data() {
+    return {
       headmsg: '线路信息',
       isClearInfo: false,
       haveResult: false,
@@ -149,15 +151,16 @@ export default {
           lineId: this.formInlineInfo.routeToSearchInfo
         }
       }).then((res) => {
-        if(res.data === {}){
+        if (res.data === {}) {
           this.haveResult = false;
-        }
-        else{
+        } else {
           this.routeToSearchInfoResult = res.data;
         }
-      }).catch((err) => {this.haveResult = false;});
+      }).catch((err) => {
+        this.haveResult = false;
+      });
     },
-    clearAllInfo(){
+    clearAllInfo() {
       this.isClearInfo = false;
       this.haveResult = false;
     },
@@ -179,7 +182,7 @@ export default {
         this.routeToSearchStationResultInterval = 0;
       });
     },
-    clearAllStation(){
+    clearAllStation() {
       this.isClearStation = false;
     }
   }
