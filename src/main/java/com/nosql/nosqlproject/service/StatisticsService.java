@@ -92,8 +92,8 @@ public class StatisticsService {
     }
 
     //11a
-    public JSONArray special_station(){
-        JSONArray arr = new JSONArray();
+    public JSONObject special_station(){
+        JSONObject obj = new JSONObject();
         ArrayList<String> subway;
         subway = stationrepository.count_subway_station();
         ArrayList<String> start;
@@ -102,50 +102,51 @@ public class StatisticsService {
         end = stationrepository.count_end_station();
         if(!subway.isEmpty())
         {
-            JSONObject obj = new JSONObject();
-            obj.put("type","地铁站");
-            obj.put("amount",subway.size());
+            JSONObject obj1 = new JSONObject();
+            obj1.put("type","地铁站");
+            obj1.put("amount",subway.size());
+            JSONArray arr =new JSONArray();
             String s = "";
             for(int i =0;i<subway.size();i++)
             {
-
-                s+=subway.get(i);
-                s+=" ";
+                s = subway.get(i);
+                arr.add(s);
             }
-            obj.put("stations",s);
-            arr.add(obj);
+            obj1.put("stations",arr);
+            obj.put("subway",obj1);
         }
         if(!start.isEmpty())
         {
-            JSONObject obj = new JSONObject();
-            obj.put("type","始发站");
-            obj.put("amount",start.size());
+            JSONObject obj1 = new JSONObject();
+            obj1.put("type","始发站");
+            obj1.put("amount",start.size());
+            JSONArray arr =new JSONArray();
             String s = "";
             for(int i =0;i<start.size();i++)
             {
-
-                s+=start.get(i);
-                s+=" ";
+                s = start.get(i);
+                arr.add(s);
             }
-            obj.put("stations",s);
-            arr.add(obj);
+            obj1.put("stations",arr);
+            obj.put("start",obj1);
         }
         if(!end.isEmpty())
         {
-            JSONObject obj = new JSONObject();
-            obj.put("type","终点站");
-            obj.put("amount",end.size());
+            JSONObject obj1 = new JSONObject();
+            obj1.put("type","终点站");
+            obj1.put("amount",end.size());
+            JSONArray arr =new JSONArray();
             String s = "";
             for(int i =0;i<end.size();i++)
             {
-                s+=end.get(i);
-                s+=" ";
+                s = end.get(i);
+                arr.add(s);
             }
-            obj.put("stations",s);
-            arr.add(obj);
+            obj1.put("stations",arr);
+            obj.put("end",obj1);
         }
 
-        return arr;
+        return obj;
     }
 
     //12

@@ -1,6 +1,7 @@
 package com.nosql.nosqlproject.controller;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.nosql.nosqlproject.service.StatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,7 +27,7 @@ public class StatisticsController {
     }
     //需求十一a
     @GetMapping("/special_station")
-    public JSONArray special_station(){
+    public JSONObject special_station(){
         return statisticsservice.special_station();
     }
     //需求十二
