@@ -38,7 +38,7 @@
                     <el-descriptions-item label="行驶距离（千米）">{{ routeToSearchInfoResult.length }}</el-descriptions-item>
                     <el-descriptions-item label="线路名称">{{ routeToSearchInfoResult.lineId }}</el-descriptions-item>
                     <el-descriptions-item label="运行时间">{{ routeToSearchInfoResult.runtime }}</el-descriptions-item>
-                    <el-descriptions-item label="途经站点">{{ routeToSearchInfoResult.interval }}</el-descriptions-item>
+                    <el-descriptions-item label="时间间隔">{{ routeToSearchInfoResult.interval }}</el-descriptions-item>
                     <el-descriptions-item label="类型">{{ routeToSearchInfoResult.type }}</el-descriptions-item>
                   </el-descriptions>
                 </div>
